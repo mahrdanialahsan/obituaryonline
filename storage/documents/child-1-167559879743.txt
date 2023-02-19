@@ -1,0 +1,15 @@
+Issue 1: Fixed,
+
+Issue 2:  it is not image it carousel slider
+
+Issue 3: please send me your facebook,twitter,youtube,linkedin and ista links so i could update here
+
+Issue 4: Fixed copyright. it will automaticalyy  update with new year
+
+Issue 5: fixed
+
+Issue 6: fixed
+
+Issue 7: Please add stripe price key from admin in "Addiction Therapy Certified Online Course ". Then it will be fixed.
+
+Issue 8: Stripe prices are linked with stripe directly. you need to create stripe product on stripe dashboard then copy price_key from stripe and past it in stripe key field in admin side like: price_1KivsWHcB37Vp6DLYSnvdsgsdgs 
