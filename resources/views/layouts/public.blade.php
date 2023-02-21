@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico')}}" type="image/x-icon">
     <!-- responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- For IE -->
@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/responsive6a4d.css')}}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/mt_main.css')}}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/dropify.min.css')}}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/aui.css')}}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('toast/toast.style.min.css')}}">
     <style id="charitable-highlight-colour-styles">
         @font-face {
@@ -63,7 +64,7 @@
         <div class="logo-box">
             <div class="shape" style="background-image: url(images/shape-30.png);"></div>
             <figure class="logo"><a href="{{ url('/') }}" title="Arbituaryonline">
-                    <img src="images/logo.png" alt="logo" style="height: 86px;" /></a></figure>
+                    <img src="{{ asset('images/logo.png')}}" alt="logo" style="height: 86px;" /></a></figure>
         </div>
         <!-- header -->
         <div class="header-lower">
@@ -72,12 +73,12 @@
                     <div class="logo-box responsive">
                         <div class="shape" style="background-image: url(images/shape-30.png);"></div>
                         <figure class="logo"><a href="{{ url('/') }}" title="Arbituaryonline">
-                                <img src="images/logo.png" alt="logo" style="height: 86px;" /></a></figure>
+                                <img src="{{ asset('images/logo.png')}}" alt="logo" style="height: 86px;" /></a></figure>
                     </div>
 
                     <div class="text">
                         <a href="{{ url('/') }}">
-                            <figure class="icon-box"><img src="images/heart-4.png" alt="Awesome Image"></figure>
+                            <figure class="icon-box"><img src="{{ asset('images/heart-4.png') }}" alt="Awesome Image"></figure>
                             <span>Become a Volunteer</span>
                         </a>
                     </div>
@@ -214,7 +215,7 @@
         <div class="close-btn"><i class="fa fa-times"></i></div>
 
         <nav class="menu-box">
-            <div class="nav-logo"><a href="{{ url('/') }}" title="Arbituaryonline"><img src="images/logo.png" alt="logo"/></a></div>
+            <div class="nav-logo"><a href="{{ url('/') }}" title="Arbituaryonline"><img src="{{ asset('images/logo.png')}}" alt="logo"/></a></div>
             <div class="menu-outer"></div>
             <div class="social-links">
                 <ul class="clearfix">
@@ -243,7 +244,7 @@
                                         <div class="left-column pull-left">
                                             <div class="logo-box">
                                                 <div class="shape" style="background-image: url(images/shape-1.png);"></div>
-                                                <figure class="logo"><a href="{{ url('/') }}"><img decoding="async" src="images/logo.png" alt="Awesome Image"></a></figure>
+                                                <figure class="logo"><a href="{{ url('/') }}"><img decoding="async" src={{ asset('logo.png')}}" alt="Awesome Image"></a></figure>
                                             </div>
                                             <div class="text">
                                                 <h3><i class="icon-email-open-sketched-envelope"></i>Subscribe <br> Our Newsletter</h3>
@@ -289,11 +290,11 @@
                 </div>
                 <ul class="footer-card pull-right clearfix">
                     <li><span>Ways to Donate:</span></li>
-                    <li><a href="#"><img src="images/card-1.png" alt="Awesome Image"></a></li>
-                    <li><a href="#"><img src="images/card-2.png" alt="Awesome Image"></a></li>
-                    <li><a href="#"><img src="images/card-3.png" alt="Awesome Image"></a></li>
-                    <li><a href="#"><img src="images/card-4.png" alt="Awesome Image"></a></li>
-                    <li><a href="#"><img src="images/card-5.png" alt="Awesome Image"></a></li>
+                    <li><a href="#"><img src="{{ asset('images/card-1.png')}}" alt="Awesome Image"></a></li>
+                    <li><a href="#"><img src="{{ asset('images/card-2.png')}}" alt="Awesome Image"></a></li>
+                    <li><a href="#"><img src="{{ asset('images/card-3.png')}}" alt="Awesome Image"></a></li>
+                    <li><a href="#"><img src="{{ asset('images/card-4.png')}}" alt="Awesome Image"></a></li>
+                    <li><a href="#"><img src="{{ asset('images/card-5.png')}}" alt="Awesome Image"></a></li>
                 </ul>
             </div>
         </div>

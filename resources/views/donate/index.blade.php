@@ -1,5 +1,4 @@
 @extends('layouts.public')
-
 @section('content')
     <!-- Page Title -->
     <section class="page-title" style="background-image: url('images/12.jpg');">
@@ -38,9 +37,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="res-ctn search-result__mobile-menu" id="js-res-ctn--filter"> <div class="res-ctn__bd lock-body">
+                                <div class="res-ctn search-result__mobile-menu" id="js-res-ctn--filter">
+                                    <div class="res-ctn__bd lock-body">
                                         <div class="title-ctn is-expanded mt-12 causes_div mb-40" data-role="accr">
-                                            <div class="title-ctn__head" data-role="accr__head"> List <i class="ico ico-chevron-up title-ctn__icon"></i> </div>
+                                            <div class="title-ctn__head" data-role="accr__head"> Cause <i class="ico ico-chevron-up title-ctn__icon"></i> </div>
                                             <div class="title-ctn__body title-ctn__body--collapsible" data-role="accr__body"> <ul class="checkbox-list causesFilter" data-role="list-show-more">
                                                     <li class="title-ctn__child">
                                                         <label class="checkbox-list__checkbox"> <input type="checkbox"
@@ -63,7 +63,6 @@
                                                                                                         class="callSearch causesType"> <span
                                                                     class="checkbox-list__lbl-spn ">Children &amp; Youth</span>
                                                         </label></li>
-
                                                 </ul>
                                             </div>
                                         </div>

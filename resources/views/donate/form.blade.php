@@ -1,20 +1,4 @@
 @extends('layouts.public')
-@push('css')
-    <link rel='stylesheet' href='/css/style.min6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/font-awesome.min1849.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/flaticon6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/owl6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/swiper.min6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/bootstrap6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/color6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/style6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/custom6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/responsive6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/woocommerce6a4d.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/mt_main.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='/css/mainfb9c.css' type='text/css' media='all' />
-    <link class="lfr-css-file" href="css/aui.css" rel="stylesheet" type="text/css" />
-@endpush
 @section('content')
     <!-- Page Title -->
     <section class="page-title" style="background-image: url('images/12.jpg');">
@@ -38,7 +22,7 @@
 
         #userDetails input, #userDetails .sod_select { text-align: center; display:inline; } a.lnkFaq { color:#17A4E1 !important; text-decoration: underline !important; } .left-col~.right-col { margin-bottom: 1em; } .left-col { text-align: right; padding-right: 1em; line-height: 33px; /*line height of textbox is also specified as 33px*/ } .right-col { text-align: center; } .postallabel { line-height: 70px; } .postalcontainer { line-height: 49px; } .postalcontainer { margin-left:-180px; width: 100%; } .postalcontainer>div { margin-left:180px; line-height: 58px; } .postalcontainer~.btn{ width: 150px; margin: 0; } input[type=checkbox]~label { display: inline; } #user_sal, #parishCode { text-align-last: center; } @media (max-width: 768px) { .left-col { text-align: center; } #user_sal { width: 15em; } } span.check.expired { background-color: #eeeeee !important; } .expiredCampaign { font-size: .875em; font-style: italic; } #donation-details .default, #donation-details .age18, #donation-details .age13 { display:none; } #donation-details .default.active, #donation-details .age18.active, #donation-details .age13.active { display:block; } .radio-pay-type, .radio-pay-token { margin-left : 50px; } .radio-pay-type.active, .radio-pay-token.active { display: block !important; } .creditCardPaymentArea { background-color: #FFF; } .radio-pay-type .small { border-bottom: 0px !important; } .choice-buttons button.no.active { background-color: #F16577 !important; color: #FFF !important; } .choice-buttons button.yes.active { background: #43AD49 !important; color: #FFF !important; } .user-img { width: 40px; height: 40px; } .warning { background: transparent !important; } .active .warning { background-color: rgb(241, 242, 242) !important; } .cartItemSelection div.lbl-warning{ color: #f5866c !important; } #gf-bkt-table { margin-bottom: 20px; } .gf-bkt-table-footer { margin-bottom: 0; } @media (min-width: 56.25rem) { #gf-bkt-table { margin-bottom: 0; } .gf-bkt-table-footer { margin-bottom: 20px; } } #donation-details a { color: #ea2722!important; } #donation-details li.active a { color: white!important; } .m-bot20{ margin-bottom:20px !important; } .aui input[type="radio"], .aui input[type="checkbox"] { margin: 0px!important; } </style>
 
-    
+
     <div class="section-page pad-navbar" id="donation-details">
         <div class="boxed-wrapper gf" id="gf-bkt-wrapper">
 

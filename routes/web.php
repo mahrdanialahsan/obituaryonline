@@ -22,6 +22,7 @@ Route::get('/cache-clear', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 //    \Illuminate\Support\Facades\Artisan::call('route:cache');
     \Illuminate\Support\Facades\Artisan::call('view:cache');
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
     dd('done');
 });
 
