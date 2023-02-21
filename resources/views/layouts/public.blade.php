@@ -96,7 +96,7 @@
                                         <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">Home</a></li>
 
                                     <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                        <a title="Donate Today" href="{{ route('home') }}" class="hvr-underline-from-left1">Donate Today</a></li>
+                                        <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">Donate Today</a></li>
 
                                     <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                         <a title="Be a Volunteer" href="{{ route('home') }}" class="hvr-underline-from-left1">Be a Volunteer</a></li>

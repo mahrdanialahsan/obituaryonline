@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/campaign/{id}/update', 'CampaignController@update')->name('campaign.update');
 });
 
+Route::get('/donate', 'DonateController@index')->name('donate');
 
 
 Route::get('/admin', function (){
