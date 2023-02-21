@@ -92,6 +92,19 @@ class CampaignController extends Controller
         }
     }
 
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function details($uid)
+    {
+        $campaign =   Campaigns::where('uid',$uid)->first();
+        return view('campaign.create',compact('uid','campaign'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

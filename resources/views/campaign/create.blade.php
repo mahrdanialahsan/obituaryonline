@@ -20,7 +20,7 @@
                     <h1>Campaign</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> </ul>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> </ul>
             </div>
         </div>
     </section>

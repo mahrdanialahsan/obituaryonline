@@ -10,7 +10,7 @@
                     <h1>Sign In</h1>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                </ul>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                </ul>
             </div>
         </div>
     </section>

@@ -43,12 +43,14 @@ class DonateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $uid
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uid)
     {
         //
+        $campaign =   Campaigns::where('uid',$uid)->first();
+        return view('donate.form',compact('uid','campaign'));
     }
 
     /**
