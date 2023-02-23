@@ -1,6 +1,7 @@
 @extends('layouts.public')
 
 @section('content')
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <style>
         /*.input-ctrl{*/
         /*    height: 80px;*/
@@ -13,14 +14,16 @@
         }
     </style>
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('images/12.jpg');">
+    <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->fundraise_page_cover_image)) ?  url('storage/site_settings/'.$site->fundraise_page_cover_image): asset('images/12.png')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>Campaign</h1>
+                    <h1>{{$site->fundraise_page_header_title ? $site->fundraise_page_header_title:"Campaign"}}</h1>
                 </div>
-                <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> </ul>
+{{--                <ul class="bread-crumb clearfix">--}}
+{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign--}}
+{{--                    </li> --}}
+{{--                </ul>--}}
             </div>
         </div>
     </section>
@@ -36,7 +39,7 @@
                     <div class="blog-list-content">
                         <div class="thm-unit-test">
                             <div class="hero-container hero-container--light-grey hero-container--auto-w create-volunteer-act__head pad-navbar">
-                                <h2 class="h2 create-volunteer-act__title">Start a fundraising campaign</h2>
+                                <h2 class="h2 create-volunteer-act__title">{{$site->fundraise_page_campaign_title ? $site->fundraise_page_campaign_title:"Start a fundraising campaign"}}</h2>
 {{--                                <div class="mobile-title m-top20 centered visible-phone">--}}
 {{--                                    <span class="small breakword">Start a fundraising campaign</span>--}}
 {{--                                </div>--}}
@@ -52,12 +55,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="post" name="compaign-form" id="compaign-form" action="{{ !empty($uid) ? route('campaign.update',['id'=>$uid]):route('campaign.store')}}" novalidate="novalidate">
+                            <form method="post" name="campaign-form" id="campaign-form" action="{{ !empty($uid) ? route('campaign.update',['id'=>$uid]):route('campaign.store')}}" novalidate="novalidate">
                                 @csrf
                                 <div class="ctn-1200" id="">
                                     <div data-role="page-holder" class="rounded-card rounded-card--no-pad rounded-card--light-shadow rounded-card--height-auto rounded-card--full create-volunteer-act__main js-create-volunteer-act__main" >
                                         <div id="tab-page-1" style ="display: none;" class="rounded-card__body rounded-card__body--responsive js-create-volunteer-act__page js-create-volunteer-act__page--1" data-role="page" >
-                                            <h3 class="h3 font-dark-grey">Deceased Information</h3>
+                                            <h3 class="h3 font-dark-grey">{{$site->fundraise_page_form_title ? $site->fundraise_page_form_title:"Deceased Information"}}</h3>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_name">Name </label>
                                                 <input type="text" name="deceased_name" id="deceased_name"  class="form-control field-required input">
@@ -102,17 +105,17 @@
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="surviving_family">Surviving Family </label>
-                                                <input type="text" name="surviving_family" id="surviving_family" class="form-control field-required input">
+                                                <textarea type="text" name="surviving_family" id="surviving_family" class="form-control field-required input"></textarea>
                                                 <label for="surviving_family" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_picture">Deceased Picture</label>
-                                                <input data-default-file="{{!empty($campaigns) ?  url('storage/deceased_picture/'.$campaigns->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
+                                                <input data-default-file="{{!empty($campaign) ?  url('storage/deceased_picture/'.$campaign->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
                                                 <label for="deceased_picture" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="death_certificate">Death Certificate</label>
-                                                <input data-default-file="{{!empty($campaigns) ?  url('storage/death_certificate/'.$campaigns->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
+                                                <input data-default-file="{{!empty($campaign) ?  url('storage/death_certificate/'.$campaign->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
                                                 <label for="death_certificate" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
@@ -140,7 +143,10 @@
                                         </div>
                                         <div class="create-volunteer-act__footer" style="margin-top: 1px" id="">
                                             <button tab="1" class="button button--135 button--large m-top10 js-create-campaign-act__next button-page-next" id="tab-next-btn" type="button">SUBMIT</button>
-                                            <button class="button button--135 button--large save-for-approval m-top10 js-create-campaign-act__next button-page-next" id="submit-btn" style="display: none" type="button">CONFIRM SUBMISSION</button>
+                                            @if(!empty($uid))
+                                                <button class="button button--135 button--large save-for-approval m-top10 js-create-campaign-act__next button-page-next" id="submit-btn" style="display: none" type="button" onclick="submitForm('campaign-approval-form')">CONFIRM SUBMISSION</button>
+
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -153,6 +159,11 @@
             </div>
         </div>
     </section>
+    @if(!empty($uid))
+        <form method="post" id="campaign-approval-form" action="{{route('campaign.submit.approval',['id'=>$uid])}}" style="display: none">
+            @csrf
+        </form>
+    @endif
 @endsection
 @push('js')
     <script>
@@ -169,15 +180,23 @@
                     $('#wake_period').val(response.wake_period);
                     $('#funeral_date').val(moment(response.funeral_date).format('YYYY-MM-DD HH:MM'));
                     $('#funeral_location').val(response.funeral_location);
-                    $('#surviving_family').val(response.surviving_family);
+                    //$('#surviving_family').val(response.surviving_family);
+                    CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
+                    setTimeout(function () {
+                        for ( instance in CKEDITOR.instances )
+                            CKEDITOR.instances[instance].updateElement();
+                    },10)
                     $('#message').val(response.message);
-                    tab     =   2;
+
+
+
+                    tab     =   response.status == null ? 2:1;
                     $(`.rounded-card__body`).hide();
                     $(`#tab-page-${tab}`).show();
                     $('.bcrumb__child').removeClass('is-active');
                     $(`#tab-nav-${tab}`).addClass('is-active');
-                    $('#tab-next-btn').attr('tab',tab);
-                    $('#tab-next-btn').text(tab == 1 ? 'UPDATE':'EDIT');
+                    $("#tab-next-btn").attr('tab',tab);
+                    $("#tab-next-btn").text(tab == 1 ? 'UPDATE':'EDIT');
                     $('.save-for-approval').css('display',tab == 1 ? 'none':'inline')
 
                 })
@@ -191,7 +210,7 @@
 
             if( tab == 1 ){
                 if(checkRequiredFileds(tab)){
-                    submitForm('compaign-form');
+                    submitForm('campaign-form');
                 }
 
             }else{
@@ -226,40 +245,81 @@
                 format: 'YYYY-MM-DD',
             });
             $('#date_of_death').datetimepicker({
-                format: 'YYYY-MM-DD HH:MM',
+                format: 'YYYY-MM-DD HH:mm',
             });
             $('#funeral_date').datetimepicker({
-                format: 'YYYY-MM-DD HH:MM',
+                format: 'YYYY-MM-DD HH:mm',
             });
             $('.dropify').dropify();
 
             // Translated
 
             // Used events
-            var drEvent = $('#input-file-events').dropify();
+            // var drEvent = $('#input-file-events').dropify();
+            //
+            // drEvent.on('dropify.beforeClear', function(event, element){
+            //     return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            // });
+            //
+            // drEvent.on('dropify.afterClear', function(event, element){
+            //     alert('File deleted');
+            // });
+            //
+            // drEvent.on('dropify.errors', function(event, element){
+            //     console.log('Has Errors');
+            // });
+            //
+            // var drDestroy = $('#input-file-to-destroy').dropify();
+            // drDestroy = drDestroy.data('dropify')
+            // $('#toggleDropify').on('click', function(e){
+            //     e.preventDefault();
+            //     if (drDestroy.isDropified()) {
+            //         drDestroy.destroy();
+            //     } else {
+            //         drDestroy.init();
+            //     }
+            // })
 
-            drEvent.on('dropify.beforeClear', function(event, element){
-                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            // CKEDITOR.editorConfig = function( config ) {
+            //     config.toolbarGroups = [
+            //         // { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+            //         // { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+            //         // { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+            //         // { name: 'forms', groups: [ 'forms' ] },
+            //         // '/',
+            //         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+            //         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+            //         { name: 'links', items: [ 'Link', 'Unlink' ] },
+            //     ];
+            // };
+            CKEDITOR.replace('surviving_family', {
+                toolbar1: [
+                    // { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                    // { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                    // //{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                    // { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                    // { name: 'justify', groups: [  'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                    //
+                    // { name: 'links', items: [ 'Link', 'Unlink' ] },
+                    // { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                    // { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                    // { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
+                    // { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                    // { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                    // { name: 'links', items: [ 'Link', 'Unlink' ] },
+                    //{ name: 'insert', items: [ 'Image'] },
+                    //{ name: 'spell', items: [ 'jQuerySpellChecker' ] },
+                    //{ name: 'table', items: [ 'Table' ] }
+                ],
             });
-
-            drEvent.on('dropify.afterClear', function(event, element){
-                alert('File deleted');
+            CKEDITOR.on('instanceReady', function(){
+                $.each( CKEDITOR.instances, function(instance) {
+                    CKEDITOR.instances[instance].on("change", function(e) {
+                        for ( instance in CKEDITOR.instances )
+                            CKEDITOR.instances[instance].updateElement();
+                    });
+                });
             });
-
-            drEvent.on('dropify.errors', function(event, element){
-                console.log('Has Errors');
-            });
-
-            var drDestroy = $('#input-file-to-destroy').dropify();
-            drDestroy = drDestroy.data('dropify')
-            $('#toggleDropify').on('click', function(e){
-                e.preventDefault();
-                if (drDestroy.isDropified()) {
-                    drDestroy.destroy();
-                } else {
-                    drDestroy.init();
-                }
-            })
         })
 
     </script>

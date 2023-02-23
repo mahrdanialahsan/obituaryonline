@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\User;
+use App\SiteSettings;
 
 class UsersSeeder extends Seeder {
     /**
@@ -9,6 +10,7 @@ class UsersSeeder extends Seeder {
      * @return void */
     public function run() {
         User::truncate();
+        SiteSettings::truncate();
         $users = [
             [
                 'name' => 'Admin',
@@ -28,5 +30,8 @@ class UsersSeeder extends Seeder {
                 'password' => Hash::make($user['password'])
             ]);
         }
+        SiteSettings::insert([
+            'site_title' => 'Arbituary Online',
+        ]);
     }
 }

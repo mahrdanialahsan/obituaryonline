@@ -1,3 +1,48 @@
+ 
+/* Css For PureHearts */
+
+/************ TABLE OF CONTENTS ***************
+1. Fonts
+2. Reset
+3. Global
+4. Main Header/style-one/style-two
+5. Main Slider/style-one/style-two
+6. Intro Section
+7. Welcome Section
+9. Cta Section
+8. Research Fields
+10. Testimonial Section
+11. Researches Section
+12. Team Section
+14. Video
+15. Fact Counter
+16. News Section
+19. Clients Section
+20. Main Footer
+21. Footer Bottom
+22. Research Style Two
+23. Innovative Solution
+24. Discover Section
+25. Testimonial Section
+26. Chooseus Section
+27. News Style Two
+28. Page Title
+29. Research Page Section
+30. Research Details
+31. Professor Page Section
+32. Professor Details
+33. About Section
+34. Error Section
+35. Blog Page Section
+36. Blog Details
+37. Blog Sidebar
+38. Contact Section
+39. Google Map
+
+
+**********************************************/
+
+
 
 /*** 
 
@@ -12,205 +57,6 @@
   border:none;
   outline:none;
 }
-
-body{
-
-    background-color: #f5f6f7;
-}
-
-.wrapper{
-  width:100%;
-
-        margin-top: 50px;
-}
-@media(max-width:992px){
- .wrapper{
-  width:100%;
-} 
-}
-.panel-heading {
-  padding: 0;
-    border:0;
-    padding: 9px 3px !important;
-}
-.panel-title>a, .panel-title>a:active{
-    display: block;
-    padding: 10px;
-    color: #555;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    word-spacing: 3px;
-    text-decoration: none;
-}
-.panel-heading  a:before {
-   font-family: 'Glyphicons Halflings';
-   float: right;
-   transition: all 0.5s;
-}
-.panel-heading.active a:before {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    transform: rotate(180deg);
-} 
-
-.panel-default > .panel-heading {
-    color: #282b2f;
-    background-color: #ffffff !important;
-    border-color: #d5d5d5;
-}
-
-
-
-
-
-
-
-
-
-
-
-@keyframes click-wave {
-    0% {
-        height: 40px;
-        width: 40px;
-        opacity: 0.15;
-        position: relative
-    }
-
-    100% {
-        height: 200px;
-        width: 200px;
-        margin-left: -80px;
-        margin-top: -80px;
-        opacity: 0
-    }
-}
-
-.option-input {
-        -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    position: relative;
-    top: -8.66667px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 24px;
-    width: 24px;
-    transition: all 0.15s ease-out 0s;
-    background: #cbd1d8;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    margin-right: 0.5rem;
-    outline: none;
-    position: relative;
-    z-index: 1000;
-}
-
-.option-input:hover {
-    background: #9faab7
-}
-
-.option-input:checked {
-    background: #2874ef
-}
-
-.option-input:checked::before {
-        height: 24px;
-    width: 24px;
-    position: absolute;
-    content: "\f111";
-    font-family: "Font Awesome 5 Free";
-    display: inline-block;
-    font-size: 14.66667px;
-    text-align: center;
-    line-height: 26px;
-}
-
-.option-input:checked::after {
-    -webkit-animation: click-wave 0.15s;
-    -moz-animation: click-wave 0.15s;
-    animation: click-wave 0.15s;
-    background: #E91E63;
-    content: '';
-    display: block;
-    position: relative;
-    z-index: 100
-}
-
-.option-input.radio {
-    border-radius: 50%
-}
-
-.option-input.radio::after {
-    border-radius: 50%
-}
-
-
-.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-    float: left;
-    margin-left: -4px !important;
-        margin-top: 9px;
-}
-
-
-input[type="checkbox"]:focus {
-    outline: thin dotted #333;
-    outline: 0px auto -webkit-focus-ring-color;
-    outline-offset: 0px;
-}
-
-.ml-10 {
-        margin-left: 10px;
-    font-size: 12px;
-    color: #080808;
-}
-
-
-
-.btn.btn-out {
-    outline: 1px solid #fff;
-    outline-offset: -5px
-}
-
-.btn {
-    border-radius: 2px;
-    text-transform: capitalize;
-    font-size: 11px;
-    padding: 10px 19px;
-    cursor: pointer;
-    color: #fff
-}
-
-.fa{
-    font-size: 12px;
-    color: #2874ef;
-}
-
-
-.refine{
-        padding: 0px 0px !important;
-}
-
-.filters-text{
-    
-    background: #fff;
-    border: 1px solid #d5d5d5;
-    margin-bottom: 15px;
-    padding: 12px;
-
-}  
-
-.filter-span{
-        font-size: 17px;
-    color: #2874ef;
-}
-
 
 
 /*** 
@@ -326,12 +172,12 @@ ul,li{
 
 input{
   transition: all 500ms ease;
+  
   box-sizing: border-box;
   height: 48px;
   color: #333333;
   font-size: 1rem;
-  padding: 0 0 0 0em;
-  font-size:1rem;
+  padding: 0 0 0 1em;
   margin: 0;
   border-radius: 4px;
   transition: border .5s;
@@ -4163,6 +4009,7 @@ div#mCSB_1_container{
 .case-section .owl-nav{
   position: absolute;
   left: -170px;
+  bottom: 0px;
 }
 
 .case-section .owl-nav button{
@@ -5676,7 +5523,7 @@ div#mCSB_1_container{
 
 .subscribe-section .inner-box .left-column{
   position: relative;
-  padding: 10px 0px 33px 185px;
+  padding: 33px 0px 33px 185px;
 }
 
 .subscribe-section .inner-box .logo-box{
@@ -5714,7 +5561,7 @@ div#mCSB_1_container{
 
 .subscribe-section .inner-box .right-column{
   position: relative;
-  padding: 25px 0px;
+  padding: 37px 0px;
 }
 
 .subscribe-section .inner-box .right-column .form-inner,
@@ -12206,8 +12053,9 @@ div#mCSB_1_container{
 .default-sidebar:before{
   position: absolute;
   content: '';
-  background-color: #fff;
+  background-color: #f4f1f0;
   width: 5000px;
+  height: calc(100% + 220px);
   left: 10px;
   top: -110px;
 }

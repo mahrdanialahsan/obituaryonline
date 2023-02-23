@@ -3,14 +3,15 @@
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('images/12.jpg');">
+    <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->signup_page_cover_image)) ?  url('storage/site_settings/'.$site->signup_page_cover_image): asset('images/12.png')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>Sign up as new organisation or group</h1>
+                    <h1>{{$site->signup_page_cover_title ? $site->signup_page_cover_title:'Sign up as new organisation or group'}}</h1>
                 </div>
-                <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                </ul>
+{{--                <ul class="bread-crumb clearfix">--}}
+{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                --}}
+{{--                </ul>--}}
             </div>
         </div>
     </section>
@@ -20,7 +21,7 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="sign-up-overview-card-container">
+                    <div class="sign-up-overview-card-container" align="center">
 
 
                         <div class="rounded-card--header-solid" id="">

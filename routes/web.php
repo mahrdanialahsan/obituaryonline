@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/campaign', 'CampaignController@store')->name('campaign.store');
     Route::get('/campaign/{id}', 'CampaignController@show')->name('campaign.show');
     Route::post('/campaign/{id}/update', 'CampaignController@update')->name('campaign.update');
+    Route::post('/campaign/{id}/submit/approval', 'CampaignController@submitForApproval')->name('campaign.submit.approval');
 });
 
 
@@ -47,14 +48,31 @@ Route::get('/donate/{id}', 'DonateController@show')->name('donate.show');
 
 
 Route::get('/admin', function (){
-    return redirect(route('admin.campaigns'));
+    return redirect(route('admin.settings.site'));
 })->name('admin');
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
+
+
+    Route::get('/settings/site', 'Admin\SiteController@index')->name('admin.settings.site');
+    Route::post('/settings/store', 'Admin\SiteController@store')->name('admin.settings.save.site');
+
+
+    Route::get('/settings/site/slider', 'Admin\SiteController@slider')->name('admin.settings.slider');
+    Route::get('/settings/site/create', 'Admin\SiteController@createSlider')->name('admin.settings.slider.create');
+    Route::post('/settings/site/store', 'Admin\SiteController@storeSlider')->name('admin.settings.slider.store');
+    Route::get('/settings/site/{id}/edit', 'Admin\SiteController@editSlider')->name('admin.settings.slider.edit');
+    Route::post('/settings/site/{id}/update', 'Admin\SiteController@updateSlider')->name('admin.settings.slider.update');
+    Route::post('/settings/site/{id}/delete', 'Admin\SiteController@deleteSlider')->name('admin.settings.slider.delete');
+
+
     Route::get('/subscriptions', 'Admin\AdminController@subscriptions')->name('admin.subscriptions');
     Route::get('/campaigns', 'Admin\CampaignController@index')->name('admin.campaigns');
     Route::get('/campaign/{id}', 'Admin\CampaignController@show')->name('admin.campaign.show');
     Route::get('/campaign/{id}/approve', 'Admin\CampaignController@approve')->name('admin.campaign.approve');
     Route::get('/campaign/{id}/reject', 'Admin\CampaignController@reject')->name('admin.campaign.reject');
+
+
+
 });
 
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');

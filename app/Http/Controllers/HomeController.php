@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Campaigns;
 use App\Custodian;
+use App\Slider;
 use App\Subscriptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +32,10 @@ class HomeController extends Controller
             return  redirect(route('admin'));
         }
         else{
-            $campaigns = Campaigns::where('status',1)->get();
-            return view('home',compact('campaigns'));
+
+            $campaigns =    Campaigns::where('status',1)->get();
+            $sliders   =    Slider::where('status',1)->orderBy('displayorder')->get();
+            return view('home',compact('campaigns','sliders'));
         }
     }
 

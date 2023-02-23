@@ -1,8 +1,3 @@
-/* /givingsg-theme/images/mt/ */
-/* scss/minitheory/base/_variables.scss */
-/* default spacing */
-/* scss/base/_colors.scss */
-/* Monochrome */
 .aui .colors:before,
 .aui .colors:after {
   content: " ";
@@ -37,7 +32,7 @@
   height: 50px; }
 
 .aui .giving-primary {
-  background-color: #7955B4; }
+  background-color:#173d68 ; }
 
 .aui .giving-secondary {
   background-color: #6BC1CC; }
@@ -2245,7 +2240,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #333333; }
 
 .aui h1, .aui h2, .aui h3, .aui h4, .aui h5, .aui h6 {
-  color: #333333; }
+  color: #fff; }
 
 .aui h1, .aui h2, .aui h3, .aui h4, .aui h5, .aui h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: bold;
@@ -2312,7 +2307,7 @@ h1, h2, h3, h4, h5, h6 {
   font-style: italic; }
 
 .body-txt--no-letter-space {
-  line-height: 16px;
+  line-height: 30px;
   letter-spacing: normal; }
 
 /* scss/minitheory/base/_text-link.scss */
@@ -2425,7 +2420,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-ctrl, .aui .input-ctrl {
   position: relative;
-  margin-bottom: 16px; }
+  /*margin-bottom: 16px; */
+  margin-bottom: 2px;
+}
 
 .input-ctrl__icon, .aui .input-ctrl__icon {
   position: absolute;
@@ -2447,8 +2444,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-ctrl__currency, .aui .input-ctrl__currency {
   position: absolute;
-  font-size: 2rem;
-  bottom: 11px;
+  font-size: 1rem;
+  bottom: 14px;
   left: .9rem;
   color: #333333; }
 
@@ -2661,7 +2658,25 @@ input[type=date] {
 
 html, body {
   height: 100%; }
-  
+
+html.aui {
+  background-color: transparent; }
+
+.aui body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .aui .body-overflow-hidden {
   /* this is just an example of how to add custom break points.*/ }
@@ -2714,7 +2729,7 @@ html, body {
 .aui .button, .aui .select-btn__lbl-btn, .button, .aui .select-btn__lbl-btn, .select-btn__lbl-btn, a.button, .aui a.select-btn__lbl-btn, a.select-btn__lbl-btn, .aui a.button, .aui a.select-btn__lbl-btn {
   box-sizing: border-box;
   display: inline-block;
-  background-color: #6BC1CC;
+  background-color: #f65024;
   color: #FFFFFF;
   font-weight: bold;
   font-size: 14px;
@@ -2725,7 +2740,7 @@ html, body {
   text-align: center;
   position: relative;
   white-space: nowrap;
-  border: 2px #6BC1CC solid;
+  border: 2px #f65024 solid;
   text-decoration: none;
   cursor: pointer;
   transition: color .4s, border .4s, box-shadow .4s, background-color .4s;
@@ -3199,284 +3214,284 @@ html, body {
   background-position: top center; }
 
 .ico-cart {
-  background-image: url("../images/ic-cart.svg"); }
+  background-image: url("../images/mt/ic-cart.svg"); }
 
 .ico-filter {
-  background-image: url("../images/ic-filter.svg"); }
+  background-image: url("../images/mt/ic-filter.svg"); }
 
 .ico-search {
-  background-image: url("../images/ic-search.svg"); }
+  background-image: url("../images/mt/ic-search.svg"); }
 
 .ico-minus {
-  background-image: url("../images/ic-minus.svg"); }
+  background-image: url("../images/mt/ic-minus.svg"); }
 
 .ico-plus {
-  background-image: url("../images/ic-plus.svg"); }
+  background-image: url("../images/mt/ic-plus.svg"); }
 
 .ico-search-black {
-  background-image: url("../images/ic-search-black.svg"); }
+  background-image: url("../images/mt/ic-search-black.svg"); }
 
 .ico-furniture {
-  background-image: url("../images/ic-home-furniture.svg"); }
+  background-image: url("../images/mt/ic-home-furniture.svg"); }
 
 .ico-sort {
-  background-image: url("../images/ic-sort.svg"); }
+  background-image: url("../images/mt/ic-sort.svg"); }
 
 .ico-paint {
-  background-image: url("../images/ic-arts.svg"); }
+  background-image: url("../images/mt/ic-arts.svg"); }
 
 .ico-audio {
-  background-image: url("../images/ic-audio.svg"); }
+  background-image: url("../images/mt/ic-audio.svg"); }
 
 .ico-book {
-  background-image: url("../images/ic-book.svg"); }
+  background-image: url("../images/mt/ic-book.svg"); }
 
 .ico-clothing {
-  background-image: url("../images/ic-clothing.svg"); }
+  background-image: url("../images/mt/ic-clothing.svg"); }
 
 .ico-play {
-  background-image: url("../images/ic-play.svg"); }
+  background-image: url("../images/mt/ic-play.svg"); }
 
 .ico-close {
-  background-image: url("../images/ic-close.svg"); }
+  background-image: url("../images/mt/ic-close.svg"); }
 
 .ico-close-white {
-  background-image: url("../images/ic-close-white.svg"); }
+  background-image: url("../images/mt/ic-close-white.svg"); }
 
 .ico-close-grey, .ico-close-gray {
-  background-image: url("../images/ic-close-gray.svg"); }
+  background-image: url("../images/mt/ic-close-gray.svg"); }
 
 .ico-baby {
-  background-image: url("../images/ic-baby.svg"); }
+  background-image: url("../images/mt/ic-baby.svg"); }
 
 .ico-charity-ribbon-db {
-  background-image: url("../images/ic-charity-ribbon-db.svg"); }
+  background-image: url("../images/mt/ic-charity-ribbon-db.svg"); }
 
 .ico-clock-db {
-  background-image: url("../images/ic-clock-db.svg"); }
+  background-image: url("../images/mt/ic-clock-db.svg"); }
 
 .ico-donate-db {
-  background-image: url("../images/ic-donate-db.svg"); }
+  background-image: url("../images/mt/ic-donate-db.svg"); }
 
 .ico-donation-raised {
-  background-image: url("../images/ic-donation-raised.svg"); }
+  background-image: url("../images/mt/ic-donation-raised.svg"); }
 
 .ico-download {
-  background-image: url("../images/ic-download.svg");
+  background-image: url("../images/mt/ic-download.svg");
   background-size: 20px 20px; }
 
 .ico-donation-raised-db {
-  background-image: url("../images/ic-donation-raised-db.svg"); }
+  background-image: url("../images/mt/ic-donation-raised-db.svg"); }
 
 .ico-fundraise-db {
-  background-image: url("../images/ic-fundraise-db.svg"); }
+  background-image: url("../images/mt/ic-fundraise-db.svg"); }
 
 .ico-volunteer-db {
-  background-image: url("../images/ic-volunteer-db.svg"); }
+  background-image: url("../images/mt/ic-volunteer-db.svg"); }
 
 .ico-volunteering-db {
-  background-image: url("../images/ic-volunteering-db.svg"); }
+  background-image: url("../images/mt/ic-volunteering-db.svg"); }
 
 .ico-electronics {
-  background-image: url("../images/ic-electronics.svg"); }
+  background-image: url("../images/mt/ic-electronics.svg"); }
 
 .ico-food {
-  background-image: url("../images/ic-food.svg"); }
+  background-image: url("../images/mt/ic-food.svg"); }
 
 .ico-arts-heritage, .ico-arts {
-  background-image: url("../images/ic-arts-heritage.svg"); }
+  background-image: url("../images/mt/ic-arts-heritage.svg"); }
 
 .ico-children-youth, .ico-children {
-  background-image: url("../images/ic-children-youth.svg"); }
+  background-image: url("../images/mt/ic-children-youth.svg"); }
 
 .ico-community {
-  background-image: url("../images/ic-community.svg"); }
+  background-image: url("../images/mt/ic-community.svg"); }
 
 .ico-disability, .ico-disabilities {
-  background-image: url("../images/ic-disability.svg"); }
+  background-image: url("../images/mt/ic-disability.svg"); }
 
 .ico-education {
-  background-image: url("../images/ic-education.svg"); }
+  background-image: url("../images/mt/ic-education.svg"); }
 
 .ico-environment, .ico-nature {
-  background-image: url("../images/ic-environment.svg"); }
+  background-image: url("../images/mt/ic-environment.svg"); }
 
 .ico-families {
-  background-image: url("../images/ic-families.svg"); }
+  background-image: url("../images/mt/ic-families.svg"); }
 
 .ico-health {
-  background-image: url("../images/ic-health.svg"); }
+  background-image: url("../images/mt/ic-health.svg"); }
 
 .ico-humanitarian {
-  background-image: url("../images/ic-humanitarian.svg"); }
+  background-image: url("../images/mt/ic-humanitarian.svg"); }
 
 .ico-sports {
-  background-image: url("../images/ic-sports.svg"); }
+  background-image: url("../images/mt/ic-sports.svg"); }
 
 .ico-toys {
-  background-image: url("../images/ic-toys.svg"); }
+  background-image: url("../images/mt/ic-toys.svg"); }
 
 .ico-sports-outdoors {
-  background-image: url("../images/ic-sports-outdoors.svg"); }
+  background-image: url("../images/mt/ic-sports-outdoors.svg"); }
 
 .ico-venues {
-  background-image: url("../images/ic-venues.svg"); }
+  background-image: url("../images/mt/ic-venues.svg"); }
 
 .ico-home-furniture {
-  background-image: url("../images/ic-home-furniture.svg"); }
+  background-image: url("../images/mt/ic-home-furniture.svg"); }
 
 .ico-kitchen {
-  background-image: url("../images/ic-kitchen.svg"); }
+  background-image: url("../images/mt/ic-kitchen.svg"); }
 
 .ico-others {
-  background-image: url("../images/ic-others.svg"); }
+  background-image: url("../images/mt/ic-others.svg"); }
 
 .ico-musical {
-  background-image: url("../images/ic-musical.svg"); }
+  background-image: url("../images/mt/ic-musical.svg"); }
 
 .ico-vehicle {
-  background-image: url("../images/ic-vehicle.svg"); }
+  background-image: url("../images/mt/ic-vehicle.svg"); }
 
 .ico-software {
-  background-image: url("../images/ic-software.svg"); }
+  background-image: url("../images/mt/ic-software.svg"); }
 
 .ico-facebook-white {
-  background-image: url("../images/ic-facebook.svg"); }
+  background-image: url("../images/mt/ic-facebook.svg"); }
 
 .ico-instagram {
-  background-image: url("../images/ic-instagram.svg"); }
+  background-image: url("../images/mt/ic-instagram.svg"); }
 
 .ico-tiktok {
-  background-image: url("../images/ic-tiktok.png"); }
+  background-image: url("../images/mt/ic-tiktok.png"); }
 
 .ico-link {
-  background-image: url("../images/ic-link.svg");
+  background-image: url("../images/mt/ic-link.svg");
   background-size: 20px 20px; }
 
 .ico-save {
-  background-image: url("../images/ic-save.svg");
+  background-image: url("../images/mt/ic-save.svg");
   background-size: 20px 20px; }
 
 .ico-email {
-  background-image: url("../images/ic-email-gray.svg"); }
+  background-image: url("../images/mt/ic-email-gray.svg"); }
 
 .ico-facebook {
-  background-image: url("../images/ic-facebook.svg"); }
+  background-image: url("../images/mt/ic-facebook.svg"); }
 
 .ico-facebook-grey, .ico-facebook-gray {
-  background-image: url("../images/ic-facebook-gray.svg"); }
+  background-image: url("../images/mt/ic-facebook-gray.svg"); }
 
 .ico-facebook-box {
-  background-image: url("../images/ic-facebook-box.svg"); }
+  background-image: url("../images/mt/ic-facebook-box.svg"); }
 
 .ico-phone {
-  background-image: url("../images/ic-phone.svg"); }
+  background-image: url("../images/mt/ic-phone.svg"); }
 
 .ico-website {
-  background-image: url("../images/ic-website.svg"); }
+  background-image: url("../images/mt/ic-website.svg"); }
 
 .ico-arrow-down-accent {
-  background-image: url("../images/ic-arrow-down-accent.svg"); }
+  background-image: url("../images/mt/ic-arrow-down-accent.svg"); }
 
 .ico-arrow-up-accent {
-  background-image: url("../images/ic-arrow-up-accent.svg"); }
+  background-image: url("../images/mt/ic-arrow-up-accent.svg"); }
 
 .ico-arrow-prev {
-  background-image: url("../images/ic-arrow-prev.svg"); }
+  background-image: url("../images/mt/ic-arrow-prev.svg"); }
 
 .ico-arrow-prev-alt {
-  background-image: url("../images/ic-arrow-prev-alt.svg"); }
+  background-image: url("../images/mt/ic-arrow-prev-alt.svg"); }
 
 .ico-arrow-next-alt {
-  background-image: url("../images/ic-arrow-prev-alt.svg");
+  background-image: url("../images/mt/ic-arrow-prev-alt.svg");
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg); }
 
 .ico-page-prev {
-  background-image: url("../images/ic-page-prev.svg"); }
+  background-image: url("../images/mt/ic-page-prev.svg"); }
 
 .ico-page-next {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
-  background-image: url("../images/ic-page-prev.svg"); }
+  background-image: url("../images/mt/ic-page-prev.svg"); }
 
 .ico-calendar {
-  background-image: url("../images/ic-calendar.svg"); }
+  background-image: url("../images/mt/ic-calendar.svg"); }
 
 .ico-calendar-gray {
-  background-image: url("../images/ic-calendar-gray.svg"); }
+  background-image: url("../images/mt/ic-calendar-gray.svg"); }
 
 .ico-time {
-  background-image: url("../images/ic-time.svg"); }
+  background-image: url("../images/mt/ic-time.svg"); }
 
 .ico-location {
-  background-image: url("../images/ic-location.svg"); }
+  background-image: url("../images/mt/ic-location.svg"); }
 
 .ico-people {
-  background-image: url("../images/ic-people.svg"); }
+  background-image: url("../images/mt/ic-people.svg"); }
 
 .ico-elderly {
-  background-image: url("../images/ic-elderly.svg"); }
+  background-image: url("../images/mt/ic-elderly.svg"); }
 
 .ico-social-service, .ico-social {
-  background-image: url("../images/ic-social-service.svg"); }
+  background-image: url("../images/mt/ic-social-service.svg"); }
 
 .ico-animal-welfare, .ico-animal {
-  background-image: url("../images/ic-animal-welfare.svg"); }
+  background-image: url("../images/mt/ic-animal-welfare.svg"); }
 
 .ico-women-girls, .ico-women {
-  background-image: url("../images/ic-women-girls.svg"); }
+  background-image: url("../images/mt/ic-women-girls.svg"); }
 
 .ico-flag {
-  background-image: url("../images/ic-flag.svg"); }
+  background-image: url("../images/mt/ic-flag.svg"); }
 
 .ico-tax {
-  background-image: url("../images/ic-tax.svg"); }
+  background-image: url("../images/mt/ic-tax.svg"); }
 
 .ico-granted {
-  background-image: url("../images/ic-granted.svg"); }
+  background-image: url("../images/mt/ic-granted.svg"); }
 
 .ico-share {
-  background-image: url("../images/ic_share_black_24px.svg");
+  background-image: url("../images/mt/ic-share.svg");
   background-size: 20px 20px; }
 
 .ico-giving {
-  background-image: url("../images/ic-giving.svg"); }
+  background-image: url("../images/mt/ic-giving.svg"); }
 
 .ico-chevron-up {
-  background-image: url("../images/ic-chevron-up.svg"); }
+  background-image: url("../images/mt/ic-chevron-up.svg"); }
 
 .ico-search-light-gray, .ico-search-light-grey {
-  background-image: url("../images/ic-search-light-gray.svg"); }
+  background-image: url("../images/mt/ic-search-light-gray.svg"); }
 
 .ico-email-gray, .ico-email-grey {
-  background-image: url("../images/ic-email-gray.svg"); }
+  background-image: url("../images/mt/ic-email-gray.svg"); }
 
 .ico-remove {
-  background-image: url("../images/ic-remove.svg"); }
+  background-image: url("../images/mt/ic-remove.svg"); }
 
 .ico-remove-grey, .ico-remove-gray {
-  background-image: url("../images/ic-remove-gray.svg"); }
+  background-image: url("../images/mt/ic-remove-gray.svg"); }
 
 .ico-upload {
-  background-image: url("../images/ic-upload.svg"); }
+  background-image: url("../images/mt/ic-upload.svg"); }
 
 .ico-video {
-  background-image: url("../images/ic-video.svg"); }
+  background-image: url("../images/mt/ic-video.svg"); }
 
 .ico-edit {
-  background-image: url("../images/ic-edit.svg");
+  background-image: url("../images/mt/ic-edit.svg");
   background-size: 1rem 1rem; }
 
 .ico-duplicate {
-  background-image: url("../images/ic-duplicate.svg");
+  background-image: url("../images/mt/ic-duplicate.svg");
   background-size: 1rem 1rem; }
 
 .ico-diskette {
-  background-image: url("../images/ic-diskette.svg"); }
+  background-image: url("../images/mt/ic-diskette.svg"); }
 
 .ico-add {
-  background-image: url("../images/ic-add.svg"); }
+  background-image: url("../images/mt/ic-add.svg"); }
 
 .ico--small {
   width: 16px;
@@ -3520,7 +3535,7 @@ html, body {
   padding: 6px 20px 6px 12px;
   border: 1px solid #CCCCCC;
   border-radius: 4px;
-  background-image: url("../images/ic-arrow-down.svg");
+  background-image: url("../images/mt/ic-arrow-down.svg");
   background-repeat: no-repeat;
   background-position: right center;
   font-size: 16px;
@@ -3573,7 +3588,7 @@ html, body {
   border-image: initial;
   text-decoration: none;
   transition: color 0.4s, border 0.4s, box-shadow 0.4s, background-color 0.4s;
-  background: url(../images/ic-arrow-down-accent.svg) right center no-repeat transparent;
+  background: url(../images/mt/ic-arrow-down-accent.svg) right center no-repeat transparent;
   background-repeat: no-repeat;
   background-position: right center;
   width: auto; }
@@ -3674,7 +3689,7 @@ html, body {
   font-size: 12px;
   border: 1px solid #6BC1CC;
   color: #6BC1CC;
-  background-image: url("../images/ic-arrow-down-accent.svg");
+  background-image: url("../images/mt/ic-arrow-down-accent.svg");
   background-position-x: 97%;
   display: block;
   width: 111px;
@@ -4012,7 +4027,7 @@ select::-ms-expand {
   position: absolute;
   width: 16px;
   height: 16px;
-  background: url("../images/ic-cancel.svg");
+  background: url("../images/mt/ic-cancel.svg");
   background-repeat: no-repeat;
   right: 0;
   top: 0; }
@@ -4793,7 +4808,7 @@ select::-ms-expand {
   .hero-container {
     padding: 40px 16px 60px 16px; } }
 .hero-container--light-grey, .hero-container--light-gray {
-  background: #F4F4F4; }
+  background: #fff; }
 
 .hero-container--auto-w {
   width: auto; }
@@ -4846,7 +4861,7 @@ select::-ms-expand {
 .hero-container__image {
   width: 100%;
   height: 100%;
-  background: url(../images/bottom-bg.jpg) no-repeat center center/cover;
+  background: url(../images/mt/bottom-bg.jpg) no-repeat center center/cover;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5000,7 +5015,7 @@ select::-ms-expand {
   color: #666666; }
 
 .bcrumb--grey-back .bcrumb__child.is-active .bcrumb__number, .bcrumb--grey-back .aui .bcrumb__child.is-active .bcrumb__number {
-  background: #7955B4; }
+  background: #f65024; }
 
 .bcrumb--grey-back .bcrumb__child.is-complete p, .bcrumb--grey-back .aui .bcrumb__child.is-complete p {
   color: #666666; }
@@ -5209,7 +5224,7 @@ select::-ms-expand {
   background-color: #6BC1CC; }
 
 .btn-checkbox-btn--save [type="checkbox"]:checked + .button .ico, .btn-checkbox-btn--save .aui [type="checkbox"]:checked + .select-btn__lbl-btn .ico, .btn-checkbox-btn--save [type="checkbox"]:checked + .select-btn__lbl-btn .ico {
-  background-image: url("../images/ic-save-white.svg"); }
+  background-image: url("../images/mt/ic-save-white.svg"); }
 
 /* scss/minitheory/molecules/_tooltip.scss */
 .tooltip__mark {
@@ -6182,15 +6197,15 @@ select::-ms-expand {
 .edu-ctn, .aui .edu-ctn {
   padding: 40px 16px;
   text-align: center;
-  background-color: white;
+  background-color: #173d68;
   position: relative; }
 
 @media (min-width: 37.5rem) {
   .edu-ctn, .aui .edu-ctn {
-    top: -35px;
+    top: ;
     border-radius: .5rem; } }
 .edu-ctn__description h1 {
-  color: #7955B4;
+  color: #fff;
   font-size: 20px;
   line-height: 28px; }
 
@@ -6222,7 +6237,7 @@ select::-ms-expand {
 @media (min-width: 37.5rem) {
   .edu-ctn {
     padding: 40px 16px;
-    box-shadow: 0 2px 3px rgba(176, 186, 193, 0.7); }
+    box-shadow:  }
 
   .edu-ctn__description h1 {
     font-size: 32px;
@@ -6389,13 +6404,13 @@ select::-ms-expand {
     display: block; } }
 /* scss/minitheory/molecules/_bg-stats.scss */
 .bg-stats {
-  background-image: url(../images/home-punch.jpg);
+  background-image:;
   background-size: contain;
   background-color: white;
   background-repeat: no-repeat;
   background-position: center bottom;
   max-width: 100%;
-  height: calc(921px + 39vw);
+  height:;
   padding-top: 40px;
   position: relative;
   z-index: 1; }
@@ -6406,12 +6421,12 @@ select::-ms-expand {
 @media (min-width: 64rem) {
   .bg-stats {
     background-position: center center;
-    height: 1130px;
+    height:400px;
     background-size: cover; } }
 @media (min-width: 75rem) {
   .bg-stats {
-    padding-top: 80px;
-    height: 1300px; } }
+    padding-top:0px;
+    height: 300px; } }
 .bg-stats__stats-blk {
   text-align: center;
   padding: 0 2rem 2rem 2rem;
@@ -6561,12 +6576,12 @@ select::-ms-expand {
 @media (min-width: 56.25rem) {
   .mrkt-title, .aui .mrkt-title {
     text-align: left;
-    padding-left: 4rem; } }
+    padding-left: ; } }
 .mrkt-title__head, .aui .mrkt-title__head {
   font-family: Muli, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.25rem;
   line-height: 20px;
-  color: #7955B4; }
+  color: #6bc1cc; }
 
 @media (min-width: 37.5rem) {
   .mrkt-title__head, .aui .mrkt-title__head {
@@ -6710,7 +6725,7 @@ select::-ms-expand {
     display: none; } }
 /* scss/minitheory/molecules/_poster.scss */
 .poster, .aui .poster {
-  background-image: url("../images/bottom-bg.jpg");
+  background-image: url("../images/mt/bottom-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -6992,7 +7007,7 @@ header.nav {
 
 @media (min-width: 56.25rem) {
   .nav__head {
-    background: #f16577;
+    background: #6bc1cc;
     height: 40px;
     display: block;
     transition: -webkit-transform 0.3s ease-out;
@@ -7884,13 +7899,13 @@ header.nav {
 
 /* scss/minitheory/organisms/_footer.scss */
 .foot {
-  background-color: #173D68;
+  background-color: #6bc1cc;
   padding: 12px;
   font-size: 1rem; }
 
 @media (min-width: 75rem) {
   .foot {
-    padding: 40px 40px 12px 40px; } }
+    padding: 15px 40px 12px 40px; } }
 .foot__ctn {
   max-width: 700px;
   margin-left: auto;
@@ -8070,7 +8085,7 @@ header.nav {
 @media (min-width: 75rem) {
   .foot__bot {
     text-align: left;
-    margin-top: 52px; } }
+    margin-top: 2px; } }
 .foot__all-rights {
   display: none; }
 
@@ -8260,13 +8275,15 @@ header.nav {
   border-radius: 8px; }
 
 .rounded-card--header-solid * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  
+   }
 
 @media (min-width: 37.5rem) {
   .rounded-card--header-solid {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.18);
-    margin: 16px 15px;
-    max-width: 370px; } }
+    margin: 2rem auto 5rem auto;
+    max-width: 570px; } }
 .rounded-card--header-solid__header {
   background: #F4F4F4;
   padding: 24px;
@@ -8368,11 +8385,15 @@ header.nav {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start; } }
-
-
+/* scss/minitheory/organisms/_company-profile-head.scss */
+/* scss/readme/_settings.scss */
+/* scss/readme/_sidebars.scss */
+/* scss/minitheory/vendors/_readmore.scss */
+/* scss/minitheory/vendors/_copy-to-clipboard.scss */
+/* scss/minitheory/vendors/_swiper.scss */
 .swiper-button-next, .swiper-button-prev {
   top: 0;
-  background-image: url("../images/ic-next.svg");
+  background-image:url(../images/ic-next.svg);
   width: 40px;
   height: 50%;
   top: 50%;
@@ -8399,7 +8420,7 @@ header.nav {
     left: 16px; } }
 .swiper-container--home .swiper-button-prev {
   left: -20px;
-  background-image: url("../images/ic-next-white.svg"); }
+  background-image:url(../images/ic-next.svg); }
 
 @media (min-width: 37.5rem) {
   .swiper-container--home .swiper-button-prev {
@@ -10218,8 +10239,8 @@ form {
   -ms-flex-align: center;
   align-items: center; }
 
-.volunteer-event__venue {
-  margin-top: 3rem; }
+.aui .volunteer-event__venue {
+  margin-top: 3.25rem; }
 
 .aui .volunteer-event__venue-item {
   margin-top: 1rem; }
@@ -10656,8 +10677,8 @@ form {
   padding-top: 66px; }
 
 @media (min-width: 56.25rem) {
-.aui .pad-navbar {
-    padding-top: 50px; } }
+  .aui .pad-navbar {
+    padding-top: 152px; } }
 .aui .w-211px {
   width: 211px; }
 

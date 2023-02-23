@@ -56,8 +56,23 @@
   page-break-after:avoid
  }
 }
- 
-
+.aui body {
+ margin:0;
+ font-family:"Open Sans",Arial,Helvetica,sans-serif;
+ font-size:12.8px;
+ line-height:20px;
+ color:#333;
+ background-color:white
+}
+.aui a {
+ color:#0af;
+ text-decoration:none
+}
+.aui a:hover,
+.aui a:focus {
+ color:#0077b3;
+ text-decoration:underline
+}
 .aui .img-rounded {
  -webkit-border-radius:6px;
  -moz-border-radius:6px;

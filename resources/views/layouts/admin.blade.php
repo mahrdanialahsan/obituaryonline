@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Route;
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"  class="no-js no-svg">
 <head>
@@ -14,6 +17,7 @@
 {{--    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />--}}
     <link href="{{ asset('assets/admin/css/datatables.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/styles.css')}}" rel="stylesheet" />
+    <link rel='stylesheet' href="{{asset('css/dropify.min.css')}}" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     @stack('css')
 </head>
@@ -55,11 +59,19 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a class="nav-link" href="{{route('admin.campaigns')}}">
+                    <a class="nav-link {{Route::currentRouteName() == 'admin.settings.site' ? 'active':''}} " href="{{route('admin.settings.site')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
+                        Site Setting
                     </a>
-                    <a class="nav-link" href="{{route('admin.subscriptions')}}">
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.settings.slider') ? 'active':''}}" href="{{route('admin.settings.slider')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Slider
+                    </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.campaign') ? 'active':''}}" href="{{route('admin.campaigns')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Campaigns
+                    </a>
+                    <a class="nav-link {{Route::currentRouteName() == 'admin.subscriptions' ? 'active':''}}" href="{{route('admin.subscriptions')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Subscriptions
                     </a>
@@ -118,10 +130,12 @@
         </footer>
     </div>
 </div>
+<script src="{{ asset('js/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/scripts.js')}}"></script>
 <script src="{{ asset('assets/admin/js/datatables.js')}}"></script>
 <script src="{{ asset('assets/admin/js/datatables-simple-demo.js')}}"></script>
+<script src="{{ asset('js/dropify.min.js') }}"></script>
 @stack('js')
 </body>
 </html>

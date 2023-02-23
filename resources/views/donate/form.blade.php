@@ -1,7 +1,7 @@
 @extends('layouts.public')
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('images/12.jpg');">
+    <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->donate_page_cover_image)) ?  url('storage/site_settings/'.$site->donate_page_cover_image): asset('images/12.png')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">

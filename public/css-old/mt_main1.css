@@ -2447,8 +2447,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-ctrl__currency, .aui .input-ctrl__currency {
   position: absolute;
-  font-size: 2rem;
-  bottom: 11px;
+  font-size: 1rem;
+  bottom: 14px;
   left: .9rem;
   color: #333333; }
 
@@ -2661,7 +2661,25 @@ input[type=date] {
 
 html, body {
   height: 100%; }
-  
+
+html.aui {
+  background-color: transparent; }
+
+.aui body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #666666;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .aui .body-overflow-hidden {
   /* this is just an example of how to add custom break points.*/ }
@@ -3437,7 +3455,7 @@ html, body {
   background-image: url("../images/ic-granted.svg"); }
 
 .ico-share {
-  background-image: url("../images/ic_share_black_24px.svg");
+  background-image: url("../images/ic-share.svg");
   background-size: 20px 20px; }
 
 .ico-giving {
@@ -8368,8 +8386,12 @@ header.nav {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start; } }
-
-
+/* scss/minitheory/organisms/_company-profile-head.scss */
+/* scss/readme/_settings.scss */
+/* scss/readme/_sidebars.scss */
+/* scss/minitheory/vendors/_readmore.scss */
+/* scss/minitheory/vendors/_copy-to-clipboard.scss */
+/* scss/minitheory/vendors/_swiper.scss */
 .swiper-button-next, .swiper-button-prev {
   top: 0;
   background-image: url("../images/ic-next.svg");
@@ -10218,8 +10240,8 @@ form {
   -ms-flex-align: center;
   align-items: center; }
 
-.volunteer-event__venue {
-  margin-top: 3rem; }
+.aui .volunteer-event__venue {
+  margin-top: 3.25rem; }
 
 .aui .volunteer-event__venue-item {
   margin-top: 1rem; }
@@ -10656,8 +10678,8 @@ form {
   padding-top: 66px; }
 
 @media (min-width: 56.25rem) {
-.aui .pad-navbar {
-    padding-top: 50px; } }
+  .aui .pad-navbar {
+    padding-top: 152px; } }
 .aui .w-211px {
   width: 211px; }
 

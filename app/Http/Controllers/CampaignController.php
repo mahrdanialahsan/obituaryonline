@@ -17,7 +17,13 @@ class CampaignController extends Controller
     public function index()
     {
         //
-        return view('campaign.index');
+        $campaigns['all']           =   Campaigns::all();
+        $campaigns['draft']         =   collect($campaigns['all'])->whereNull('status')->all();
+        $campaigns['pending']       =   collect($campaigns['all'])->where('status',0)->all();
+        $campaigns['approved']      =   collect($campaigns['all'])->where('status',1)->all();
+        $campaigns['rejected']      =   collect($campaigns['all'])->where('status',2)->all();
+
+        return view('campaign.index',compact('campaigns'));
     }
 
     /**
@@ -42,14 +48,14 @@ class CampaignController extends Controller
         $uid = Str::random(150);
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
-            'deceased_name'     => 'required|string|max:255',
+            'deceased_name'     => 'required|string|max:191',
             'date_of_birth'     => 'required|date|date_format:Y-m-d',
             'date_of_death'     => 'required|date|date_format:Y-m-d H:i',
-            'wake_location'     => 'required|string|max:255',
+            'wake_location'     => 'required|string|max:191',
             'wake_period'       => 'required|integer',
             'funeral_date'      => 'required|date|date_format:Y-m-d H:i',
-            'funeral_location'  => 'required|string|max:255',
-            'surviving_family'  => 'required|string|max:255',
+            'funeral_location'  => 'required|string|max:191',
+            'surviving_family'  => 'required|string',
             //'deceased_picture'  => 'required|image','mimes:jpeg,png,jpg,gif',
             'deceased_picture'  => 'required',
             'death_certificate' => 'required|mimes:pdf',
@@ -62,7 +68,7 @@ class CampaignController extends Controller
         $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
         $data                       =   $request->except(['deceased_picture','death_certificate']);
         $data['deceased_picture']   =   $dpfileName;
-        $data['death_certificate']   =   $dpfileName;
+        $data['death_certificate']  =   $dcfileName;
         $data['uid']                =   $uid;
         $data['created_by']         =   auth()->id();
         $compaign = new Campaigns($data);
@@ -71,7 +77,7 @@ class CampaignController extends Controller
         return response()->json([
             'status'   => 'redirect',
             'url'      =>  route('campaign.show',['id'=>$compaign->uid]),
-            'msg'      =>  'Compaign created successfully.',
+            'msg'      =>  'Campaign created successfully.',
         ],200);
 
     }
@@ -84,11 +90,11 @@ class CampaignController extends Controller
      */
     public function show(Request $request,$uid)
     {
-        $campaigns =   Campaigns::where('uid',$uid)->first();
+        $campaign =   Campaigns::where('uid',$uid)->where('created_by',auth()->id())->first();
         if($request->ajax()){
-           return response()->json(Campaigns::where('uid',$uid)->first());
+           return response()->json($campaign);
         }else{
-            return view('campaign.create',compact('uid','campaigns'));
+            return view('campaign.create',compact('uid','campaign'));
         }
     }
 
@@ -102,7 +108,7 @@ class CampaignController extends Controller
     public function details($uid)
     {
         $campaign =   Campaigns::where('uid',$uid)->first();
-        return view('campaign.create',compact('uid','campaign'));
+        return view('campaign.details',compact('uid','campaign'));
     }
 
     /**
@@ -128,43 +134,52 @@ class CampaignController extends Controller
         //
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
-            'deceased_name'     => 'required|string|max:255',
+            'deceased_name'     => 'required|string|max:191',
             'date_of_birth'     => 'required|date|date_format:Y-m-d',
             'date_of_death'     => 'required|date|date_format:Y-m-d H:i',
-            'wake_location'     => 'required|string|max:255',
+            'wake_location'     => 'required|string|max:191',
             'wake_period'       => 'required|integer',
             'funeral_date'      => 'required|date|date_format:Y-m-d H:i',
-            'funeral_location'  => 'required|string|max:255',
-            'surviving_family'  => 'required|string|max:255',
+            'funeral_location'  => 'required|string|max:191',
+            'surviving_family'  => 'required|string',
             'message'           => 'required|string',
         ]);
-        $compaign                   =  Campaigns::where('uid',$uid)->first();
-        $compaign->deceased_name    =  $request->deceased_name;
-        $compaign->date_of_birth    =  $request->date_of_birth;
-        $compaign->date_of_death    =  $request->date_of_death;
-        $compaign->wake_location    =  $request->wake_location;
-        $compaign->wake_period      =  $request->wake_period;
-        $compaign->funeral_date     =  $request->funeral_date;
-        $compaign->funeral_location =  $request->funeral_location;
-        $compaign->surviving_family =  $request->surviving_family;
-        $compaign->message          =  $request->message;
-        if($request->hasFile('deceased_picture')){
-            $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
-            $request->deceased_picture->move(storage_path('app/public/deceased_picture'), $dpfileName);
-            $compaign->deceased_picture     =  $dpfileName;
+        $compaign                   =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereNotIn('status',[1,2])->first();
+        if($compaign){
+            $compaign->deceased_name    =  $request->deceased_name;
+            $compaign->date_of_birth    =  $request->date_of_birth;
+            $compaign->date_of_death    =  $request->date_of_death;
+            $compaign->wake_location    =  $request->wake_location;
+            $compaign->wake_period      =  $request->wake_period;
+            $compaign->funeral_date     =  $request->funeral_date;
+            $compaign->funeral_location =  $request->funeral_location;
+            $compaign->surviving_family =  $request->surviving_family;
+            $compaign->message          =  $request->message;
+            if($request->hasFile('deceased_picture')){
+                $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
+                $request->deceased_picture->move(storage_path('app/public/deceased_picture'), $dpfileName);
+                $compaign->deceased_picture     =  $dpfileName;
+            }
+            if($request->hasFile('death_certificate')){
+                $dcfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->death_certificate->extension();
+                $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
+                $compaign->death_certificate    =  $dcfileName;
+            }
+            $compaign->updated_at         =   date('Y-m-d H:i:s');
+            $compaign->save();
+            return response()->json([
+                'status'   => 'redirect',
+                'url'      =>  route('campaign.show',['id'=>$compaign->uid]),
+                'msg'      =>  'Campaign updated successfully.',
+            ],200);
         }
-        if($request->hasFile('death_certificate')){
-            $dcfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->death_certificate->extension();
-            $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
-            $compaign->death_certificate    =  $dcfileName;
+        else{
+            return response()->json([
+                'status'   =>  'error',
+                'msg'      =>  'Invalid request.',
+            ],400);
         }
-        $compaign->updated_at         =   date('Y-m-d H:i:s');
-        $compaign->save();
-        return response()->json([
-            'status'   => 'redirect',
-            'url'      =>  route('campaign.show',['id'=>$compaign->uid]),
-            'msg'      =>  'Compaign updated successfully.',
-        ],200);
+
     }
 
     /**
@@ -176,5 +191,28 @@ class CampaignController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function submitForApproval(Request $request, $uid)
+    {
+        //
+        $compaign               =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereNotIn('status',[1,2])->first();
+        if($compaign) {
+            $compaign->status = 0;
+            $compaign->updated_at = date('Y-m-d H:i:s');
+            $compaign->save();
+            return response()->json([
+                'status' => 'redirect',
+                'url' => route('campaign.show', ['id' => $compaign->uid]),
+                'msg' => 'Campaign submitted successfully for approval.',
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'status'   =>  'error',
+                'msg'      =>  'Invalid request.',
+            ],400);
+        }
     }
 }
