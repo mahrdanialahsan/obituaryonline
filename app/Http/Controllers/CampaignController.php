@@ -45,21 +45,24 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        $uid = Str::random(150);
+        $uid = Str::random(60);
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
-            'deceased_name'     => 'required|string|max:191',
-            'date_of_birth'     => 'required|date|date_format:Y-m-d',
-            'date_of_death'     => 'required|date|date_format:Y-m-d H:i',
-            'wake_location'     => 'required|string|max:191',
-            'wake_period'       => 'required|integer',
-            'funeral_date'      => 'required|date|date_format:Y-m-d H:i',
-            'funeral_location'  => 'required|string|max:191',
-            'surviving_family'  => 'required|string',
-            //'deceased_picture'  => 'required|image','mimes:jpeg,png,jpg,gif',
-            'deceased_picture'  => 'required',
-            'death_certificate' => 'required|mimes:pdf',
-            'message'           => 'required|string',
+            'deceased_first_name'   => 'required|string|max:191',
+            'deceased_last_name'    => 'required|string|max:191',
+            'nric'                  => 'required|string|max:191',
+            'date_of_birth'         => 'required|date|date_format:Y-m-d',
+            'date_of_death'         => 'required|date|date_format:Y-m-d H:i',
+            'wake_location'         => 'required|string|max:191',
+            'wake_period'           => 'required|integer',
+            'funeral_date'          => 'required|date|date_format:Y-m-d H:i',
+            'funeral_location'      => 'required|string|max:191',
+            'surviving_family'      => 'required|string',
+            //'deceased_picture'    => 'required|image','mimes:jpeg,png,jpg,gif',
+            'deceased_picture'      => 'required',
+            'death_certificate'     => 'required|mimes:pdf',
+            //'poa_wills'             => 'required|string',
+            'message'               => 'required|string',
         ]);
         //dd($request->all());
         $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
@@ -85,17 +88,24 @@ class CampaignController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $uid
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$uid)
+    public function show($uid)
     {
         $campaign =   Campaigns::where('uid',$uid)->where('created_by',auth()->id())->first();
-        if($request->ajax()){
-           return response()->json($campaign);
-        }else{
-            return view('campaign.create',compact('uid','campaign'));
-        }
+        return view('campaign.create',compact('uid','campaign'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     *@param  string  $uid
+     * @return \Illuminate\Http\Response
+     */
+    public function get($uid)
+    {
+        $campaign =   Campaigns::where('uid',$uid)->where('created_by',auth()->id())->first();
+        return response()->json($campaign);
     }
 
 
@@ -134,7 +144,9 @@ class CampaignController extends Controller
         //
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
-            'deceased_name'     => 'required|string|max:191',
+            'deceased_first_name'=> 'required|string|max:191',
+            'deceased_last_name'=> 'required|string|max:191',
+            'nric'              => 'required|string|max:191',
             'date_of_birth'     => 'required|date|date_format:Y-m-d',
             'date_of_death'     => 'required|date|date_format:Y-m-d H:i',
             'wake_location'     => 'required|string|max:191',
@@ -144,17 +156,21 @@ class CampaignController extends Controller
             'surviving_family'  => 'required|string',
             'message'           => 'required|string',
         ]);
-        $compaign                   =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereNotIn('status',[1,2])->first();
+        $compaign                   =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
         if($compaign){
-            $compaign->deceased_name    =  $request->deceased_name;
-            $compaign->date_of_birth    =  $request->date_of_birth;
-            $compaign->date_of_death    =  $request->date_of_death;
-            $compaign->wake_location    =  $request->wake_location;
-            $compaign->wake_period      =  $request->wake_period;
-            $compaign->funeral_date     =  $request->funeral_date;
-            $compaign->funeral_location =  $request->funeral_location;
-            $compaign->surviving_family =  $request->surviving_family;
-            $compaign->message          =  $request->message;
+            $compaign->deceased_first_name  =  $request->deceased_first_name;
+            $compaign->deceased_last_name   =  $request->deceased_last_name;
+            $compaign->nric                 =  $request->nric;
+            $compaign->date_of_birth        =  $request->date_of_birth;
+            $compaign->date_of_death        =  $request->date_of_death;
+            $compaign->wake_location        =  $request->wake_location;
+            $compaign->wake_period          =  $request->wake_period;
+            $compaign->funeral_date         =  $request->funeral_date;
+            $compaign->public_donation      =  (int)@$request->public_donation;
+            $compaign->funeral_location     =  $request->funeral_location;
+            $compaign->surviving_family     =  $request->surviving_family;
+            $compaign->poa_wills            =  $request->poa_wills;
+            $compaign->message              =  $request->message;
             if($request->hasFile('deceased_picture')){
                 $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
                 $request->deceased_picture->move(storage_path('app/public/deceased_picture'), $dpfileName);

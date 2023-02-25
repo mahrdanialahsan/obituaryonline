@@ -281,6 +281,7 @@
 <script src="{{ asset('js/jquery.min.js')}}"></script>
 <script src="{{ asset('js/popper.min431f.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
+<script src="{{ asset('js/moment-duration-format.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min431f.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
 <script src="{{ asset('js/owl431f.js') }}"></script>

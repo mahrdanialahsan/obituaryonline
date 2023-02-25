@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="mt-4">Subscriptions</h1>
+    <h1 class="mt-4">Site Settings</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Site Settings</li>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <div class="form-floating">
-                            <textarea class="form-control" id="home_page_title_short_description" name="home_page_title_short_description" type="text" required placeholder="Ever undertakes laborious physical exercise except obtain some advantage from it but who has any right to find." > {{$site->site_title}} </textarea>
+                            <textarea class="form-control" id="home_page_title_short_description" name="home_page_title_short_description" type="text" required placeholder="Ever undertakes laborious physical exercise except obtain some advantage from it but who has any right to find." > {{$site->home_page_title_short_description}} </textarea>
                             <label for="home_page_title_short_description">Title Short Description</label>
                         </div>
                     </div>

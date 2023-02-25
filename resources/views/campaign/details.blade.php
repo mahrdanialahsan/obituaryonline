@@ -89,7 +89,7 @@
 
                             <div class="text">
                                 <h3 class="h3">About Campaign</h3><br>
-                                <div class="campaign-description">{{$campaign->message}}</div>
+                                <div class="campaign-description">{!! $campaign->message !!}</div>
 
                             </div>
 

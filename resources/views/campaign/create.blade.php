@@ -3,14 +3,11 @@
 @section('content')
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <style>
-        /*.input-ctrl{*/
-        /*    height: 80px;*/
-        /*}*/
         .error{
             color: #f98768;
         }
-        .bootstrap-datetimepicker-widget.dropdown-menu  {
-            z-index: 9 !important;
+        .input-ctrl, .aui .input-ctrl {
+             margin-bottom: 0px;
         }
     </style>
     <!-- Page Title -->
@@ -62,9 +59,19 @@
                                         <div id="tab-page-1" style ="display: none;" class="rounded-card__body rounded-card__body--responsive js-create-volunteer-act__page js-create-volunteer-act__page--1" data-role="page" >
                                             <h3 class="h3 font-dark-grey">{{$site->fundraise_page_form_title ? $site->fundraise_page_form_title:"Deceased Information"}}</h3>
                                             <div class="input-ctrl">
-                                                <label class="lbl" for="deceased_name">Name </label>
-                                                <input type="text" name="deceased_name" id="deceased_name"  class="form-control field-required input">
-                                                <label for="deceased_name" class="error help-block"></label>
+                                                <label class="lbl" for="deceased_first_name">First Name </label>
+                                                <input type="text" name="deceased_first_name" id="deceased_first_name"  class="form-control field-required input">
+                                                <label for="deceased_first_name" class="error help-block"></label>
+                                            </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="deceased_last_name">Last Name </label>
+                                                <input type="text" name="deceased_last_name" id="deceased_last_name"  class="form-control field-required input">
+                                                <label for="deceased_last_name" class="error help-block"></label>
+                                            </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="nric">NRIC </label>
+                                                <input type="text" name="nric" id="nric"  class="form-control field-required input">
+                                                <label for="nric" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="date_of_birth">Date of Birth</label>
@@ -104,9 +111,13 @@
                                                 <label for="funeral_location" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
-                                                <label class="lbl" for="surviving_family">Surviving Family </label>
-                                                <textarea type="text" name="surviving_family" id="surviving_family" class="form-control field-required input"></textarea>
-                                                <label for="surviving_family" class="error help-block"></label>
+                                                <ul class="checkbox-list causesFilter" data-role="list-show-more" style="max-height: none;">
+                                                    <li class="title-ctn__child"><label class="checkbox-list__checkbox">
+                                                            <input type="checkbox" value="1" name="public_donation" id="public_donation" class="callSearch causesType">
+                                                            <span class="checkbox-list__lbl-spn ">Donation Is Public</span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_picture">Deceased Picture</label>
@@ -118,9 +129,20 @@
                                                 <input data-default-file="{{!empty($campaign) ?  url('storage/death_certificate/'.$campaign->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
                                                 <label for="death_certificate" class="error help-block"></label>
                                             </div>
+
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="surviving_family">Surviving Family </label>
+                                                <textarea type="text" name="surviving_family" id="surviving_family" class="form-control field-required input"></textarea>
+                                                <label for="surviving_family" class="error help-block"></label>
+                                            </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="poa_wills"> Power of attorney / Power of probate</label>
+                                                <textarea   name="poa_wills" id="poa_wills"    class="form-control field-required textarea"></textarea>
+                                                <label for="poa_wills" class="error help-block"></label>
+                                            </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="message">About Campaign </label>
-                                                <textarea   name="message" id="message" maxlength="1500" rows="10"   class="form-control field-required textarea"></textarea>
+                                                <textarea   name="message" id="message"    class="form-control field-required textarea"></textarea>
                                                 <label for="message" class="error help-block"></label>
                                             </div>
                                         </div>
@@ -171,25 +193,26 @@
         var base_url = '{{url('/')}}';
         function setValue(){
             @if(!empty($uid))
-                $.get("/campaign/{!! $uid !!}").done(function(response){
+                $.get("/campaign/get/{!! $uid !!}").done(function(response){
 
-                    $('#deceased_name').val(response.deceased_name);
+                    $('#deceased_first_name').val(response.deceased_first_name);
+                    $('#deceased_last_name').val(response.deceased_last_name);
+                    $('#nric').val(response.nric);
                     $('#date_of_birth').val(moment(response.date_of_birth).format('YYYY-MM-DD'));
                     $('#date_of_death').val(moment(response.date_of_death).format('YYYY-MM-DD HH:MM'));
                     $('#wake_location').val(response.wake_location);
                     $('#wake_period').val(response.wake_period);
                     $('#funeral_date').val(moment(response.funeral_date).format('YYYY-MM-DD HH:MM'));
                     $('#funeral_location').val(response.funeral_location);
-                    //$('#surviving_family').val(response.surviving_family);
+                    $('#public_donation').prop("checked",response.public_donation == 1 ? true:false );
                     CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
+                    CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
+                    CKEDITOR.instances["message"].setData(response.message);
+                    debugger
                     setTimeout(function () {
                         for ( instance in CKEDITOR.instances )
                             CKEDITOR.instances[instance].updateElement();
                     },10)
-                    $('#message').val(response.message);
-
-
-
                     tab     =   response.status == null ? 2:1;
                     $(`.rounded-card__body`).hide();
                     $(`#tab-page-${tab}`).show();
@@ -252,65 +275,32 @@
             });
             $('.dropify').dropify();
 
-            // Translated
+            toolbar = [
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                //{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'justify', groups: [  'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
 
-            // Used events
-            // var drEvent = $('#input-file-events').dropify();
-            //
-            // drEvent.on('dropify.beforeClear', function(event, element){
-            //     return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-            // });
-            //
-            // drEvent.on('dropify.afterClear', function(event, element){
-            //     alert('File deleted');
-            // });
-            //
-            // drEvent.on('dropify.errors', function(event, element){
-            //     console.log('Has Errors');
-            // });
-            //
-            // var drDestroy = $('#input-file-to-destroy').dropify();
-            // drDestroy = drDestroy.data('dropify')
-            // $('#toggleDropify').on('click', function(e){
-            //     e.preventDefault();
-            //     if (drDestroy.isDropified()) {
-            //         drDestroy.destroy();
-            //     } else {
-            //         drDestroy.init();
-            //     }
-            // })
-
-            // CKEDITOR.editorConfig = function( config ) {
-            //     config.toolbarGroups = [
-            //         // { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-            //         // { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-            //         // { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-            //         // { name: 'forms', groups: [ 'forms' ] },
-            //         // '/',
-            //         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-            //         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-            //         { name: 'links', items: [ 'Link', 'Unlink' ] },
-            //     ];
-            // };
+                { name: 'links', items: [ 'Link', 'Unlink' ] },
+                { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
+                { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                { name: 'links', items: [ 'Link', 'Unlink' ] },
+                { name: 'insert', items: [ 'Image'] },
+                { name: 'spell', items: [ 'jQuerySpellChecker' ] },
+                { name: 'table', items: [ 'Table' ] }
+            ];
             CKEDITOR.replace('surviving_family', {
-                toolbar1: [
-                    // { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
-                    // { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
-                    // //{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
-                    // { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
-                    // { name: 'justify', groups: [  'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-                    //
-                    // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                    // { name: 'basicstyles', groups: [ 'basicstyles' ], items: [ 'Bold', 'Italic', 'Underline', "-", 'TextColor', 'BGColor' ] },
-                    // { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
-                    // { name: 'scripts', items: [ 'Subscript', 'Superscript' ] },
-                    // { name: 'justify', groups: [ 'blocks', 'align' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-                    // { name: 'paragraph', groups: [ 'list', 'indent' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
-                    // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                    //{ name: 'insert', items: [ 'Image'] },
-                    //{ name: 'spell', items: [ 'jQuerySpellChecker' ] },
-                    //{ name: 'table', items: [ 'Table' ] }
-                ],
+               // toolbar: toolbar,
+            });
+            CKEDITOR.replace('message', {
+                // toolbar: toolbar,
+            });
+            CKEDITOR.replace('poa_wills', {
+                // toolbar: toolbar,
             });
             CKEDITOR.on('instanceReady', function(){
                 $.each( CKEDITOR.instances, function(instance) {

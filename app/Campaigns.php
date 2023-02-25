@@ -18,7 +18,9 @@ class Campaigns extends Model
 
     protected $fillable = [
         'uid',
-        'deceased_name',
+        'deceased_first_name',
+        'deceased_last_name',
+        'nric',
         'date_of_birth',
         'date_of_death',
         'wake_location',
@@ -28,6 +30,8 @@ class Campaigns extends Model
         'surviving_family',
         'deceased_picture',
         'death_certificate',
+        'poa_wills',
+        'public_donation',
         'message',
         'status',
         'approved_by',

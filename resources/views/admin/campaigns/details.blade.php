@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <th>Message</th>
-                    <td>{{$campaign->message}}</td>
+                    <td>{!! $campaign->message !!}</td>
                 </tr>
                 <tr>
                     <th>Status</th>

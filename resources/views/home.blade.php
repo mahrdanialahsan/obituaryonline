@@ -136,7 +136,7 @@
                                                         <div class="lower-content">
                                                             <div class="text">
                                                                 <div class="category">{{$site->home_page_campaign_slider_title ? $site->home_page_campaign_slider_title:"Our Causes"}} </div>
-                                                                <h3><a href="{{route('campaign.details',['id'=>$campaign->uid])}}">{{$campaign->deceased_name}}</a></h3>
+                                                                <h3><a href="{{route('campaign.details',['id'=>$campaign->uid])}}">{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</a></h3>
                                                                 <p>{{substr($campaign->message, 0, 131)}}{{strlen($campaign->message)>130 ? '...':''}}</p>
                                                             </div>
                                                             <ul class="info-box clearfix">

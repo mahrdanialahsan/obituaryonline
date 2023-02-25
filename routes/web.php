@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/campaign/create', 'CampaignController@create')->name('campaign.create');
     Route::post('/campaign', 'CampaignController@store')->name('campaign.store');
     Route::get('/campaign/{id}', 'CampaignController@show')->name('campaign.show');
+    Route::get('/campaign/get/{id}', 'CampaignController@get')->name('campaign.get');
     Route::post('/campaign/{id}/update', 'CampaignController@update')->name('campaign.update');
     Route::post('/campaign/{id}/submit/approval', 'CampaignController@submitForApproval')->name('campaign.submit.approval');
 });
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/campaign-details/{id}', 'CampaignController@details')->name('campaign.details');
 Route::get('/donate', 'DonateController@index')->name('donate');
 Route::get('/donate/{id}', 'DonateController@show')->name('donate.show');
+Route::post('/filter-campaigns', 'DonateController@filter')->name('filter');
 
 
 Route::get('/admin', function (){
