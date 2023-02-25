@@ -207,7 +207,8 @@
                     $('#public_donation').prop("checked",response.public_donation == 1 ? true:false );
                     CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
                     CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
-                    CKEDITOR.instances["message"].setData(response.message);
+                    //CKEDITOR.instances["message"].setData(response.message);
+                    $('#message').val(response.message);
                     debugger
                     setTimeout(function () {
                         for ( instance in CKEDITOR.instances )
@@ -296,9 +297,9 @@
             CKEDITOR.replace('surviving_family', {
                // toolbar: toolbar,
             });
-            CKEDITOR.replace('message', {
-                // toolbar: toolbar,
-            });
+            // CKEDITOR.replace('message', {
+            //     // toolbar: toolbar,
+            // });
             CKEDITOR.replace('poa_wills', {
                 // toolbar: toolbar,
             });

@@ -16,8 +16,7 @@ class DonateController extends Controller
     public function index()
     {
         //
-        $campaigns = Campaigns::where('status',1)->get();
-        return view('donate.index',compact('campaigns'));
+        return view('donate.index');
     }
 
     /**
@@ -118,7 +117,7 @@ class DonateController extends Controller
         if(count($orderByArr)>0){
             $orderBy = "ORDER BY ".implode(',',$orderByArr)." ".((int)@$request->sort_by_desc == 1 ? " DESC": " ASC");
         }
-        $result = DB::select("SELECT * FROM campaigns WHERE id > 0  $check  $orderBy ");
+        $result = DB::select("SELECT * FROM campaigns WHERE status = 1  $check  $orderBy ");
         return response()->json($result);
     }
 }

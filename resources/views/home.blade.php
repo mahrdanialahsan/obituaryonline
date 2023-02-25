@@ -126,18 +126,20 @@
                                                     <div class="inner-box">
                                                         <div class="image-box">
                                                             <figure class="image"><img width="570" height="420" src="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}"/></figure>
+                                                            @if($campaign->public_donation == 1)
                                                             <div class="percentage-box">
                                                                 <div class="bar">
                                                                     <div class="bar-inner count-bar counted" data-percent="50%"> <div class="count-box"><span class="count-text" data-speed="2500" data-stop="50">0</span>%</div></div>
                                                                 </div>
                                                                 <div class="count-text"><span class="amount">&#036;25,000.00</span> donated of <span class="goal-amount">&#036;50,000.00</span> goal</div>
                                                             </div>
+                                                            @endif
                                                         </div>
                                                         <div class="lower-content">
                                                             <div class="text">
                                                                 <div class="category">{{$site->home_page_campaign_slider_title ? $site->home_page_campaign_slider_title:"Our Causes"}} </div>
                                                                 <h3><a href="{{route('campaign.details',['id'=>$campaign->uid])}}">{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</a></h3>
-                                                                <p>{{substr($campaign->message, 0, 131)}}{{strlen($campaign->message)>130 ? '...':''}}</p>
+                                                                <p>{!! substr($campaign->message, 0, 131) !!}{{strlen($campaign->message)>130 ? '...':''}}</p>
                                                             </div>
                                                             <ul class="info-box clearfix">
                                                                 <li>
@@ -145,8 +147,14 @@
                                                                     <h5>Date:<small> {{date('M d, Y',strtotime($campaign->created_at))}} </small></h5>
                                                                 </li>
                                                                 <li>
+                                                                    @php
+                                                                        $dateOfBirth = $campaign->date_of_birth;
+                                                                        $dob = new DateTime($dateOfBirth);
+                                                                        $now = new DateTime();
+                                                                        $diff = $now->diff($dob);
+                                                                    @endphp
                                                                     <i class="fa fa-users"></i>
-                                                                    <h5>By: <small>Admin</small></h5>
+                                                                    <h5>Age: <small>{{ $diff->y > 0 ? $diff->y." Years ":($diff->m > 0 ? $diff->m." Months ":($diff->d > 0 ? $diff->d." Days":'1 Day'))}}</small></h5>
                                                                 </li>
                                                             </ul>
                                                         </div>
