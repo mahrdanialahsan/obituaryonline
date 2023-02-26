@@ -22,9 +22,11 @@ class CreateCampaignsTable extends Migration
             $table->date('date_of_birth');
             $table->timestamp('date_of_death');
             $table->string('wake_location')->nullable();
+            $table->text('wake_location_json')->nullable();
             $table->integer('wake_period')->nullable();
             $table->timestamp('funeral_date')->nullable();
             $table->string('funeral_location')->nullable();
+            $table->text('funeral_location_json')->nullable();
             $table->longText('surviving_family')->nullable();
             $table->string('deceased_picture')->nullable();
             $table->string('death_certificate')->nullable();

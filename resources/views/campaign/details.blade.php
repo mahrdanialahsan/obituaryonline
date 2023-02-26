@@ -85,8 +85,77 @@
 
 
                             <br>
+                            <div class="company-profile__donation-cards">
+                                <div class="border-all dtn-amt-item m-bot30 border-round clearfix other-impact-message">
+                                    <div class="horizontal-card">
+                                        <div class="horizontal-card__head">
+                                            <div class="input-ctrl">
+                                                <label for="other-amt">
+                                                    <h3 class="h3">Wake Service</h3>
+                                                </label>
+                                                <p><small>{{$campaign->wake_location}}</small></p>
+                                                <br>
+                                                <p>Date</p>
+                                                <p><small>{{date('D, d M Y',strtotime($campaign->date_of_death))}}</small> To</p>
+                                                <p><small>{{date('D, d M Y',strtotime($campaign->date_of_death. " +$campaign->wake_period  days"))}}</small></p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;">
+                                            @php
+                                                $wake_location_json = json_decode($campaign->wake_location_json);
+                                            @endphp
+                                            <div class="text-left dtn-desc m-left0 text-left">
+                                                <iframe
+                                                        width="450"
+                                                        height="250"
+                                                        frameborder="0" style="border:0"
+                                                        referrerpolicy="no-referrer-when-downgrade"
+                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$campaign->wake_location}}"
+                                                        allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="company-profile__donation-cards">
+                                <div class="border-all dtn-amt-item m-bot30 border-round clearfix other-impact-message">
+                                    <div class="horizontal-card">
+                                        <div class="horizontal-card__head">
+                                            <div class="input-ctrl">
+                                                <label for="other-amt">
+                                                    <h3 class="h3">Funeral Service</h3>
+                                                </label>
+                                                <p><small>{{$campaign->funeral_location}}</small></p>
+                                                <br>
+                                                <p>Date</p>
+                                                <p><small>{{date('D, d M Y',strtotime($campaign->funeral_date))}}</small></p>
+                                                <p>Time</p>
+                                                <p><small>{{date('h:i A',strtotime($campaign->funeral_date))}}</small></p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;">
+                                            @php
+                                                $funeral_location_json = json_decode($campaign->funeral_location_json);
+                                            @endphp
+                                            <div class="text-left dtn-desc m-left0 text-left">
+                                                <iframe
+                                                        width="450"
+                                                        height="250"
+                                                        frameborder="0" style="border:0"
+                                                        referrerpolicy="no-referrer-when-downgrade"
+                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$campaign->funeral_location}}"
+                                                        allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
                             <div class="text">
                                 <h3 class="h3">About Campaign</h3><br>
                                 <div class="campaign-description">{!! $campaign->message !!}</div>
@@ -129,6 +198,7 @@
 
 
                         <div class="volunteer-event__venue">
+                            @if($campaign->public_donation == 1 || $campaign->created_by == auth()->id())
                             <div class="campaign-stats mt-16">
                                 <div class="font-black">
                                     <div class="h2">$2,030</div>
@@ -140,6 +210,7 @@
                                     <span style="position: absolute;right: 1px;" class="body-txt body-txt--small body-txt--no-letter-space float-right bold">20 more days</span>
                                 </div>
                             </div>
+                            @endif
                         </div>
 
 
@@ -157,21 +228,21 @@
                                 <p>Dearly missed and fondly remembered by loved ones.</p>
                             </div>
                             <div class="widget-title"><h3></h3></div>
-                               {!! $campaign->surviving_family !!}
-{{--                            <div class="post-inner">--}}
-{{--                                <span class="post-date" style="color:#000000; font-size:1.5rem;">Husband:</span>--}}
-{{--                                <p>Late Robert Ang Bok Sin</p>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="widget-title"><h3></h3></div>--}}
-{{--                            <div class="post-inner">--}}
-{{--                                <span class="post-date" style="color:#000000; font-size:1.5rem;">Sons & Daughters-in-law</span>--}}
-{{--                                <p>Dennis Ang</p>--}}
-{{--                                <p>Mervyn Ang & Lee Soo Tian</p>--}}
-{{--                                <p>Alan Ang & Linda Chong</p>--}}
-{{--                            </div>--}}
-
-
+                            @php
+                              $surviving_family =    json_decode($campaign->surviving_family);
+                            @endphp
+                            @if(is_array($surviving_family) || is_object($surviving_family))
+                                @foreach($surviving_family as $row)
+                                    <div class="post-inner">
+                                        <span class="post-date" style="color:#000000; font-size:1.5rem;">{{$row->surviving_family_relation_title}}</span>
+                                        <p>{{$row->surviving_family_relation_name}}</p>
+                                        @if(trim($row->surviving_family_relation_description) != '')
+                                         <p><small>{{$row->surviving_family_relation_description}}</small></p>
+                                        @endif
+                                    </div>
+                                    <br>
+                                @endforeach
+                            @endif
                         </div>
 
 

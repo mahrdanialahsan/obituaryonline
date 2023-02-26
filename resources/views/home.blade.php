@@ -126,7 +126,7 @@
                                                     <div class="inner-box">
                                                         <div class="image-box">
                                                             <figure class="image"><img width="570" height="420" src="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}"/></figure>
-                                                            @if($campaign->public_donation == 1)
+                                                            @if($campaign->public_donation == 1 || $campaign->created_by == auth()->id())
                                                             <div class="percentage-box">
                                                                 <div class="bar">
                                                                     <div class="bar-inner count-bar counted" data-percent="50%"> <div class="count-box"><span class="count-text" data-speed="2500" data-stop="50">0</span>%</div></div>

@@ -9,6 +9,9 @@
         .input-ctrl, .aui .input-ctrl {
              margin-bottom: 0px;
         }
+        .surviving_family_relation_description{
+            margin-bottom: 12px;
+        }
     </style>
     <!-- Page Title -->
     <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->fundraise_page_cover_image)) ?  url('storage/site_settings/'.$site->fundraise_page_cover_image): asset('images/12.png')}});">
@@ -61,32 +64,33 @@
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_first_name">First Name </label>
                                                 <input type="text" name="deceased_first_name" id="deceased_first_name"  class="form-control field-required input">
-                                                <label for="deceased_first_name" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_last_name">Last Name </label>
                                                 <input type="text" name="deceased_last_name" id="deceased_last_name"  class="form-control field-required input">
-                                                <label for="deceased_last_name" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="nric">NRIC </label>
                                                 <input type="text" name="nric" id="nric"  class="form-control field-required input">
-                                                <label for="nric" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="date_of_birth">Date of Birth</label>
                                                 <input type="text" name="date_of_birth" id="date_of_birth" class="form-control field-required input" placeholder="YYYY-MM-DD" >
-                                                <label for="date_of_birth" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="date_of_death">Date and Time Of Death </label>
                                                 <input type="text" name="date_of_death" id="date_of_death" class="form-control field-required input"  placeholder="YYYY-MM-DD HH:MM" >
-                                                <label for="date_of_death" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="wake_location">Wake Location </label>
                                                 <input type="text" name="wake_location" id="wake_location" class="form-control field-required input" >
-                                                <label for="wake_location" class="error help-block"></label>
+
+                                                <input type="hidden" id="wake_location_json" name="wake_location_json">
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="wake_period">Wake Period</label>
@@ -98,17 +102,18 @@
                                                         <span class="txt-days">days</span>
                                                     </div>
                                                 </div>
-                                                <label for="wake_period" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="funeral_date">Funeral Date </label>
                                                 <input type="text" name="funeral_date" id="funeral_date" class="form-control field-required input"  placeholder="YYYY-MM-DD HH:MM">
-                                                <label for="funeral_date" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="funeral_location">Funeral Location </label>
                                                 <input type="text" name="funeral_location" id="funeral_location" class="form-control field-required input">
-                                                <label for="funeral_location" class="error help-block"></label>
+
+                                                <input type="hidden" id="funeral_location_json" name="funeral_location_json">
                                             </div>
                                             <div class="input-ctrl">
                                                 <ul class="checkbox-list causesFilter" data-role="list-show-more" style="max-height: none;">
@@ -122,28 +127,49 @@
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_picture">Deceased Picture</label>
                                                 <input data-default-file="{{!empty($campaign) ?  url('storage/deceased_picture/'.$campaign->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
-                                                <label for="deceased_picture" class="error help-block"></label>
+
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="death_certificate">Death Certificate</label>
                                                 <input data-default-file="{{!empty($campaign) ?  url('storage/death_certificate/'.$campaign->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
-                                                <label for="death_certificate" class="error help-block"></label>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h3 class="h3 font-dark-grey" style="margin-top: 15px">Surviving Family</h3>
+                                                </div>
+                                                <div class="col-sm-6" style="text-align: right;padding-top: 17px;">
+                                                    <button type="button" id="addMoreRelation">Add More</button>
+                                                </div>
                                             </div>
 
-                                            <div class="input-ctrl">
-                                                <label class="lbl" for="surviving_family">Surviving Family </label>
-                                                <textarea type="text" name="surviving_family" id="surviving_family" class="form-control field-required input"></textarea>
-                                                <label for="surviving_family" class="error help-block"></label>
-                                            </div>
+                                            <hr class="hr">
+                                            <span id="surviving_family_list">
+                                                <div class="content-side col-xs-12 col-sm-12 col-md-12 mb-12" style="border: 1px solid #cccc">
+                                                    <div class="input-ctrl">
+                                                        <div class="row">
+                                                            <div class="col-6"><label class="lbl" >Relation Title </label></div>
+                                                            <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
+                                                        </div>
+                                                        <input type="text" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl">Name </label>
+                                                        <input type="text" name="surviving_family_relation_name[]" class="form-control field-required input" placeholder="Wife name,son name,daughter name etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl" >Description </label>
+                                                        <textarea type="text" name="surviving_family_relation_description[]"  class="surviving_family_relation_description form-control field-required input" placeholder=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </span>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="poa_wills"> Power of attorney / Power of probate</label>
                                                 <textarea   name="poa_wills" id="poa_wills"    class="form-control field-required textarea"></textarea>
-                                                <label for="poa_wills" class="error help-block"></label>
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="message">About Campaign </label>
                                                 <textarea   name="message" id="message"    class="form-control field-required textarea"></textarea>
-                                                <label for="message" class="error help-block"></label>
                                             </div>
                                         </div>
                                         <div id="tab-page-2" style ="text-align: center;display: none;" class="rounded-card__body rounded-card__body--responsive js-create-volunteer-act__page js-create-volunteer-act__page--1" data-role="page" >
@@ -189,6 +215,34 @@
 @endsection
 @push('js')
     <script>
+
+        $(document).on('click','.removeSurvivingFamily',function () {
+            var thisvar = $(this);
+            if(confirm("Are you sure to remove ?")){
+                thisvar.parent().parent().parent().parent().remove();
+            }
+        });
+        $(document).on('click','#addMoreRelation',function () {
+            $('#surviving_family_list').append(`<div class="content-side col-xs-12 col-sm-12 col-md-12" style="border: 1px solid #cccc;margin-top: 12px">
+
+                                                    <div class="input-ctrl">
+                                                        <div class="row">
+                                                            <div class="col-6"><label class="lbl" >Relation Title </label></div>
+                                                            <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
+                                                        </div>
+                                                        <input type="text" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl">Name </label>
+                                                        <input type="text" name="surviving_family_relation_name[]" class="form-control field-required input" placeholder="Wife name,son name,daughter name etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl" >Description </label>
+                                                        <textarea type="text" name="surviving_family_relation_description[]"  class="surviving_family_relation_description form-control field-required input" placeholder=""></textarea>
+                                                    </div>
+                                                </div>`);
+        });
+
         var tab = 1;
         var base_url = '{{url('/')}}';
         function setValue(){
@@ -201,13 +255,40 @@
                     $('#date_of_birth').val(moment(response.date_of_birth).format('YYYY-MM-DD'));
                     $('#date_of_death').val(moment(response.date_of_death).format('YYYY-MM-DD HH:MM'));
                     $('#wake_location').val(response.wake_location);
+                    $('#wake_location_json').val(response.wake_location_json);
                     $('#wake_period').val(response.wake_period);
                     $('#funeral_date').val(moment(response.funeral_date).format('YYYY-MM-DD HH:MM'));
                     $('#funeral_location').val(response.funeral_location);
+                    $('#funeral_location_json').val(response.funeral_location_json);
                     $('#public_donation').prop("checked",response.public_donation == 1 ? true:false );
-                    CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
+                    // CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
                     CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
                     //CKEDITOR.instances["message"].setData(response.message);
+
+                    if($.trim(response.surviving_family) != ''){
+                        var surviving_family = JSON.parse(response.surviving_family);
+                        $('#surviving_family_list').empty();
+                        surviving_family.forEach(x=>{
+                            $('#surviving_family_list').append(`<div class="content-side col-xs-12 col-sm-12 col-md-12" style="border: 1px solid #cccc;margin-top: 12px">
+
+                                                    <div class="input-ctrl">
+                                                        <div class="row">
+                                                            <div class="col-6"><label class="lbl" >Relation Title </label></div>
+                                                            <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
+                                                        </div>
+                                                        <input type="text" value="${x.surviving_family_relation_title}" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl">Name </label>
+                                                        <input type="text" value="${x.surviving_family_relation_name}" name="surviving_family_relation_name[]" class="form-control field-required input" placeholder="Wife name,son name,daughter name etc" />
+                                                    </div>
+                                                    <div class="input-ctrl">
+                                                        <label class="lbl" >Description </label>
+                                                        <textarea type="text" name="surviving_family_relation_description[]"  class="surviving_family_relation_description form-control field-required input" placeholder="">${x.surviving_family_relation_description}</textarea>
+                                                    </div>
+                                                </div>`);
+                        });
+                    }
                     $('#message').val(response.message);
                     debugger
                     setTimeout(function () {
@@ -294,9 +375,9 @@
                 { name: 'spell', items: [ 'jQuerySpellChecker' ] },
                 { name: 'table', items: [ 'Table' ] }
             ];
-            CKEDITOR.replace('surviving_family', {
-               // toolbar: toolbar,
-            });
+            // CKEDITOR.replace('surviving_family', {
+            //    // toolbar: toolbar,
+            // });
             // CKEDITOR.replace('message', {
             //     // toolbar: toolbar,
             // });
@@ -313,5 +394,59 @@
             });
         })
 
+    </script>
+@endpush
+
+
+
+
+
+
+@push('js')
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script type="text/javascript">
+        function initAutocomplete1() {
+            var input = document.getElementById('wake_location');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                // document.getElementById('city2').value = place.name;
+                // document.getElementById('cityLat').value = place.geometry.location.lat();
+                // document.getElementById('cityLng').value = place.geometry.location.lng();
+                    document.getElementById('wake_location_json').value = JSON.stringify({
+                                                                    "address" :  document.getElementById('wake_location').value,
+                                                                    "city" :  place.name,
+                                                                    "lat" :  place.geometry.location.lat(),
+                                                                    "long" :  place.geometry.location.lng()
+                                                                });
+                //alert("This function is working!");
+                //alert(place.name);
+                // alert(place.address_components[0].long_name);
+
+            });
+        }
+        function initAutocomplete2() {
+            var input1 = document.getElementById('funeral_location');
+            var autocomplete1 = new google.maps.places.Autocomplete(input1);
+            google.maps.event.addListener(autocomplete1, 'place_changed', function () {
+                var place = autocomplete1.getPlace();
+                document.getElementById('funeral_location_json').value = JSON.stringify({
+                                                                "address" :  document.getElementById('funeral_location').value,
+                                                                "city" :  place.name,
+                                                                "lat" :  place.geometry.location.lat(),
+                                                                "long" :  place.geometry.location.lng()
+                                                            });
+                //alert("This function is working!");
+                //alert(place.name);
+                // alert(place.address_components[0].long_name);
+
+            });
+        }
+
+        function initAutocomplete() {
+            initAutocomplete1()
+            initAutocomplete2()
+        }
     </script>
 @endpush

@@ -57,7 +57,9 @@ class CampaignController extends Controller
             'wake_period'           => 'required|integer',
             'funeral_date'          => 'required|date|date_format:Y-m-d H:i',
             'funeral_location'      => 'required|string|max:191',
-            'surviving_family'      => 'required|string',
+            'surviving_family_relation_title.*'         => 'required|string',
+            'surviving_family_relation_name.*'          => 'required|string',
+            'surviving_family_relation_description.*'   => 'required|string',
             //'deceased_picture'    => 'required|image','mimes:jpeg,png,jpg,gif',
             'deceased_picture'      => 'required',
             'death_certificate'     => 'required|mimes:pdf',
@@ -74,6 +76,20 @@ class CampaignController extends Controller
         $data['death_certificate']  =   $dcfileName;
         $data['uid']                =   $uid;
         $data['created_by']         =   auth()->id();
+        $surviving_family           =   [];
+        foreach($request->surviving_family_relation_title as $key=>$val){
+            if(trim($val) != ''){
+                $surviving_family[]     =   [
+                    'surviving_family_relation_title'       =>  @$request->surviving_family_relation_title[$key],
+                    'surviving_family_relation_name'        =>  @$request->surviving_family_relation_name[$key],
+                    'surviving_family_relation_description' =>  @$request->surviving_family_relation_description[$key],
+                ];
+            }
+        }
+        $data['surviving_family']         =   json_encode($surviving_family);
+
+
+
         $compaign = new Campaigns($data);
         $compaign->save();
         //dd(route('campaign.show',['id'=>$compaign->uid]));
@@ -153,7 +169,9 @@ class CampaignController extends Controller
             'wake_period'       => 'required|integer',
             'funeral_date'      => 'required|date|date_format:Y-m-d H:i',
             'funeral_location'  => 'required|string|max:191',
-            'surviving_family'  => 'required|string',
+            'surviving_family_relation_title.*'         => 'required|string',
+            'surviving_family_relation_name.*'          => 'required|string',
+            'surviving_family_relation_description.*'   => 'required|string',
             'message'           => 'required|string',
         ]);
         $compaign                   =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
@@ -164,10 +182,12 @@ class CampaignController extends Controller
             $compaign->date_of_birth        =  $request->date_of_birth;
             $compaign->date_of_death        =  $request->date_of_death;
             $compaign->wake_location        =  $request->wake_location;
+            $compaign->wake_location_json   =  $request->wake_location_json;
             $compaign->wake_period          =  $request->wake_period;
             $compaign->funeral_date         =  $request->funeral_date;
             $compaign->public_donation      =  (int)@$request->public_donation;
             $compaign->funeral_location     =  $request->funeral_location;
+            $compaign->funeral_location_json=  $request->funeral_location_json;
             $compaign->surviving_family     =  $request->surviving_family;
             $compaign->poa_wills            =  $request->poa_wills;
             $compaign->message              =  $request->message;
@@ -181,6 +201,18 @@ class CampaignController extends Controller
                 $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
                 $compaign->death_certificate    =  $dcfileName;
             }
+            $surviving_family         =   [];
+            //dd($request->surviving_family_relation_title);
+            foreach($request->surviving_family_relation_title as $key=>$val){
+                if(trim($val) != ''){
+                    $surviving_family[]     =   [
+                                                    'surviving_family_relation_title'       =>  @$request->surviving_family_relation_title[$key],
+                                                    'surviving_family_relation_name'        =>  @$request->surviving_family_relation_name[$key],
+                                                    'surviving_family_relation_description' =>  @$request->surviving_family_relation_description[$key],
+                                                ];
+                }
+            }
+            $compaign->surviving_family   =   json_encode($surviving_family);
             $compaign->updated_at         =   date('Y-m-d H:i:s');
             $compaign->save();
             return response()->json([
@@ -213,7 +245,7 @@ class CampaignController extends Controller
     public function submitForApproval(Request $request, $uid)
     {
         //
-        $compaign               =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereNotIn('status',[1,2])->first();
+        $compaign               =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
         if($compaign) {
             $compaign->status = 0;
             $compaign->updated_at = date('Y-m-d H:i:s');
