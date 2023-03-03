@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Campaigns;
 use Illuminate\Http\Request;
 use DB;
+use Session;
 
 class DonateController extends Controller
 {
@@ -49,8 +50,6 @@ class DonateController extends Controller
     public function show($uid)
     {
         //
-        $campaign =   Campaigns::where('uid',$uid)->first();
-        return view('donate.form',compact('uid','campaign'));
     }
 
     /**

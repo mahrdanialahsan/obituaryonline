@@ -177,7 +177,7 @@
                            </div>
                        </div>
                        <div class="card__cta">
-                           <a href="/donate/${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</a>
+                           <a href="javascript:;" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</a>
                                                 </div>
                                                 <div class="card__cta">
                                                     <a href="/campaign-details/${x.uid}" class="button button--no-bg button--full" >LEARN MORE</a>

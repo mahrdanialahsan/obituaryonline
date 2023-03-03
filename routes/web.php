@@ -45,7 +45,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/campaign-details/{id}', 'CampaignController@details')->name('campaign.details');
 Route::get('/donate', 'DonateController@index')->name('donate');
-Route::get('/donate/{id}', 'DonateController@show')->name('donate.show');
 Route::post('/filter-campaigns', 'DonateController@filter')->name('filter');
 
 
@@ -78,3 +77,16 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
 });
 
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
+
+
+Route::get('/cart/donation', 'AddToCartController@index')->name('cart');
+Route::post('/get-cart', 'AddToCartController@getCart')->name('cart.get');
+Route::post('/add-to-cart/{uid}/amount/{amount}', 'AddToCartController@store')->name('cart.store');
+Route::post('/empty-cart/{uid?}', 'AddToCartController@destroy')->name('cart.empty');
+Route::get('/cart/checkout', 'AddToCartController@checkout')->name('cart.checkout');
+
+
+
+
+Route::get('stripe', 'StripeCheckoutController@stripe');
+Route::post('stripe', 'StripeCheckoutController@stripePost')->name('stripe.post');

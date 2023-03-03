@@ -45,7 +45,9 @@
 <p class="body-txt break-word" id="otherAmtMessage"> Your donation could help provide a meal for 3 children in our Canossaville Student Care programme for a month. </p> </span> </div> </div>
                                             <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
                                                 <button data-value="80" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE $80</button>
-                                                <button data-value="80" class="button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "> <span id="user-input-holder">ADD TO CART</span> </button>
+                                                <button data-value="80" class="button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost ">
+                                                    <span id="user-input-holder">ADD TO CART</span>
+                                                </button>
                                             </div> </div> </div> </div>
 
 
