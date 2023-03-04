@@ -63,12 +63,12 @@
                                             <h3 class="h3 font-dark-grey">{{$site->fundraise_page_form_title ? $site->fundraise_page_form_title:"Deceased Information"}}</h3>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_first_name">First Name </label>
-                                                <input type="text" name="deceased_first_name" id="deceased_first_name"  class="form-control field-required input">
+                                                <input type="text" name="deceased_first_name" id="deceased_first_name"  class="form-control field-required input txtOnly">
 
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_last_name">Last Name </label>
-                                                <input type="text" name="deceased_last_name" id="deceased_last_name"  class="form-control field-required input">
+                                                <input type="text" name="deceased_last_name" id="deceased_last_name"  class="form-control field-required input txtOnly">
 
                                             </div>
                                             <div class="input-ctrl">
@@ -96,7 +96,7 @@
                                                 <label class="lbl" for="wake_period">Wake Period</label>
                                                 <div class="ctn">
                                                     <div class="grid-12 grid-tablet-portrait-up-11">
-                                                        <input type="number" name="wake_period" id="wake_period" class="input date-picker-time form-control field-required" >
+                                                        <input type="number" name="wake_period" id="wake_period" class="input nbrOnly form-control field-required" >
                                                     </div>
                                                     <div class="grid-12 grid-tablet-portrait-up-1-last">
                                                         <span class="txt-days">days</span>
@@ -115,6 +115,13 @@
 
                                                 <input type="hidden" id="funeral_location_json" name="funeral_location_json">
                                             </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="funeral_location">Default Donation Amount </label>
+                                                <input type="text" name="default_amount" id="default_amount" class="form-control nbrOnly field-required input">
+
+                                                <input type="hidden" id="funeral_location_json" name="funeral_location_json">
+                                            </div>
+                                            <br>
                                             <div class="input-ctrl">
                                                 <ul class="checkbox-list causesFilter" data-role="list-show-more" style="max-height: none;">
                                                     <li class="title-ctn__child"><label class="checkbox-list__checkbox">
@@ -257,6 +264,7 @@
                     $('#wake_location').val(response.wake_location);
                     $('#wake_location_json').val(response.wake_location_json);
                     $('#wake_period').val(response.wake_period);
+                    $('#default_amount').val(response.default_amount);
                     $('#funeral_date').val(moment(response.funeral_date).format('YYYY-MM-DD HH:MM'));
                     $('#funeral_location').val(response.funeral_location);
                     $('#funeral_location_json').val(response.funeral_location_json);

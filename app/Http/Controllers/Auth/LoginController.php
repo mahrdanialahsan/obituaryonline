@@ -50,9 +50,10 @@ class LoginController extends Controller
         if ($response = $this->authenticated($request, $this->guard()->user())) {
             return $response;
         }
+
         return response()->json([
             'status'   => 'redirect',
-            'url'      =>  url($this->redirectPath()),
+            'url'      =>   redirect()->intended('/')->getTargetUrl(),
             'msg'      =>  'LoggedIn successfully',
         ]);
 

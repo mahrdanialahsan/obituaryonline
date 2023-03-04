@@ -160,6 +160,7 @@
                             </nav>
                         </div>
                         <div class="nav-right-content clearfix">
+                            @if( @Auth()->user()->is_admin != 1)
                             <div class="cart-box">
                                 <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!}</a>
                             </div>
@@ -177,7 +178,7 @@
                                     </a>
                                 @endguest
                             </div>
-
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -192,6 +193,7 @@
                             </nav>
                         </div>
                         <div class="nav-right-content clearfix">
+                            @if( @Auth()->user()->is_admin != 1)
                             <div class="cart-box">
                                 <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>
                             </div>
@@ -209,7 +211,7 @@
                                     </a>
                                 @endguest
                             </div>
-
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -231,6 +233,7 @@
                 <div class="nav-logo"><a href="#" title="Purehearts"><img src="{{asset('images/logo.png')}}" alt="logo"/></a></div>
                 <div class="menu-outer"></div>
                 <div class="social-links">
+                    @if( @Auth()->user()->is_admin != 1)
                     <ul class="clearfix">
                         <li>
                             <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>
@@ -247,6 +250,7 @@
                                 </a></li>
                         @endguest
                     </ul>
+                    @endif
                 </div>
             </nav>
         </div>
@@ -291,9 +295,9 @@
                                                     </div>
                                                 </div>
                                                 <ul class="social-style-one clearfix">
-                                                    <li><a href="{{$site->facebook_url ? $site->facebook_url:"https://www.facebook.com/"}}"><i class="fas fa-facebook-f"></i></a></li>
-                                                    <li><a href="{{$site->twitter_url ? $site->twitter_url:"https://www.twitter.com/"}}"><i class="fa fa fa-twitter"></i></a></li>
-                                                    <li><a href="{{$site->linkedin_url ? $site->linkedin_url:"https://www.linkedin.com/"}}"><i class="fa fa fa-linkedin"></i></a></li>
+                                                    <li><a href="{{$site->facebook_url ? $site->facebook_url:"https://www.facebook.com/"}}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                                    <li><a href="{{$site->twitter_url ? $site->twitter_url:"https://www.twitter.com/"}}"><i class="fa-brands fa-twitter"></i></a></li>
+                                                    <li><a href="{{$site->linkedin_url ? $site->linkedin_url:"https://www.linkedin.com/"}}"><i class="fa-brands fa-linkedin"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -320,9 +324,9 @@
                         <li><span>Ways to Donate:</span></li>
                         <li><a href="#"><img src="{{ asset('images/card-1.png')}}" alt="Awesome Image"></a></li>
                         <li><a href="#"><img src="{{ asset('images/card-2.png')}}" alt="Awesome Image"></a></li>
-                        <li><a href="#"><img src="{{ asset('images/card-3.png')}}" alt="Awesome Image"></a></li>
-                        <li><a href="#"><img src="{{ asset('images/card-4.png')}}" alt="Awesome Image"></a></li>
-                        <li><a href="#"><img src="{{ asset('images/card-5.png')}}" alt="Awesome Image"></a></li>
+{{--                        <li><a href="#"><img src="{{ asset('images/card-3.png')}}" alt="Awesome Image"></a></li>--}}
+{{--                        <li><a href="#"><img src="{{ asset('images/card-4.png')}}" alt="Awesome Image"></a></li>--}}
+{{--                        <li><a href="#"><img src="{{ asset('images/card-5.png')}}" alt="Awesome Image"></a></li>--}}
                     </ul>
                 </div>
             </div>
@@ -408,46 +412,48 @@
     {{--<script src="{{ asset('js/jquery.mask.js')}}"></script>--}}
     <script src="{{ asset('toast/toast.script.js')}}"></script>
 
-    @stack('js')
+
     <script>
         $(document).on('click','.donate-popup-button',function () {
              let btn_type   =  $(this).attr('data-cart-btn');
              let uid        =  $(this).attr('uid');
-             alert(uid);
+             //alert(uid);
              let amount     =  parseInt($('#dropdownMenuButton').attr('amount'));
              if(amount > 0){
-                $.ajax({
-                    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    url         : `/add-to-cart/${uid}/amount/${amount}`, // the url where we want to POST
-                    data        : {},
-                    processData : false,
-                    contentType : false,
-                    cache       : false,
-                    headers     : {
-                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (response) {
-                        if(response.status == 'success'){
-                            if(response.amount > 0){
-                                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.amount}$</small></sup>`)
-                            }else{
-                                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i></span>`)
-                            }
-                            $('.modal').modal('hide')
-                            toaster('Success','Item added to cart.','success');
-                        }else{
-                            toaster('Error',response.msg,'error');
-                        }
-                    },
-                    error: function (data) {
-                        toaster('Error',data.responseJSON.message,'error');
-                    }
-                })
+                 $.ajax({
+                     type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                     url         : `/add-to-cart/${uid}/amount/${amount}`, // the url where we want to POST
+                     data        : {},
+                     processData : false,
+                     contentType : false,
+                     cache       : false,
+                     headers     : {
+                         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                     },
+                     success: function (response) {
+                         if(response.status == 'success'){
+                             if(response.amount > 0){
+                                 $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.amount}$</small></sup>`)
+                             }else{
+                                 $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i></span>`)
+                             }
+                             if(btn_type == 'donate'){
+                                 window.location = '/cart/donation';
+                             }else{
+                                 $('.modal').modal('hide')
+                                 toaster('Success','Item added to cart.','success');
+                             }
+
+                         }else{
+                             toaster('Error',response.msg,'error');
+                         }
+                     },
+                     error: function (data) {
+                         toaster('Error',data.responseJSON.message,'error');
+                     }
+                 })
              }else{
                  toaster('Error','Please select amount.','error');
-             }
-             if(btn_type == 'donate'){
-               window.location = '/cart/donation';
              }
 
         })
@@ -526,7 +532,80 @@
                 }
             })
         }
-    </script>
+        var cart_items = [];
+        function LoadcartItems(response) {
+            $('.ttl_amount').text(response.data.ttl_amount+'$');
+            if(response.data.ttl_amount > 0){
+                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.data.ttl_amount}$</small></sup>`)
+            }else{
+                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i></span>`)
+            }
+            $('.cart-body').empty();
+            if(response.data.donations.length){
+                cart_items = response.data.cart;
+                response.data.donations.forEach(donation=>{
+                    $('.cart-body').append(`<tr class="cartItemListing">
+                                                                <td  class="cartItemSelection">
+                                                                    <div class="truncate">${donation.deceased_first_name} ${donation.deceased_last_name}</div>
+                                                                </td>
+                                                                <td style="text-align: center"  class="success ">
+                                                                    Donation is eligible for tax deduction
+                                                                </td>
+                                                                <td  style="text-align: center" class="editableAmount" id="editableAmount-${donation.uid}">${cart_items[donation.uid]} $</td>
+                                                                <td class=" edit-holder" style="min-width: 100px;">
+                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" action="edit" id="edit-id-${donation.uid}" href="javascript:;"  class="cartItemEdit"> <i class="edit-table fa fa-pencil"></i> </a>&nbsp;
+                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" id="delete-id-${donation.uid}" href="javascript:;" class="cartItemRemove"> <i class="edit-table fa fa-trash"></i> </a>&nbsp;
 
+                                                                </td>
+                                                            </tr>`)
+                });
+            }
+        }
+        function loadCart(){
+            $.ajax({
+                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url         : `/get-cart`, // the url where we want to POST
+                data        : {},
+                processData : false,
+                contentType : false,
+                cache       : false,
+                headers     : {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if(response.status == 'success'){
+                        LoadcartItems(response);
+                        //toaster('Success','Item added to cart.','success');
+                    }
+                    else{
+                        toaster('Error',response.msg,'error');
+                    }
+                },
+                error: function (data) {
+                    toaster('Error',data.responseJSON.message,'error');
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            $('.nbrOnly').keypress(function (e) {
+                var charCode = (e.which) ? e.which : event.keyCode
+                if (String.fromCharCode(charCode).match(/[^0-9]/g))
+                    return false;
+            });
+            $('.txtOnly').keydown(function (e) {
+                // if (e.shiftKey || e.ctrlKey || e.altKey) {
+                //     e.preventDefault();
+                // } else
+                    {
+                    var key = e.keyCode;
+                    if (!((key == 8) || (key == 32) || (key >= 16 && key <= 18)|| (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                        e.preventDefault();
+                    }
+                }
+            });
+        });
+    </script>
+    @stack('js')
 </body>
 </html>

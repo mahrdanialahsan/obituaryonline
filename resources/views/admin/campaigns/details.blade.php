@@ -16,16 +16,14 @@
                 @endif
             </div>
         </div>
-
     </div>
     <div class="card mb-4">
         <div class="card-body">
-
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Deceased Name</th>
-                    <td>{{$campaign->deceased_name}}</td>
+                    <td>{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</td>
                 </tr>
                 <tr>
                     <th>Date of Birth</th>
@@ -52,8 +50,16 @@
                     <td>{{$campaign->funeral_location}}</td>
                 </tr>
                 <tr>
+                    <th>Default Amount</th>
+                    <td>{{$campaign->default_amount}}</td>
+                </tr>
+                <tr>
                     <th>Surviving Family</th>
                     <td>{{$campaign->surviving_family}}</td>
+                </tr>
+                <tr>
+                    <th>Total Donation</th>
+                    <td>{{$campaign->total_donation}}</td>
                 </tr>
                 <tr>
                     <th>Message</th>
@@ -84,6 +90,29 @@
                     </td>
                 </tr>
                 </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                <tr>
+                    <th>Piad By</th>
+                    <th>Amount</th>
+                    <th>Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($payments as $row)
+                    <tr>
+                        <td>{{$row->user_name}}</td>
+                        <td>{{number_format($row->amount,2)}}$</td>
+                        <td>{{date('Y-m-d H:i:s', strtotime($row->created_at))}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
             </table>
         </div>
     </div>

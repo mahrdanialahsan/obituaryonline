@@ -24,6 +24,7 @@ class CreateCampaignsTable extends Migration
             $table->string('wake_location')->nullable();
             $table->text('wake_location_json')->nullable();
             $table->integer('wake_period')->nullable();
+            $table->double('default_amount')->nullable();
             $table->timestamp('funeral_date')->nullable();
             $table->string('funeral_location')->nullable();
             $table->text('funeral_location_json')->nullable();
@@ -33,6 +34,7 @@ class CreateCampaignsTable extends Migration
             $table->longText('message')->nullable();
             $table->longText('poa_wills')->nullable();
             $table->tinyInteger('public_donation')->default(1)->comment("0: No, 1:Yes");
+            $table->double('total_donation')->default(0);
             $table->tinyInteger('status')->nullable()->comment("null:draft, 0: Pending, 1:Approved,2:Deactivated");
             $table->integer('created_by');
             $table->integer('approved_by')->nullable();

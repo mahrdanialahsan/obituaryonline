@@ -15,8 +15,9 @@
                 <div class="title">
                     <h1>Campaign</h1>
                 </div>
-                <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> </ul>
+{{--                <ul class="bread-crumb clearfix">--}}
+{{--                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> --}}
+{{--                </ul>--}}
             </div>
         </div>
     </section>
@@ -39,7 +40,14 @@
                             <h3 class="m-top0 m-bot30">Giving Cart</h3>
                             <div class="text-center">
                                 <div class="text-center" style="padding-bottom:20px"> <div class="user-img mt-16">
-                                        <img class="profile-pic" src="{{asset('images/ph-pink.jpg')}}"></div>
+                                        <img class="profile-pic" src="{{asset('images/ph-pink.jpg')}}">
+                                    </div>
+                                    @if (Session::has('success'))
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ Session::get('success') }}</p>
+                                        </div>
+                                    @endif
 {{--                                    <p class="small mt-16 text-center">You are making a donation as &nbsp;--}}
 {{--                                        <select name="user-role-select" id="user-role-select" class="select select2 small roleSwitch">--}}
 {{--                                            <option value="" data-image-path="{{asset('images/ph-pink.jpg')}}'" data-role-id="" data-group-role-id="INDIVIDUAL" data-identity-number="" data-name="" data-salutation="" data-email="" data-poscode="" data-block="" data-address1="" data-address2="" data-unit="" data-group-role-desc="INDIVIDUAL" data-org-type="" selected>Individual</option>--}}
@@ -79,7 +87,7 @@
                         </div>
                         <div class="gf-bkt-table-footer delete-all-area pull-left">
                             <span class="check main main-mobile active"></span>
-                            <a href="javascript:;" uid="" class="delete cartItemRemove"><span class="fa fa-trash"></span> Delete </a>
+                            <a href="javascript:;" uid="all" class="delete cartItemRemove"><span class="fa fa-trash"></span> Delete </a>
                         </div>
                     </div>
                 </div>
@@ -91,61 +99,6 @@
 @endsection
 @push('js')
     <script>
-        var cart_items = [];
-        function LoadcartItems(response) {
-            $('.ttl_amount').text(response.data.ttl_amount+'$');
-            if(response.data.ttl_amount > 0){
-                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.data.ttl_amount}$</small></sup>`)
-            }else{
-                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i></span>`)
-            }
-            $('.cart-body').empty();
-            if(response.data.donations.length){
-                cart_items = response.data.cart;
-                response.data.donations.forEach(donation=>{
-                    $('.cart-body').append(`<tr class="cartItemListing">
-                                                                <td  class="cartItemSelection">
-                                                                    <div class="truncate">${donation.deceased_first_name} ${donation.deceased_last_name}</div>
-                                                                </td>
-                                                                <td style="text-align: center"  class="success ">
-                                                                    Donation is eligible for tax deduction
-                                                                </td>
-                                                                <td  style="text-align: center" class="editableAmount" id="editableAmount-${donation.uid}">${cart_items[donation.uid]} $</td>
-                                                                <td class=" edit-holder" style="min-width: 100px;">
-                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" action="edit" id="edit-id-${donation.uid}" href="javascript:;"  class="cartItemEdit"> <i class="edit-table fa fa-pencil"></i> </a>&nbsp;
-                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" id="delete-id-${donation.uid}" href="javascript:;" class="cartItemRemove"> <i class="edit-table fa fa-trash"></i> </a>&nbsp;
-
-                                                                </td>
-                                                            </tr>`)
-                });
-            }
-        }
-
-        function loadCart(){
-            $.ajax({
-                type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : `/get-cart`, // the url where we want to POST
-                data        : {},
-                processData : false,
-                contentType : false,
-                cache       : false,
-                headers     : {
-                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if(response.status == 'success'){
-                       LoadcartItems(response);
-                        //toaster('Success','Item added to cart.','success');
-                    }
-                    else{
-                        toaster('Error',response.msg,'error');
-                    }
-                },
-                error: function (data) {
-                    toaster('Error',data.responseJSON.message,'error');
-                }
-            })
-        }
         $(document).on('click','.cartItemRemove',function () {
             let uid = $(this).attr('uid');
             $.ajax({
@@ -171,7 +124,6 @@
                 }
             })
         });
-        loadCart();
         $(document).on('click','.cartItemEdit',function(){
 
             let uid      = $(this).attr('uid');
@@ -207,5 +159,6 @@
                 $(this).html(`<i class="edit-table fa fa-check"></i>`);
             }
         })
+        loadCart();
     </script>
 @endpush

@@ -17,6 +17,9 @@ class DonateController extends Controller
     public function index()
     {
         //
+        if(@Auth()->user()->is_admin == 1){
+            return redirect(url('/'));
+        }
         return view('donate.index');
     }
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\CampaignPayments;
 use App\Campaigns;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Str;
+use DB;
 
 class CampaignController extends Controller
 {
@@ -17,7 +19,7 @@ class CampaignController extends Controller
     public function index()
     {
         //
-        $campaigns['all']           =   Campaigns::all();
+        $campaigns['all']           =   Campaigns::where('created_by',auth()->id())->get();
         $campaigns['draft']         =   collect($campaigns['all'])->whereNull('status')->all();
         $campaigns['pending']       =   collect($campaigns['all'])->where('status',0)->all();
         $campaigns['approved']      =   collect($campaigns['all'])->where('status',1)->all();
@@ -45,17 +47,19 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        $uid = Str::random(60);
+        $uid = Str::random(40);
+        $todayDate = date('Y-m-d');
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
             'deceased_first_name'   => 'required|string|max:191',
             'deceased_last_name'    => 'required|string|max:191',
             'nric'                  => 'required|string|max:191',
-            'date_of_birth'         => 'required|date|date_format:Y-m-d',
-            'date_of_death'         => 'required|date|date_format:Y-m-d H:i',
+            'date_of_birth'         => 'required|date|date_format:Y-m-d|before_or_equal:'.$todayDate,
+            'date_of_death'         => 'required|date|date_format:Y-m-d H:i|after:date_of_birth',
             'wake_location'         => 'required|string|max:191',
-            'wake_period'           => 'required|integer',
-            'funeral_date'          => 'required|date|date_format:Y-m-d H:i',
+            'wake_period'           => 'required|integer|min:1',
+            'default_amount'        => 'required|integer|min:1',
+            'funeral_date'          => 'required|date|date_format:Y-m-d H:i|after_or_equal:date_of_death',
             'funeral_location'      => 'required|string|max:191',
             'surviving_family_relation_title.*'         => 'required|string',
             'surviving_family_relation_name.*'          => 'required|string',
@@ -133,8 +137,25 @@ class CampaignController extends Controller
      */
     public function details($uid)
     {
-        $campaign =   Campaigns::where('uid',$uid)->first();
-        return view('campaign.details',compact('uid','campaign'));
+        $campaign   =   Campaigns::where('uid',$uid)->first();
+        if($campaign){
+            $campaign_id =   $campaign->id;
+            $payments    =   DB::select(" SELECT 
+                                            SUM(campaign_payments.amount) as ttl_amount,
+                                            users.name as user_name 
+                                         FROM 
+                                            campaign_payments 
+                                         JOIN users on users.id = campaign_payments.user_id 
+                                         where campaign_id = $campaign_id
+                                         GROUP BY  campaign_payments.user_id
+                                         ORDER BY SUM(campaign_payments.amount) DESC 
+                                         LIMIT 25
+                                        ");
+            return view('campaign.details',compact('uid','campaign','payments'));
+        }
+        else{
+            abort(404);
+        }
     }
 
     /**
@@ -158,16 +179,18 @@ class CampaignController extends Controller
     public function update(Request $request, $uid)
     {
         //
+        $todayDate = date('Y-m-d');
         $request->validate([
             //'uid'               => 'required|string|uid|unique:campaigns',
             'deceased_first_name'=> 'required|string|max:191',
             'deceased_last_name'=> 'required|string|max:191',
             'nric'              => 'required|string|max:191',
-            'date_of_birth'     => 'required|date|date_format:Y-m-d',
-            'date_of_death'     => 'required|date|date_format:Y-m-d H:i',
+            'date_of_birth'     => 'required|date|date_format:Y-m-d|before_or_equal:'.$todayDate,
+            'date_of_death'     => 'required|date|date_format:Y-m-d H:i|after:date_of_birth',
             'wake_location'     => 'required|string|max:191',
-            'wake_period'       => 'required|integer',
-            'funeral_date'      => 'required|date|date_format:Y-m-d H:i',
+            'wake_period'       => 'required|integer|min:1',
+            'default_amount'    => 'required|integer|min:1',
+            'funeral_date'      => 'required|date|date_format:Y-m-d H:i|after_or_equal:date_of_death',
             'funeral_location'  => 'required|string|max:191',
             'surviving_family_relation_title.*'         => 'required|string',
             'surviving_family_relation_name.*'          => 'required|string',
@@ -187,6 +210,7 @@ class CampaignController extends Controller
             $compaign->funeral_date         =  $request->funeral_date;
             $compaign->public_donation      =  (int)@$request->public_donation;
             $compaign->funeral_location     =  $request->funeral_location;
+            $compaign->default_amount       =  (float)$request->default_amount;
             $compaign->funeral_location_json=  $request->funeral_location_json;
             $compaign->surviving_family     =  $request->surviving_family;
             $compaign->poa_wills            =  $request->poa_wills;

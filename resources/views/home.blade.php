@@ -28,7 +28,7 @@
                                                                             <p>{!! $slider->description !!}</p>
                                                                             @if($slider->allow_donate_button == 1)
                                                                                 <div class="btn-box">
-                                                                                    <a href="#" class="banner-btn">Donate Now</a>
+                                                                                    <a href="{{route('donate')}}" class="banner-btn">Donate Now</a>
                                                                                 </div>
                                                                             @endif
                                                                         </div>
@@ -131,7 +131,7 @@
                                                                 <div class="bar">
                                                                     <div class="bar-inner count-bar counted" data-percent="50%"> <div class="count-box"><span class="count-text" data-speed="2500" data-stop="50">0</span>%</div></div>
                                                                 </div>
-                                                                <div class="count-text"><span class="amount">&#036;25,000.00</span> donated of <span class="goal-amount">&#036;50,000.00</span> goal</div>
+                                                                <div class="count-text"><span class="amount">&#036;{{$campaign->total_donation}}</span> donated of <span class="goal-amount">&#036;50,000.00</span> goal</div>
                                                             </div>
                                                             @endif
                                                         </div>
@@ -259,76 +259,77 @@
 {{--            </section>--}}
 
 
-{{--            <section class="elementor-section elementor-top-section elementor-element elementor-element-1cb8d88 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="1cb8d88" data-element_type="section">--}}
-{{--                <div class="elementor-container elementor-column-gap-default">--}}
-{{--                    <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0d8bb58" data-id="0d8bb58" data-element_type="column">--}}
-{{--                        <div class="elementor-widget-wrap elementor-element-populated">--}}
-{{--                            <div class="elementor-element elementor-element-1b4ffc1 elementor-widget elementor-widget-purehearts_our_funfacts" data-id="1b4ffc1" data-element_type="widget" data-widget_type="purehearts_our_funfacts.default">--}}
-{{--                                <div class="elementor-widget-container">--}}
+            <section class="elementor-section elementor-top-section elementor-element elementor-element-1cb8d88 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="1cb8d88" data-element_type="section">
+                <div class="elementor-container elementor-column-gap-default">
+                    <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0d8bb58" data-id="0d8bb58" data-element_type="column">
+                        <div class="elementor-widget-wrap elementor-element-populated">
+                            <div class="elementor-element elementor-element-1b4ffc1 elementor-widget elementor-widget-purehearts_our_funfacts" data-id="1b4ffc1" data-element_type="widget" data-widget_type="purehearts_our_funfacts.default">
+                                <div class="elementor-widget-container">
 
-{{--                                    <!-- funfact-section -->--}}
-{{--                                    <section class="funfact-section  centred" style="background-image: url(images/10.jpg);">--}}
-{{--                                        <div class="auto-container">--}}
-{{--                                            <div class="sec-title style-two light centred">--}}
-{{--                                                <span class="top-text">About Pure Hearts</span>--}}
-{{--                                                <h2>Pure Hearts Facts &amp; Figures</h2>--}}
-{{--                                                <p>The master-builder of human happiness no one rejects, dislikes <br />or avoids  pleasure itself pleasure.</p>                </div>--}}
-{{--                                            <div class="row clearfix">--}}
-{{--                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">--}}
-{{--                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <div class="icon-box"><i class="icon-charity"></i></div>--}}
-{{--                                                            <div class="count-outer count-box">--}}
-{{--                                                                <span class="count-text" data-speed="1500" data-stop="278">0</span><span></span>--}}
-{{--                                                            </div>--}}
-{{--                                                            <h4>Volunteers</h4>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">--}}
-{{--                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <div class="icon-box"><i class="icon-donation-1"></i></div>--}}
-{{--                                                            <div class="count-outer count-box">--}}
-{{--                                                                <span class="count-text" data-speed="1500" data-stop="6.5">0</span><span>k</span>--}}
-{{--                                                            </div>--}}
-{{--                                                            <h4>Beneficiaries</h4>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">--}}
-{{--                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <div class="icon-box"><i class="icon-donation"></i></div>--}}
-{{--                                                            <div class="count-outer count-box">--}}
-{{--                                                                <span class="count-text" data-speed="1500" data-stop="10">0</span><span>M</span>--}}
-{{--                                                            </div>--}}
-{{--                                                            <h4>Worth Donations</h4>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">--}}
-{{--                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <div class="icon-box"><i class="icon-home"></i></div>--}}
-{{--                                                            <div class="count-outer count-box">--}}
-{{--                                                                <span class="count-text" data-speed="1500" data-stop="350">0</span><span>+</span>--}}
-{{--                                                            </div>--}}
-{{--                                                            <h4>NGOs Impacted</h4>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </section>--}}
-{{--                                    <!-- funfact-section end -->--}}
+                                    <!-- funfact-section -->
+                                    <section class="funfact-section  centred" style="background-image: url(images/10.jpg);">
+                                        <div class="auto-container">
+                                            <div class="sec-title style-two light centred">
+                                                <span class="top-text">About Pure Hearts</span>
+                                                <h2>Pure Hearts Facts &amp; Figures</h2>
+                                                <p>The master-builder of human happiness no one rejects, dislikes <br />or avoids  pleasure itself pleasure.</p>                </div>
+                                            <div class="row clearfix">
+                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">
+                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div class="inner-box">
+                                                            <div class="icon-box"><i class="icon-charity"></i></div>
+                                                            <div class="count-outer count-box">
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->count()}}">{{collect($campaigns)->count()}}</span><span></span>
+                                                            </div>
+                                                            <h4>Obituary</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">
+                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><div class="inner-box">
+                                                            <div class="icon-box"><i class="icon-donation-1"></i></div>
+                                                            <div class="count-outer count-box">
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->where('total_donation','>',0)->count()}}">{{collect($campaigns)->where('total_donation','>',0)->count()}}</span>
+                                                            </div>
+                                                            <h4>Family helped</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">
+                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div class="inner-box">
+                                                            <div class="icon-box"><i class="icon-donation"></i></div>
+                                                            <div class="count-outer count-box">
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->sum('total_donation')}}">{{collect($campaigns)->sum('total_donation')}}</span><span>$</span>
+                                                            </div>
+                                                            <h4>Fund Raised</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6 col-sm-12 funfact-block">
+                                                    <a href="{{route('donate')}}">
+                                                    <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div class="inner-box">
+                                                            <div class="icon-box"><i class="icon-home"></i></div>
+                                                            <div class="count-outer count-box">
+                                                                <span><i class="fa fa-anchor"></i> </span>
+                                                            </div>
+                                                            <h4>How you can help</h4>
+                                                        </div>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- funfact-section end -->
 
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </section>--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </div>
     </div>

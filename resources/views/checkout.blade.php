@@ -38,8 +38,6 @@
                                         <div class="col-md-7 col-12 icons" style="text-align: right">
                                             <i class="fa-brands fa-cc-visa fa-2x" aria-hidden="true"></i>
                                             <i class="fa-brands  fa-cc-mastercard fa-2x" aria-hidden="true"></i>
-                                            <i class="fa-brands  fa-cc-discover fa-2x" aria-hidden="true"></i>
-                                            <i class="fa-brands  fa-cc-amex fa-2x" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +54,7 @@
                                         <div class="form-group">
                                             <label for="validationTooltipCardNumber"><strong>CARD NUMBER</strong></label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control border-right-0" id="card-number" placeholder="Card Number">
+                                                <input type="text" min="16" max="16" class="form-control nbrOnly border-right-0" id="card-number" placeholder="Card Number">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text rounded-right" id="">
                                                         <i class="fa fa-credit-card"></i>
@@ -68,26 +66,32 @@
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputExpirationDate"><strong>EXPIRATION MONTH</strong></label>
-                                                    <input type="text" class="form-control" id="card-expiry-month" placeholder="MM ">
+                                                    <input type="text" class="form-control nbrOnly"  min="1" max="2"id="card-expiry-month" placeholder="MM ">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputExpirationDate"><strong>EXPIRATION YEAR</strong></label>
-                                                    <input type="text" class="form-control" id="card-expiry-year" placeholder="YYYY">
+                                                    <input type="text" class="form-control nbrOnly" min="4" max="4" id="card-expiry-year" placeholder="YYYY">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
                                                     <label for="exampleInputCvcCode"><strong>CVC CODE</strong></label>
-                                                    <input type="text" class="form-control" id="card-cvc" placeholder="CVC">
+                                                    <input type="text" class="form-control nbrOnly" min="3" max="3" id="card-cvc" placeholder="CVC">
                                                 </div>
                                             </div>
-                                            <div class="col-12 jq_msg">
+                                            <div class="col-12">
                                                 @if (Session::has('success'))
                                                     <div class="alert alert-success text-center">
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                                                         <p>{{ Session::get('success') }}</p>
+                                                    </div>
+                                                @endif
+                                                @if (Session::has('error'))
+                                                    <div class="alert alert-danger text-center">
+                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                        <p>{{ Session::get('error') }}</p>
                                                     </div>
                                                 @endif
                                             </div>
@@ -161,10 +165,11 @@
             --------------------------------------------*/
             function stripeResponseHandler(status, response) {
                 if (response.error) {
-                    $('.jq_msg').html(`<div class="alert alert-danger text-center">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                            <p>${response.error.message}</p>
-                                        </div>`);
+                    // $('.jq_msg').html(`<div class="alert alert-danger text-center">
+                    //                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    //                         <p>${response.error.message}</p>
+                    //                     </div>`);
+                    toaster('Error',response.error.message,'error');
                 } else {
                     /* token contains id, last4, and card type */
                     var token = response['id'];

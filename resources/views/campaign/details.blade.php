@@ -8,8 +8,9 @@
                 <div class="title">
                     <h1>Memory</h1>
                 </div>
-                <ul class="bread-crumb clearfix">
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                </ul>
+{{--                <ul class="bread-crumb clearfix">--}}
+{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                --}}
+{{--                </ul>--}}
             </div>
         </div>
     </section>
@@ -28,43 +29,24 @@
                                     <span class="post-date">{{date('F d, Y',strtotime($campaign->created_at))}}</span>
                                 </figure>
                             </div>
-
-
-
-
                             <div class="" id="donate-trig" style="margin-left: 0px;">
                                 <h3 class="h3 mt-40">How Your Donation Makes a Difference</h3>
-
                                 <div class="company-profile__donation-cards">
                                     <div class="border-all dtn-amt-item m-bot30 border-round clearfix ">
                                         <div class="horizontal-card">
                                             <div class="horizontal-card__head">
-                                                <h2 class="vertical-horizontal-center"> $80 </h2>
+                                                <h2 class="vertical-horizontal-center"> ${{$campaign->default_amount}} </h2>
                                             </div>
                                             <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;"> <div class="text-left dtn-desc m-left0 text-left"> <span class="small">
 <p class="body-txt break-word" id="otherAmtMessage"> Your donation could help provide a meal for 3 children in our Canossaville Student Care programme for a month. </p> </span> </div> </div>
                                             <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
-                                                <button data-value="80" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE $80</button>
-                                                <button data-value="80" class="button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost ">
-                                                    <span id="user-input-holder">ADD TO CART</span>
+                                                <button amount="{{$campaign->default_amount}}" uid="{{$campaign->uid}}" data-cart-btn="donate"    class=" addToCartDirectly btn-ghost clearfix impact-message button button--small button--full " id="user-input-holder"> DONATE ${{$campaign->default_amount}}</button>
+                                                <button amount="{{$campaign->default_amount}}" uid="{{$campaign->uid}}" data-cart-btn="cart"    class=" addToCartDirectly button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span>
                                                 </button>
-                                            </div> </div> </div> </div>
-
-
-                                <div class="company-profile__donation-cards">
-                                    <div class="border-all dtn-amt-item m-bot30 border-round clearfix ">
-                                        <div class="horizontal-card">
-                                            <div class="horizontal-card__head">
-                                                <h2 class="vertical-horizontal-center"> $90 </h2>
                                             </div>
-                                            <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;"> <div class="text-left dtn-desc m-left0 text-left"> <span class="small">
-<p class="body-txt break-word" id="otherAmtMessage"> Your donation could help provide a meal for 3 children in our Canossaville Student Care programme for a month. </p> </span> </div> </div>
-                                            <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
-                                                <button data-value="80" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE $80</button>
-                                                <button data-value="80" class="button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "> <span id="user-input-holder">ADD TO CART</span> </button>
-                                            </div> </div> </div> </div>
-
-
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="company-profile__donation-cards">
                                     <div class="border-all dtn-amt-item m-bot30 border-round clearfix other-impact-message">
@@ -74,18 +56,22 @@
                                                     <label for="other-amt">
                                                         <h3 class="h3">Other amount</h3> </label>
                                                     <div id="custom-amt-input-modal">
-                                                        <input id="other-amt2" type="number" class="input input--currency button-input other-amount" placeholder="0" onkeypress="return (event.charCode >= 48 &amp;&amp; event.charCode <= 57)|| event.which === 8"> <span class="input-ctrl__currency">$</span>
-                                                    </div> </div> </div>
+                                                        <input id="other-amount" uid="{{$campaign->uid}}" type="number" value="0" class="input input--currency button-input other-amount" placeholder="0">
+{{--                                                        <span class="input-ctrl__currency">$</span>--}}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;"> <div class="text-left dtn-desc m-left0 text-left">
-<span class="small">
-<p class="body-txt break-word" id="otherAmtMessage"> Every Dollar Counts! Thank you for your donation to support our programmes and services. </p> </span> </div> </div>
+                                            <span class="small">
+                                            <p class="body-txt break-word" id="otherAmtMessage"> Every Dollar Counts! Thank you for your donation to support our programmes and services. </p> </span> </div> </div>
                                             <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
-                                                <button data-value="OTHER" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full user-input-holder " id="user-input-holder">DONATE TODAY</button>
-                                                <button data-value="OTHER" class="button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost ">
-                                                    <span id="user-input-holder">ADD TO CART</span> </button>
-                                            </div> </div> </div> </div> </div>
-
-
+                                                <button  amount="0" uid="{{$campaign->uid}}" data-cart-btn="donate"   class=" addToCartDirectly CustomAmountButtons btn-ghost clearfix impact-message button button--small button--full user-input-holder " id="user-input-holder">DONATE TODAY</button>
+                                                <button  amount="0" uid="{{$campaign->uid}}" data-cart-btn="cart"    class=" addToCartDirectly CustomAmountButtons button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <br>
                             <div class="company-profile__donation-cards">
                                 <div class="border-all dtn-amt-item m-bot30 border-round clearfix other-impact-message">
@@ -203,8 +189,10 @@
                             @if($campaign->public_donation == 1 || $campaign->created_by == auth()->id())
                             <div class="campaign-stats mt-16">
                                 <div class="font-black">
-                                    <div class="h2">$2,030</div>
-                                    <div class="body-txt body-txt--small body-txt--no-letter-space bold">raised from 17 donors</div>
+                                    <div class="h2">${{number_format($campaign->total_donation)}}</div>
+                                    @if(collect($payments)->count())
+                                        <div class="body-txt body-txt--small body-txt--no-letter-space bold">raised from {{collect($payments)->count()}} donors</div>
+                                    @endif
                                     <div class="progress-bar mt-8 mb-8">
                                         <div class="progress-bar__fill" style="width: 20%;"></div>
                                     </div>
@@ -219,10 +207,10 @@
 
                         <div class="post-widget" style="text-align:center; margin-top:5rem;">
                             @php
-                                $dateOfBirth = $campaign->date_of_birth;
-                                $dob = new DateTime($dateOfBirth);
-                                $now = new DateTime();
-                                $diff = $now->diff($dob);
+                                $dateOfBirth =    $campaign->date_of_birth;
+                                $dob         =    new DateTime($dateOfBirth);
+                                $now         =    new DateTime();
+                                $diff        =    $now->diff($dob);
                             @endphp
                             <div class="widget-title"><h3>Age: <small>{{ $diff->y > 0 ? $diff->y." years ":''}} {{$diff->m > 0 ? $diff->m." months ":''}} {{$diff->d > 0 ? $diff->d." days":''}}</small></h3></div>
                             <div class="post-inner">
@@ -247,7 +235,22 @@
                             @endif
                         </div>
 
+                        @if(collect($payments)->count()>0)
 
+                        <div class="volunteer-event__venue">
+                            <div class="campaign-stats mt-16">
+                                <div class="font-black">
+                                    <div class="h2">Contributor:</div>
+                                    <ul class="list-group list-group-flush">
+                                        @foreach($payments as $key=>$payment)
+                                            <li class="list-group-item"> {{$key+1}}. ${{$payment->ttl_amount}} {{$payment->user_name}}</li>
+                                        @endforeach
+                                    </ul>
+
+                                </div>
+                    </div>
+                        </div>
+                        @endif
                     </aside>
                 </div>
             </div>
@@ -255,3 +258,53 @@
     </section>
 
 @endsection
+
+@push('js')
+    <script>
+        $(document).on('input','.other-amount',function () {
+            $('.CustomAmountButtons').attr('amount',$(this).val());
+        });
+        $(document).on('click','.addToCartDirectly',function () {
+            let btn_type   =  $(this).attr('data-cart-btn');
+            let uid        =  $(this).attr('uid');
+            let amount     =  parseInt($(this).attr('amount'));
+            if(amount > 0){
+                $.ajax({
+                    type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url         : `/add-to-cart/${uid}/amount/${amount}`, // the url where we want to POST
+                    data        : {},
+                    processData : false,
+                    contentType : false,
+                    cache       : false,
+                    headers     : {
+                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if(response.status == 'success'){
+                            if(response.amount > 0){
+                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.amount}$</small></sup>`)
+                            }else{
+                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i></span>`)
+                            }
+                            if(btn_type == 'donate'){
+                                window.location = '/cart/donation';
+                            }else{
+                                $('.modal').modal('hide')
+                                toaster('Success','Item added to cart.','success');
+                            }
+
+                        }else{
+                            toaster('Error',response.msg,'error');
+                        }
+                    },
+                    error: function (data) {
+                        toaster('Error',data.responseJSON.message,'error');
+                    }
+                })
+            }else{
+                toaster('Error','Please select amount.','error');
+            }
+
+        })
+    </script>
+@endpush

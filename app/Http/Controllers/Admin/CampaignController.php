@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\CampaignPayments;
 use App\Campaigns;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +18,11 @@ class CampaignController extends Controller
     public function show(Request $request, $id)
     {
         $campaign   =   Campaigns::find($id);
-        return view('admin.campaigns.details',compact('campaign'));
+        $payments   =   CampaignPayments::join('users','users.id','=','user_id')
+                        ->selectRaw("campaign_payments.*,name as user_name")
+                        ->where('campaign_id',$id)
+                        ->get();
+        return view('admin.campaigns.details',compact('campaign','payments'));
     }
     public function approve(Request $request, $uid)
     {

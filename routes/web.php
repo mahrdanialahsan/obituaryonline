@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/campaign/get/{id}', 'CampaignController@get')->name('campaign.get');
     Route::post('/campaign/{id}/update', 'CampaignController@update')->name('campaign.update');
     Route::post('/campaign/{id}/submit/approval', 'CampaignController@submitForApproval')->name('campaign.submit.approval');
+    Route::get('/cart/checkout', 'AddToCartController@checkout')->name('cart.checkout');
 });
 
 
@@ -66,6 +67,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::post('/settings/site/{id}/delete', 'Admin\SiteController@deleteSlider')->name('admin.settings.slider.delete');
 
 
+
+    Route::get('/payments', 'Admin\PaymentController@index')->name('admin.payments');
+    Route::get('/payments/{id}', 'Admin\PaymentController@show')->name('admin.payments.show');
+
     Route::get('/subscriptions', 'Admin\AdminController@subscriptions')->name('admin.subscriptions');
     Route::get('/campaigns', 'Admin\CampaignController@index')->name('admin.campaigns');
     Route::get('/campaign/{id}', 'Admin\CampaignController@show')->name('admin.campaign.show');
@@ -82,8 +87,7 @@ Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
 Route::get('/cart/donation', 'AddToCartController@index')->name('cart');
 Route::post('/get-cart', 'AddToCartController@getCart')->name('cart.get');
 Route::post('/add-to-cart/{uid}/amount/{amount}', 'AddToCartController@store')->name('cart.store');
-Route::post('/empty-cart/{uid?}', 'AddToCartController@destroy')->name('cart.empty');
-Route::get('/cart/checkout', 'AddToCartController@checkout')->name('cart.checkout');
+Route::post('/empty-cart/{uid}', 'AddToCartController@destroy')->name('cart.empty');
 
 
 

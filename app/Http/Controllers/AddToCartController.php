@@ -8,19 +8,24 @@ use Session;
 
 class AddToCartController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        //
         $cart               =   [];
         $donations          =   [];
         if(Session::has('cart_items')){
             $cart           =   Session::get('cart_items');
             $donations      =   Campaigns::whereIn('uid',array_keys($cart))->get();
+        }
+        if(@Auth()->user()->is_admin == 1){
+            return redirect(url('/'));
         }
         return view('donate.form',compact('donations','cart'));
     }
@@ -28,7 +33,6 @@ class AddToCartController extends Controller
 
     public function getCart($status = 0)
     {
-        //
         $cart               =   [];
         $donations          =   [];
         if(Session::has('cart_items')){
@@ -69,19 +73,25 @@ class AddToCartController extends Controller
      */
     public function store(Request $request,$uid,$amount)
     {
-        //
+        $amount =   (float)$amount;
         $cart   =   [];
         if(Session::has('cart_items')){
             $cart           =   Session::get('cart_items');
-            $cart[$uid]     =   $amount ? (float)$amount:0;
+            $prevAmount     =   isset($cart[$uid]) ? $cart[$uid] : 0;
+            $cart[$uid]     =   $amount + $prevAmount;
+        }else{
+            $cart[$uid]     =   $amount;
+        }
+        if(@Auth()->user()->is_admin == 1){
+            $cart   =   [];
         }
         Session::put('cart_items',$cart);
         return response()->json([
             'status' =>     'success',
-            'msg'    => '   Item added to cart.',
+            'msg'    =>     'Item added to cart.',
             'amount' =>     array_sum(array_values(Session::get('cart_items'))),
             'count'  =>     @count(Session::get('cart_items')),
-            'data'   => $this->getCart(1)
+            'data'   =>     $this->getCart(1)
 
         ]);
     }
@@ -126,15 +136,14 @@ class AddToCartController extends Controller
      * @param  string  $uid
      * @return \Illuminate\Http\Response
      */
-    public function destroy($uid='')
+    public function destroy($uid='all')
     {
         //
         if(Session::has('cart_items')){
             $cart       =   Session::get('cart_items');
-            if(empty($uid)){
+            if($uid=='all'){
                 $cart   =   [] ;
             }else{
-                //dd($cart[$uid]);
                 unset($cart[$uid]);
             }
             Session::put('cart_items',$cart);
@@ -146,6 +155,11 @@ class AddToCartController extends Controller
     }
 
     public function checkout(){
-        return view('checkout');
+        if( Session::has('cart_items') && (float)array_sum(array_values(Session::get('cart_items'))) > 0 ){
+            return view('checkout');
+        }
+        else{
+            return redirect(route('cart'));
+        }
     }
 }
