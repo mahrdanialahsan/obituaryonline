@@ -37,7 +37,7 @@
                                                         @endforeach
                                                     @else
                                                         <div class="swiper-slide">
-                                                            <div class="image-layer" style="background-image: url(images/banner-4.jpg);"></div><div class="auto-container">
+                                                            <div class="image-layer" style="background-image: url({{asset('images/banner-4.jpg')}});"></div><div class="auto-container">
                                                                 <div class="content-box">
                                                                     <figure class="icon-layer"><img decoding="async" src="{{asset('images/heart-5.png')}}" alt="Awesome Image"></figure>
                                                                     <div class="shape" style="background-image: url({{asset('images/shape-32.png')}});"></div>
@@ -45,7 +45,7 @@
                                                                     <h2>Adopt a Child</h2>
                                                                     <p>Charity is a continuous process toward success and happiness <br />Let’s help them now.</p>
                                                                     <div class="btn-box">
-                                                                        <a href="#" class="banner-btn">Donate Now</a>
+                                                                        <a href="{{route('donate')}}" class="banner-btn">Donate Now</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

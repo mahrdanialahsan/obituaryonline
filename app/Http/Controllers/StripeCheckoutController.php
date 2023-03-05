@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CampaignPayments;
 use App\Campaigns;
 use App\Payments;
+use App\SiteSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -37,7 +38,8 @@ class StripeCheckoutController extends Controller
                     'user_id'    => Auth::user()->id,
                     'cart_items' => json_encode($cart_items),
                 ];
-                Stripe\Stripe::setApiKey(env('STRIPE_SECRET', 'sk_test_VgQx6sXcjkb19a2xCjI3Bz2J00Jy8xVuGN'));
+                $site =   SiteSettings::whereNotNull('id')->first();
+                Stripe\Stripe::setApiKey($site->stripe_secret);
                 $response = Stripe\Charge::create([
                                                 "amount"        =>  round($amount, 2) * 100,
                                                 "currency"      =>  "usd",

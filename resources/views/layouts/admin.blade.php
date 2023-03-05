@@ -75,6 +75,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Subscriptions
                     </a>
+                    <a class="nav-link {{Route::currentRouteName() == 'admin.users' ? 'active':''}}" href="{{route('admin.users')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Users
+                    </a>
                     <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.payments')  ? 'active':''}}" href="{{route('admin.payments')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Payments

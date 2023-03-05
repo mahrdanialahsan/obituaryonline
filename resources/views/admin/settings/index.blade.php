@@ -41,6 +41,21 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <h3> Stripe Leys</h3>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating  mb-3">
+                            <input  value="{{$site->stripe_key}}"  class="form-control" id="stripe_key" name="stripe_key" type="text" placeholder="pk_test_AGasvfU4csIh1Cbhk2TFfLEJ00uLFx1vrg" required11 />
+                            <label for="stripe_key"> STRIPE_KEY.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating  mb-3">
+                            <input  value="{{$site->stripe_secret}}"  class="form-control" id="twitter_url" name="twitter_url" type="text" placeholder="sk_test_VgQx6sXcjkb19a2xCjI3Bz2J00Jy8xVuGN" required11 />
+                            <label for="twitter_url"> STRIPE_SECRET.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <h3> Footer</h3>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating  mb-3">

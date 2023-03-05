@@ -18,6 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('meta')
     <title>{{$site->site_title ? $site->site_title:"Obitury Online."}}</title>
     <meta name='robots' content='max-image-preview:large' />
     <link rel='dns-prefetch'    href="{{asset('http://fonts.googleapis.com/')}}" />

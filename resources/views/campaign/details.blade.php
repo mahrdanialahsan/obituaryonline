@@ -1,5 +1,14 @@
 @extends('layouts.public')
 
+
+@push('meta')
+    <meta property="og:url"           content="{{route('campaign.details',['id'=>$campaign->uid])}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}" />
+    <meta property="og:description"   content="{{$campaign->message}}" />
+    <meta property="og:image"         content="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}" />
+@endpush
+
 @section('content')
     <!-- Page Title -->
     <section class="page-title" style="background-image: url({{asset('images/12.jpg')}});">
@@ -15,7 +24,7 @@
         </div>
     </section>
     <!-- End Page Title -->
-    <BR>
+    <br>
     <!-- sidebar-page-container -->
     <section class="sidebar-page-container">
         <div class="auto-container">
@@ -166,23 +175,27 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                     <aside class="blog-sidebar">
                         <h5>In laving memory of</h5>
-                        <h2 class="h2 volunteer-event__title break-word">{{$campaign->deceased_name}}</h2>
+                        <h2 class="h2 volunteer-event__title break-word">{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</h2>
                         <p class="mt-10">Passed away on {{date('d F Y',strtotime($campaign->date_of_death))}}</p>
                         <br>
                         <div class="social-list social-list--just-left mt-16">
-                            <a href="javascript:;" class="button button--icon button--ghost centered shareit addthis_button_compact">
-                                <i class="ico ico-share button--icon__icon" style="margin-top:2px;"></i>
-                                <span class="button--icon__name">SHARE</span> </a>
-
-
-                            <label class="btn-checkbox-btn btn-checkbox-btn--save" tabindex="1000">
-<span id="favouritebookmark" class="button button--icon button--ghost " data-toast-msg-on="You have saved the page" data-toast-msg-off="You have removed the page" data-state="false" data-role="toast-toggle">
-<i class="ico ico-save button--icon__icon" style="margin-top:2px;"></i>
-<span class="button--icon__name">SAVE</span></span></label>
-
-                            <a id="copy-url" class="button button--icon button--ghost js-copy" data-clipboard-text="" data-toast-msg="Link is copied to clipboard"><i class="ico ico-link button--icon__icon" style="margin-top:2px;"></i>
-                                <span class="button--icon__name">LINK</span></a>
+                            <div class="dropdown" style="margin-right: 5px">
+                                <a class=" dropdown-toggle button button--icon button--ghost centered shareit addthis_button_compact" data-toggle="dropdown">
+                                    <i class="ico ico-share button--icon__icon" style="margin-top:2px;"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($campaign->message." ".route('campaign.details',['id'=>$campaign->uid])."#.ZARWImtO85U.whatsapp")}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
+                                    <a class="dropdown-item shareBtn" url="{{route('campaign.details',['id'=>$campaign->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
+{{--                                    <a class="dropdown-item" href="#">Twitter</a>--}}
+                                </div>
+                            </div>
+                            <a id="copy-url" text="{{route('campaign.details',['id'=>$campaign->uid])}}" class="button button--icon button--ghost copyText" data-clipboard-text="" msg="Link is copied to clipboard">
+                                <i class="ico ico-link button--icon__icon" style="margin-top:2px;"></i>
+                                <span class="button--icon__name">LINK</span>
+                            </a>
                         </div>
+{{-- <a  target="_blank" href="https://api.whatsapp.com/send?text={{urlencode("Charities Week 2023 by Caritas Singapore Community Council - The Caritas Singapore Agape Fund https://www.giving.sg/caritas-singapore-community-council-the-cscc-agape-fund/charities_week_2023#.ZARS9R1KVIs.whatsapp")}}" data-action="share/whatsapp/share">Share via Whatsapp</a>--}}
+
 
 
                         <div class="volunteer-event__venue">
@@ -305,6 +318,23 @@
                 toaster('Error','Please select amount.','error');
             }
 
-        })
+        });
+        $(document).on('click','.copyText',function () {
+            var copyText = $(this).attr('text');
+            navigator.clipboard.writeText(copyText);
+            toaster('Copied:',$(this).attr('msg'),'success');
+        });
+        // target the button and pass in:
+        // url - url of the site you want to share
+        // title -title of your share
+        // discription - description of your share
+
+        $( ".shareBtn" ).click(function() {
+            let url = $(this).attr('url')
+            facebookShareUrl = 'https://www.facebook.com/sharer.php?p[url]=' + url
+            // how to open a window - https://www.w3schools.com/jsref/met_win_open.asp
+            window.open(facebookShareUrl);
+        });
+
     </script>
 @endpush

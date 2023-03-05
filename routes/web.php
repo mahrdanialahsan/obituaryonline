@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
+|--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -22,6 +23,10 @@ Route::get('/cache-clear', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 //    \Illuminate\Support\Facades\Artisan::call('route:cache');
     \Illuminate\Support\Facades\Artisan::call('view:cache');
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    dd('done');
+});
+Route::get('/storage-link', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     dd('done');
 });
@@ -55,6 +60,11 @@ Route::get('/admin', function (){
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
 
 
+
+
+    Route::get('/users', 'Admin\AdminController@users')->name('admin.users');
+    Route::get('/subscriptions', 'Admin\AdminController@subscriptions')->name('admin.subscriptions');
+
     Route::get('/settings/site', 'Admin\SiteController@index')->name('admin.settings.site');
     Route::post('/settings/store', 'Admin\SiteController@store')->name('admin.settings.save.site');
 
@@ -71,7 +81,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/payments', 'Admin\PaymentController@index')->name('admin.payments');
     Route::get('/payments/{id}', 'Admin\PaymentController@show')->name('admin.payments.show');
 
-    Route::get('/subscriptions', 'Admin\AdminController@subscriptions')->name('admin.subscriptions');
     Route::get('/campaigns', 'Admin\CampaignController@index')->name('admin.campaigns');
     Route::get('/campaign/{id}', 'Admin\CampaignController@show')->name('admin.campaign.show');
     Route::get('/campaign/{id}/approve', 'Admin\CampaignController@approve')->name('admin.campaign.approve');

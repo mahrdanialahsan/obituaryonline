@@ -270,6 +270,7 @@
                     $('#funeral_location_json').val(response.funeral_location_json);
                     $('#public_donation').prop("checked",response.public_donation == 1 ? true:false );
                     // CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
+                   if(CKEDITOR.instances["poa_wills"])
                     CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
                     //CKEDITOR.instances["message"].setData(response.message);
 

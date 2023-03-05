@@ -48,7 +48,7 @@
                                             method="post"
                                             class="require-validation"
                                             data-cc-on-file="false"
-                                            data-stripe-publishable-key="{{ env('STRIPE_KEY','pk_test_AGasvfU4csIh1Cbhk2TFfLEJ00uLFx1vrg') }}"
+                                            data-stripe-publishable-key="{{ $site->stripe_key }}"
                                             id="payment-form">
                                         @csrf
                                         <div class="form-group">
