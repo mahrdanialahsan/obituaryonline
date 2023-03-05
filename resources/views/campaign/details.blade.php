@@ -184,8 +184,8 @@
                                     <i class="ico ico-share button--icon__icon" style="margin-top:2px;"></i>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($campaign->message." ".route('campaign.details',['id'=>$campaign->uid])."#.ZARWImtO85U.whatsapp")}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
-                                    <a class="dropdown-item shareBtn" url="{{route('campaign.details',['id'=>$campaign->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
+                                    <a target="_blank" class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($campaign->message." ".route('campaign.details',['id'=>$campaign->uid]))}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
+                                    <a  class="dropdown-item shareBtn" url="{{route('campaign.details',['id'=>$campaign->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
 {{--                                    <a class="dropdown-item" href="#">Twitter</a>--}}
                                 </div>
                             </div>
