@@ -34,15 +34,15 @@
             font-family: 'FontAwesome';
             src: url('../font/fontawesome-webfont.eot');
         }
-        .campaign-raised .amount,
-        .campaign-figures .amount,
+        .obituary-raised .amount,
+        .obituary-figures .amount,
         .donors-count,
         .time-left,
         .charitable-form-field a:not(.button),
         .charitable-form-fields .charitable-fieldset a:not(.button),
         .charitable-notice,
         .charitable-notice .errors a { color:#f89d35; }
-        .campaign-progress-bar .bar,
+        .obituary-progress-bar .bar,
         .donate-button,
         .charitable-donation-form .donation-amount.selected,
         .charitable-donation-amount-form .donation-amount.selected { background-color:#f89d35; }
@@ -104,7 +104,7 @@
                                         <a title="Be a Volunteer" href="{{ route('home') }}" class="hvr-underline-from-left1">Be a Volunteer</a></li>
 
                                     <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                        <a title="Fundraise Now" href="{{ route('campaign.create') }}" class="hvr-underline-from-left1">Fundraise Now</a></li>
+                                        <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">Post obituary</a></li>
 
                                 </ul>
                             </div>

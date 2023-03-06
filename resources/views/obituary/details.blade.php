@@ -2,11 +2,11 @@
 
 
 @push('meta')
-    <meta property="og:url"           content="{{route('campaign.details',['id'=>$campaign->uid])}}" />
+    <meta property="og:url"           content="{{route('obituary.details',['id'=>$obituary->uid])}}" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}" />
-    <meta property="og:description"   content="{{$campaign->message}}" />
-    <meta property="og:image"         content="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}" />
+    <meta property="og:title"         content="{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}" />
+    <meta property="og:description"   content="{{$obituary->message}}" />
+    <meta property="og:image"         content="{{url('storage/deceased_picture/'.$obituary->deceased_picture)}}" />
 @endpush
 
 @section('content')
@@ -34,8 +34,8 @@
                         <div class="thm-unit-test">
                             <div class="content-one">
                                 <figure class="image-box">
-                                    <img src="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}" class="image" >
-                                    <span class="post-date">{{date('F d, Y',strtotime($campaign->created_at))}}</span>
+                                    <img src="{{url('storage/deceased_picture/'.$obituary->deceased_picture)}}" class="image" >
+                                    <span class="post-date">{{date('F d, Y',strtotime($obituary->created_at))}}</span>
                                 </figure>
                             </div>
                             <div class="" id="donate-trig" style="margin-left: 0px;">
@@ -44,19 +44,18 @@
                                     <div class="border-all dtn-amt-item m-bot30 border-round clearfix ">
                                         <div class="horizontal-card">
                                             <div class="horizontal-card__head">
-                                                <h2 class="vertical-horizontal-center"> ${{$campaign->default_amount}} </h2>
+                                                <h2 class="vertical-horizontal-center"> ${{$obituary->default_amount}} </h2>
                                             </div>
                                             <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;"> <div class="text-left dtn-desc m-left0 text-left"> <span class="small">
 <p class="body-txt break-word" id="otherAmtMessage"> Your donation could help provide a meal for 3 children in our Canossaville Student Care programme for a month. </p> </span> </div> </div>
                                             <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
-                                                <button amount="{{$campaign->default_amount}}" uid="{{$campaign->uid}}" data-cart-btn="donate"    class=" addToCartDirectly btn-ghost clearfix impact-message button button--small button--full " id="user-input-holder"> DONATE ${{$campaign->default_amount}}</button>
-                                                <button amount="{{$campaign->default_amount}}" uid="{{$campaign->uid}}" data-cart-btn="cart"    class=" addToCartDirectly button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span>
+                                                <button amount="{{$obituary->default_amount}}" uid="{{$obituary->uid}}" data-cart-btn="donate"    class=" addToCartDirectly btn-ghost clearfix impact-message button button--small button--full " id="user-input-holder"> DONATE ${{$obituary->default_amount}}</button>
+                                                <button amount="{{$obituary->default_amount}}" uid="{{$obituary->uid}}" data-cart-btn="cart"    class=" addToCartDirectly button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="company-profile__donation-cards">
                                     <div class="border-all dtn-amt-item m-bot30 border-round clearfix other-impact-message">
                                         <div class="horizontal-card">
@@ -65,7 +64,7 @@
                                                     <label for="other-amt">
                                                         <h3 class="h3">Other amount</h3> </label>
                                                     <div id="custom-amt-input-modal">
-                                                        <input id="other-amount" uid="{{$campaign->uid}}" type="number" value="0" class="input input--currency button-input other-amount" placeholder="0">
+                                                        <input id="other-amount" uid="{{$obituary->uid}}" type="number" value="0" class="input input--currency button-input other-amount" placeholder="0">
 {{--                                                        <span class="input-ctrl__currency">$</span>--}}
                                                     </div>
                                                 </div>
@@ -74,8 +73,8 @@
                                             <span class="small">
                                             <p class="body-txt break-word" id="otherAmtMessage"> Every Dollar Counts! Thank you for your donation to support our programmes and services. </p> </span> </div> </div>
                                             <div class=" horizontal-card__aside horizontal-card__aside--light-blue company-profile__donate-card dtn-btns" style="margin-left: 0px;">
-                                                <button  amount="0" uid="{{$campaign->uid}}" data-cart-btn="donate"   class=" addToCartDirectly CustomAmountButtons btn-ghost clearfix impact-message button button--small button--full user-input-holder " id="user-input-holder">DONATE TODAY</button>
-                                                <button  amount="0" uid="{{$campaign->uid}}" data-cart-btn="cart"    class=" addToCartDirectly CustomAmountButtons button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span> </button>
+                                                <button  amount="0" uid="{{$obituary->uid}}" data-cart-btn="donate"   class=" addToCartDirectly CustomAmountButtons btn-ghost clearfix impact-message button button--small button--full user-input-holder " id="user-input-holder">DONATE TODAY</button>
+                                                <button  amount="0" uid="{{$obituary->uid}}" data-cart-btn="cart"    class=" addToCartDirectly CustomAmountButtons button button--ghost button--small button--full ignore-label-update impact-message user-input-holder custom-amt-input-modal btn-ghost "><span id="user-input-holder">ADD TO CART</span> </button>
                                             </div>
                                         </div>
                                     </div>
@@ -90,16 +89,16 @@
                                                 <label for="other-amt">
                                                     <h3 class="h3">Wake Service</h3>
                                                 </label>
-                                                <p><small>{{$campaign->wake_location}}</small></p>
+                                                <p><small>{{$obituary->wake_location}}</small></p>
                                                 <br>
                                                 <p>Date</p>
-                                                <p><small>{{date('D, d M Y',strtotime($campaign->date_of_death))}}</small> To</p>
-                                                <p><small>{{date('D, d M Y',strtotime($campaign->date_of_death. " +$campaign->wake_period  days"))}}</small></p>
+                                                <p><small>{{date('D, d M Y',strtotime($obituary->date_of_death))}}</small> To</p>
+                                                <p><small>{{date('D, d M Y',strtotime($obituary->date_of_death. " +$obituary->wake_period  days"))}}</small></p>
                                             </div>
                                         </div>
                                         <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;">
                                             @php
-                                                $wake_location_json = json_decode($campaign->wake_location_json);
+                                                $wake_location_json = json_decode($obituary->wake_location_json);
                                             @endphp
                                             <div class="text-left dtn-desc m-left0 text-left">
                                                 <iframe
@@ -107,12 +106,11 @@
                                                         height="250"
                                                         frameborder="0" style="border:0"
                                                         referrerpolicy="no-referrer-when-downgrade"
-                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$campaign->wake_location}}"
+                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$obituary->wake_location}}"
                                                         allowfullscreen>
                                                 </iframe>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -125,17 +123,17 @@
                                                 <label for="other-amt">
                                                     <h3 class="h3">Funeral Service</h3>
                                                 </label>
-                                                <p><small>{{$campaign->funeral_location}}</small></p>
+                                                <p><small>{{$obituary->funeral_location}}</small></p>
                                                 <br>
                                                 <p>Date</p>
-                                                <p><small>{{date('D, d M Y',strtotime($campaign->funeral_date))}}</small></p>
+                                                <p><small>{{date('D, d M Y',strtotime($obituary->funeral_date))}}</small></p>
                                                 <p>Time</p>
-                                                <p><small>{{date('h:i A',strtotime($campaign->funeral_date))}}</small></p>
+                                                <p><small>{{date('h:i A',strtotime($obituary->funeral_date))}}</small></p>
                                             </div>
                                         </div>
                                         <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;">
                                             @php
-                                                $funeral_location_json = json_decode($campaign->funeral_location_json);
+                                                $funeral_location_json = json_decode($obituary->funeral_location_json);
                                             @endphp
                                             <div class="text-left dtn-desc m-left0 text-left">
                                                 <iframe
@@ -143,40 +141,30 @@
                                                         height="250"
                                                         frameborder="0" style="border:0"
                                                         referrerpolicy="no-referrer-when-downgrade"
-                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$campaign->funeral_location}}"
+                                                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&q={{$obituary->funeral_location}}"
                                                         allowfullscreen>
                                                 </iframe>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="text">
-                                <h3 class="h3">About Campaign</h3><br>
-                                <div class="campaign-description">{!! $campaign->message !!}</div>
-
+                                <h3 class="h3">About Obituary</h3><br>
+                                <div class="obituary-description">{!! $obituary->message !!}</div>
                             </div>
-
                             <div class="clearfix"><br></div>
-
-
                         </div>
                         <!--End thm-unit-test-->
                     </div>
                     <!--End blog-content-->
-
                 </div>
-
-
-
-
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                     <aside class="blog-sidebar">
                         <h5>In laving memory of</h5>
-                        <h2 class="h2 volunteer-event__title break-word">{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</h2>
-                        <p class="mt-10">Passed away on {{date('d F Y',strtotime($campaign->date_of_death))}}</p>
+                        <h2 class="h2 volunteer-event__title break-word">{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</h2>
+                        <p class="mt-10">Passed away on {{date('d F Y',strtotime($obituary->date_of_death))}}</p>
                         <br>
                         <div class="social-list social-list--just-left mt-16">
                             <div class="dropdown" style="margin-right: 5px">
@@ -184,12 +172,12 @@
                                     <i class="ico ico-share button--icon__icon" style="margin-top:2px;"></i>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a target="_blank" class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($campaign->message." ".route('campaign.details',['id'=>$campaign->uid]))}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
-                                    <a  class="dropdown-item shareBtn" url="{{route('campaign.details',['id'=>$campaign->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
+                                    <a target="_blank" class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($obituary->message." ".route('obituary.details',['id'=>$obituary->uid]))}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
+                                    <a  class="dropdown-item shareBtn" url="{{route('obituary.details',['id'=>$obituary->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
 {{--                                    <a class="dropdown-item" href="#">Twitter</a>--}}
                                 </div>
                             </div>
-                            <a id="copy-url" text="{{route('campaign.details',['id'=>$campaign->uid])}}" class="button button--icon button--ghost copyText" data-clipboard-text="" msg="Link is copied to clipboard">
+                            <a id="copy-url" text="{{route('obituary.details',['id'=>$obituary->uid])}}" class="button button--icon button--ghost copyText" data-clipboard-text="" msg="Link is copied to clipboard">
                                 <i class="ico ico-link button--icon__icon" style="margin-top:2px;"></i>
                                 <span class="button--icon__name">LINK</span>
                             </a>
@@ -199,10 +187,10 @@
 
 
                         <div class="volunteer-event__venue">
-                            @if($campaign->public_donation == 1 || $campaign->created_by == auth()->id())
-                            <div class="campaign-stats mt-16">
+                            @if($obituary->public_donation == 1 || $obituary->created_by == auth()->id())
+                            <div class="obituary-stats mt-16">
                                 <div class="font-black">
-                                    <div class="h2">${{number_format($campaign->total_donation)}}</div>
+                                    <div class="h2">${{number_format($obituary->total_donation)}}</div>
                                     @if(collect($payments)->count())
                                         <div class="body-txt body-txt--small body-txt--no-letter-space bold">raised from {{collect($payments)->count()}} donors</div>
                                     @endif
@@ -220,19 +208,19 @@
 
                         <div class="post-widget" style="text-align:center; margin-top:5rem;">
                             @php
-                                $dateOfBirth =    $campaign->date_of_birth;
+                                $dateOfBirth =    $obituary->date_of_birth;
                                 $dob         =    new DateTime($dateOfBirth);
                                 $now         =    new DateTime();
                                 $diff        =    $now->diff($dob);
                             @endphp
-                            <div class="widget-title"><h3>Age: <small>{{ $diff->y > 0 ? $diff->y." years ":''}} {{$diff->m > 0 ? $diff->m." months ":''}} {{$diff->d > 0 ? $diff->d." days":''}}</small></h3></div>
+                            <div class="widget-title"><h3>Age:  <small>{{getAge($obituary->date_of_birth,$obituary->date_of_death)}} </small></h3></div>
                             <div class="post-inner">
-                                <p>Passed away peacefully on {{date('d F Y',strtotime($campaign->date_of_death))}}. </p>
+                                <p>Passed away peacefully on {{date('d F Y',strtotime($obituary->date_of_death))}}. </p>
                                 <p>Dearly missed and fondly remembered by loved ones.</p>
                             </div>
                             <div class="widget-title"><h3></h3></div>
                             @php
-                              $surviving_family =    json_decode($campaign->surviving_family);
+                              $surviving_family =    json_decode($obituary->surviving_family);
                             @endphp
                             @if(is_array($surviving_family) || is_object($surviving_family))
                                 @foreach($surviving_family as $row)
@@ -251,7 +239,7 @@
                         @if(collect($payments)->count()>0)
 
                         <div class="volunteer-event__venue">
-                            <div class="campaign-stats mt-16">
+                            <div class="obituary-stats mt-16">
                                 <div class="font-black">
                                     <div class="h2">Contributor:</div>
                                     <ul class="list-group list-group-flush">

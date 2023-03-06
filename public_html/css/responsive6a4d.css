@@ -2114,10 +2114,10 @@
   .rtl .main-header .search-box-outer .dropdown-menu{
     left: -40px !important;
   }
-  .campaign-summary .campaign-summary-item{
+  .obituary-summary .obituary-summary-item{
 	width:100%;
   }
-  .single-tribe_events .tribe-events-cal-links .tribe-events-button, .charitable-submit-field .button, .campaign-summary .campaign-donation .donate-button{
+  .single-tribe_events .tribe-events-cal-links .tribe-events-button, .charitable-submit-field .button, .obituary-summary .obituary-donation .donate-button{
 		margin-bottom:20px;  
   }
   .woocommerce div.product .woocommerce-tabs ul.tabs li a{

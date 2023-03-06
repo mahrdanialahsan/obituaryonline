@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\CampaignPayments;
-use App\Campaigns;
+use App\ObituaryPayments;
+use App\Obituaries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Str;
 use DB;
 
-class CampaignController extends Controller
+class ObituaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +19,13 @@ class CampaignController extends Controller
     public function index()
     {
         //
-        $campaigns['all']           =   Campaigns::where('created_by',auth()->id())->get();
-        $campaigns['draft']         =   collect($campaigns['all'])->whereNull('status')->all();
-        $campaigns['pending']       =   collect($campaigns['all'])->where('status',0)->all();
-        $campaigns['approved']      =   collect($campaigns['all'])->where('status',1)->all();
-        $campaigns['rejected']      =   collect($campaigns['all'])->where('status',2)->all();
+        $obituaries['all']           =   Obituaries::where('created_by',auth()->id())->get();
+        $obituaries['draft']         =   collect($obituaries['all'])->whereNull('status')->all();
+        $obituaries['pending']       =   collect($obituaries['all'])->where('status',0)->all();
+        $obituaries['approved']      =   collect($obituaries['all'])->where('status',1)->all();
+        $obituaries['rejected']      =   collect($obituaries['all'])->where('status',2)->all();
 
-        return view('campaign.index',compact('campaigns'));
+        return view('obituary.index',compact('obituaries'));
     }
 
     /**
@@ -36,7 +36,7 @@ class CampaignController extends Controller
     public function create()
     {
         //
-        return view('campaign.create');
+        return view('obituary.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class CampaignController extends Controller
         $uid = Str::random(40);
         $todayDate = date('Y-m-d');
         $request->validate([
-            //'uid'               => 'required|string|uid|unique:campaigns',
+            //'uid'               => 'required|string|uid|unique:obituaries',
             'deceased_first_name'   => 'required|string|max:191',
             'deceased_last_name'    => 'required|string|max:191',
             'nric'                  => 'required|string|max:191',
@@ -94,13 +94,13 @@ class CampaignController extends Controller
 
 
 
-        $compaign = new Campaigns($data);
+        $compaign = new Obituaries($data);
         $compaign->save();
-        //dd(route('campaign.show',['id'=>$compaign->uid]));
+        //dd(route('obituary.show',['id'=>$compaign->uid]));
         return response()->json([
             'status'   => 'redirect',
-            'url'      =>  route('campaign.show',['id'=>$compaign->uid]),
-            'msg'      =>  'Campaign created successfully.',
+            'url'      =>  route('obituary.show',['id'=>$compaign->uid]),
+            'msg'      =>  'Obituary created successfully.',
         ],200);
 
     }
@@ -113,8 +113,8 @@ class CampaignController extends Controller
      */
     public function show($uid)
     {
-        $campaign =   Campaigns::where('uid',$uid)->where('created_by',auth()->id())->first();
-        return view('campaign.create',compact('uid','campaign'));
+        $obituary =   Obituaries::where('uid',$uid)->where('created_by',auth()->id())->first();
+        return view('obituary.create',compact('uid','obituary'));
     }
     /**
      * Display the specified resource.
@@ -124,8 +124,8 @@ class CampaignController extends Controller
      */
     public function get($uid)
     {
-        $campaign =   Campaigns::where('uid',$uid)->where('created_by',auth()->id())->first();
-        return response()->json($campaign);
+        $obituary =   Obituaries::where('uid',$uid)->where('created_by',auth()->id())->first();
+        return response()->json($obituary);
     }
 
 
@@ -137,21 +137,21 @@ class CampaignController extends Controller
      */
     public function details($uid)
     {
-        $campaign   =   Campaigns::where('uid',$uid)->first();
-        if($campaign){
-            $campaign_id =   $campaign->id;
+        $obituary   =   Obituaries::where('uid',$uid)->first();
+        if($obituary){
+            $obituary_id =   $obituary->id;
             $payments    =   DB::select(" SELECT 
-                                            SUM(campaign_payments.amount) as ttl_amount,
+                                            SUM(obituary_payments.amount) as ttl_amount,
                                             users.name as user_name 
                                          FROM 
-                                            campaign_payments 
-                                         JOIN users on users.id = campaign_payments.user_id 
-                                         where campaign_id = $campaign_id
-                                         GROUP BY  campaign_payments.user_id
-                                         ORDER BY SUM(campaign_payments.amount) DESC 
+                                            obituary_payments 
+                                         JOIN users on users.id = obituary_payments.user_id 
+                                         where obituary_id = $obituary_id
+                                         GROUP BY  obituary_payments.user_id
+                                         ORDER BY SUM(obituary_payments.amount) DESC 
                                          LIMIT 25
                                         ");
-            return view('campaign.details',compact('uid','campaign','payments'));
+            return view('obituary.details',compact('uid','obituary','payments'));
         }
         else{
             abort(404);
@@ -181,7 +181,7 @@ class CampaignController extends Controller
         //
         $todayDate = date('Y-m-d');
         $request->validate([
-            //'uid'               => 'required|string|uid|unique:campaigns',
+            //'uid'               => 'required|string|uid|unique:obituaries',
             'deceased_first_name'=> 'required|string|max:191',
             'deceased_last_name'=> 'required|string|max:191',
             'nric'              => 'required|string|max:191',
@@ -197,7 +197,7 @@ class CampaignController extends Controller
             'surviving_family_relation_description.*'   => 'required|string',
             'message'           => 'required|string',
         ]);
-        $compaign                   =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
+        $compaign                   =  Obituaries::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
         if($compaign){
             $compaign->deceased_first_name  =  $request->deceased_first_name;
             $compaign->deceased_last_name   =  $request->deceased_last_name;
@@ -241,8 +241,8 @@ class CampaignController extends Controller
             $compaign->save();
             return response()->json([
                 'status'   => 'redirect',
-                'url'      =>  route('campaign.show',['id'=>$compaign->uid]),
-                'msg'      =>  'Campaign updated successfully.',
+                'url'      =>  route('obituary.show',['id'=>$compaign->uid]),
+                'msg'      =>  'Obituary updated successfully.',
             ],200);
         }
         else{
@@ -269,15 +269,15 @@ class CampaignController extends Controller
     public function submitForApproval(Request $request, $uid)
     {
         //
-        $compaign               =  Campaigns::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
+        $compaign               =  Obituaries::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
         if($compaign) {
             $compaign->status = 0;
             $compaign->updated_at = date('Y-m-d H:i:s');
             $compaign->save();
             return response()->json([
                 'status' => 'redirect',
-                'url' => route('campaign.show', ['id' => $compaign->uid]),
-                'msg' => 'Campaign submitted successfully for approval.',
+                'url' => route('obituary.show', ['id' => $compaign->uid]),
+                'msg' => 'Obituary submitted successfully for approval.',
             ], 200);
         }
         else{

@@ -17,10 +17,10 @@
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>{{$site->donate_page_header_title ? $site->donate_page_header_title:"Campaign"}}</h1>
+                    <h1>{{$site->donate_page_header_title ? $site->donate_page_header_title:"Obituary"}}</h1>
                 </div>
 {{--                <ul class="bread-crumb clearfix">--}}
-{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">{{$site->donate_page_header_title ? $site->donate_page_header_title:"Campaign"}}</li>--}}
+{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">{{$site->donate_page_header_title ? $site->donate_page_header_title:"Obituary"}}</li>--}}
 {{--                </ul>--}}
             </div>
         </div>
@@ -53,25 +53,25 @@
                                                     <li class="title-ctn__child-input">
                                                         <label class="checkbox-list__checkbox">
                                                             <span class="checkbox-list__lbl-spn" style="margin-left: 0;margin-bottom: 2px">Post Date</span>
-                                                            <input type="text" id="filter_post_date" name="filter_post_date" class="filter-campaigns form-control input-small">
+                                                            <input type="text" id="filter_post_date" name="filter_post_date" class="filter-obituaries form-control input-small">
                                                         </label>
                                                     </li>
                                                     <li class="title-ctn__child-input">
                                                         <label class="checkbox-list__checkbox">
                                                             <span class="checkbox-list__lbl-spn" style="margin-left: 0;margin-bottom: 2px">Name</span>
-                                                            <input type="text"  id="filter_name" name="filter_name"   class="filter-campaigns form-control input-small">
+                                                            <input type="text"  id="filter_name" name="filter_name"   class="filter-obituaries form-control input-small">
                                                         </label>
                                                     </li>
                                                     <li class="title-ctn__child-input">
                                                         <label class="checkbox-list__checkbox">
                                                             <span class="checkbox-list__lbl-spn" style="margin-left: 0;margin-bottom: 2px">ID(last 4 digit)</span>
-                                                            <input type="text"   id="filter_post_nric" name="filter_post_nric"  class=" filter-campaigns form-control input-small">
+                                                            <input type="text"   id="filter_post_nric" name="filter_post_nric"  class=" filter-obituaries form-control input-small">
                                                         </label>
                                                     </li>
                                                     <li class="title-ctn__child-input">
                                                         <label class="checkbox-list__checkbox">
                                                             <span class="checkbox-list__lbl-spn" style="margin-left: 0;margin-bottom: 2px">Year of Born</span>
-                                                            <input type="text"  id="filter_born_year" name="filter_born_year"   class=" filter-campaigns form-control input-small">
+                                                            <input type="text"  id="filter_born_year" name="filter_born_year"   class=" filter-obituaries form-control input-small">
                                                         </label>
                                                     </li>
                                                 </ul>
@@ -81,19 +81,25 @@
                                                 <ul class="checkbox-list causesFilter" data-role="list-show-more">
                                                     <li class="title-ctn__child">
                                                         <label class="checkbox-list__checkbox">
-                                                            <input type="checkbox" value="1" id="sort_by_date" name="sort_by_date" class="filter-campaigns callSearch causesType">
+                                                            <input type="checkbox" value="1" id="sort_by_name" name="sort_by_name" class="filter-obituaries callSearch causesType">
+                                                            <span class="checkbox-list__lbl-spn">Name</span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="title-ctn__child">
+                                                        <label class="checkbox-list__checkbox">
+                                                            <input type="checkbox" value="1" id="sort_by_date" name="sort_by_date" class="filter-obituaries callSearch causesType">
                                                             <span class="checkbox-list__lbl-spn">Date</span>
                                                         </label>
                                                     </li>
                                                     <li class="title-ctn__child">
                                                         <label class="checkbox-list__checkbox">
-                                                            <input type="checkbox" value="1" id="sort_by_age" name="sort_by_age"    class="filter-campaigns callSearch causesType">
+                                                            <input type="checkbox" value="1" id="sort_by_age" name="sort_by_age"    class="filter-obituaries callSearch causesType">
                                                             <span class="checkbox-list__lbl-spn">Age</span>
                                                         </label>
                                                     </li>
                                                     <li class="title-ctn__child">
                                                         <label class="checkbox-list__checkbox">
-                                                            <input type="checkbox" value="1"  id="sort_by_desc" name="sort_by_desc"     class=" filter-campaigns callSearch causesType">
+                                                            <input type="checkbox" value="1"  id="sort_by_desc" name="sort_by_desc"     class=" filter-obituaries callSearch causesType">
                                                             <span class="checkbox-list__lbl-spn">DESC order</span>
                                                         </label>
                                                     </li>
@@ -133,20 +139,21 @@
             var duration = moment.duration(diff);
             return duration.format().replace("-","");
         }
-        function filterCampaign(){
+        function filterObituary(){
+            $('#searchlisting').LoadingOverlay("show");
             $('#resultcount').text(0);
             $.ajax({
                 type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : '/filter-campaigns', // the url where we want to POST
+                url         : '/filter-obituaries', // the url where we want to POST
                 data        : $('#filter-form').serialize(),
                 headers     : {
                     'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (data) {
+                success: function (response) {
                     $('#searchlisting').empty();
-                    if(data.length){
-                        $('#resultcount').text(data.length);
-                        data.forEach(x=>{
+                    if(response.data.length){
+                        $('#resultcount').text(response.data.length);
+                        response.data.forEach(x=>{
                             var age = calAge(moment(x.date_of_birth).format('YYYY-MM-DD'),moment( x.date_of_death).format('YYYY-MM-DD'));
                            $('#searchlisting').append(`<div class="card--flex card">
                                             <div class="card__head">
@@ -180,15 +187,17 @@
                            <a href="javascript:;" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</a>
                                                 </div>
                                                 <div class="card__cta">
-                                                    <a href="/campaign-details/${x.uid}" class="button button--no-bg button--full" >LEARN MORE</a>
+                                                    <a href="/obituary-details/${x.uid}" class="button button--no-bg button--full" >LEARN MORE</a>
                                                 </div>
                                             </div>
                                         </div>`).show('slow');
                         });
+                        $('#searchlisting').LoadingOverlay("hide");
                     }
 
                 },
                 error: function (data) {
+                    $('#searchlisting').LoadingOverlay("hide");
                     $('#searchlisting').empty();
 
                     if(typeof data.responseJSON.errors !== 'undefined'){
@@ -208,23 +217,23 @@
                 format: 'YYYY-MM-DD',
             });
             $("#filter_post_date").on("blur", function() {
-                filterCampaign()
+                filterObituary()
             });
             $('#filter_born_year').datetimepicker({
                 format: 'YYYY',
             })
             $("#filter_born_year").on("blur", function() {
-                filterCampaign()
+                filterObituary()
             });
-            filterCampaign();
+            filterObituary();
         });
-        $(document).on('input','.filter-campaigns',function () {
-            filterCampaign()
+        $(document).on('input','.filter-obituaries',function () {
+            filterObituary()
         })
         $(document).on('click','.js-clear-filters-btn',function () {
-            $('.filter-campaigns').val('');
-            $('.filter-campaigns').prop("checked",false);
-            setTimeout(filterCampaign(),5);
+            $('.filter-obituaries').val('');
+            $('.filter-obituaries').prop("checked",false);
+            setTimeout(filterObituary(),5);
 
         })
 

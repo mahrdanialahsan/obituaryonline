@@ -40,7 +40,7 @@
     <link rel='stylesheet'      href="{{asset('css/dropify.min.css')}}" type="text/css" />
     <link rel='stylesheet'      href="{{asset('toast/toast.style.css')}}" type="text/css" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <style id="charitable-highlight-colour-styles">.campaign-raised .amount,.campaign-figures .amount,.donors-count,.time-left,.charitable-form-field a:not(.button),.charitable-form-fields .charitable-fieldset a:not(.button),.charitable-notice,.charitable-notice .errors a { color:#f89d35; }.campaign-progress-bar .bar,.donate-button,.charitable-donation-form .donation-amount.selected,.charitable-donation-amount-form .donation-amount.selected { background-color:#f89d35; }.charitable-donation-form .donation-amount.selected,.charitable-donation-amount-form .donation-amount.selected,.charitable-notice,.charitable-drag-drop-images li:hover a.remove-image,.supports-drag-drop .charitable-drag-drop-dropzone.drag-over { border-color:#f89d35; }</style>
+    <style id="charitable-highlight-colour-styles">.obituary-raised .amount,.obituary-figures .amount,.donors-count,.time-left,.charitable-form-field a:not(.button),.charitable-form-fields .charitable-fieldset a:not(.button),.charitable-notice,.charitable-notice .errors a { color:#f89d35; }.obituary-progress-bar .bar,.donate-button,.charitable-donation-form .donation-amount.selected,.charitable-donation-amount-form .donation-amount.selected { background-color:#f89d35; }.charitable-donation-form .donation-amount.selected,.charitable-donation-amount-form .donation-amount.selected,.charitable-notice,.charitable-drag-drop-images li:hover a.remove-image,.supports-drag-drop .charitable-drag-drop-dropzone.drag-over { border-color:#f89d35; }</style>
     <style>
         .case-block-two .inner-box .lower-content .info-box li {
             padding-left: 0px !important;
@@ -154,7 +154,7 @@
     {{--                                        <a title="Be a Volunteer" href="{{ route('home') }}" class="hvr-underline-from-left1">Be a Volunteer</a></li>--}}
 
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Fundraise Now" href="{{ route('campaign.create') }}" class="hvr-underline-from-left1">{{$site->fundraise_page_menu_title ? $site->fundraise_page_menu_title:"Fundraise Now"}}</a></li>
+                                            <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a></li>
 
                                     </ul>
                                 </div>
@@ -171,7 +171,7 @@
                                     <a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a>
                                 @else
                                     {{ Auth::user()->name }} |
-                                    <a href="{{ route('campaigns') }}"> {{$site->my_campaigns_title ? $site->my_campaigns_title:"My Campaigns"}} </a> |
+                                    <a href="{{ route('myobituaries') }}"> {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> |
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -204,7 +204,7 @@
                                     <a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a>
                                 @else
                                     {{ Auth::user()->name }} |
-                                    <a href="{{ route('campaigns') }}">  {{$site->my_campaigns_title ? $site->my_campaigns_title:"My Campaigns"}}  </a> |
+                                    <a href="{{ route('myobituaries') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}}  </a> |
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -244,7 +244,7 @@
                             <li><a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a></li>
                         @else
                             <li> {{ Auth::user()->name }} </li>
-                            <li><a href="{{ route('campaigns') }}">  {{$site->my_campaigns_title ? $site->my_campaigns_title:"My Campaigns"}} </a> </li>
+                            <li><a href="{{ route('myobituaries') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> </li>
                             <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="admin-bar"></i> {{ __('Logout') }}
@@ -398,6 +398,7 @@
     </div>
 
     <script src="{{ asset('js/jquery.min.js')}}"></script>
+    <script src="{{ asset('js/loadingoverlay.min.js')}}"></script>
     <script src="{{ asset('js/popper.min431f.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/moment-duration-format.min.js') }}"></script>
@@ -415,6 +416,7 @@
 
 
     <script>
+        $.LoadingOverlay("show");
         $(document).on('click','.donate-popup-button',function () {
              let btn_type   =  $(this).attr('data-cart-btn');
              let uid        =  $(this).attr('uid');
@@ -605,6 +607,7 @@
                     }
                 }
             });
+            $.LoadingOverlay("hide");
         });
     </script>
     @stack('js')

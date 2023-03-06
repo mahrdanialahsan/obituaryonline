@@ -11,7 +11,7 @@
         <table id="datatablesSimple">
             <thead>
             <tr>
-                <th>Campaign</th>
+                <th>Obituary</th>
                 <th>Tran ID</th>
                 <th>Amount</th>
                 <th>Created At</th>
@@ -20,7 +20,7 @@
             <tbody>
             @foreach($payments as $row)
                 <tr>
-                    <td><a target="_blank" href="{{route('campaign.details',['id'=>$row->uid])}}" > {{$row->deceased_first_name}} {{$row->deceased_last_name}}</a></td>
+                    <td><a target="_blank" href="{{route('obituary.details',['id'=>$row->uid])}}" > {{$row->deceased_first_name}} {{$row->deceased_last_name}}</a></td>
                     <td>{{$payment->transaction_id}}</td>
                     <td>{{number_format($row->amount,2)}}$</td>
                     <td>{{date('Y-m-d H:i:s', strtotime($row->created_at))}}</td>

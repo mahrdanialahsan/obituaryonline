@@ -7,16 +7,16 @@
         width: 60px;
     }
 </style>
-{{--    @dd($campaigns);--}}
+{{--    @dd($obituaries);--}}
     <!-- Page Title -->
     <section class="page-title" style="background-image: url('images/12.jpg');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>Campaign</h1>
+                    <h1>Obituary</h1>
                 </div>
 {{--                <ul class="bread-crumb clearfix">--}}
-{{--                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign</li> --}}
+{{--                    <li class="breadcrumb-item"><a href="index.html">Home &nbsp;</a></li><li class="breadcrumb-item">Obituary</li> --}}
 {{--                </ul>--}}
             </div>
         </div>
@@ -26,7 +26,7 @@
 
     <style>
         #enetsqrmodal h2{ font-size: 19px!important; } .creditcard-option { padding: 4px; } button.creditcard-option img { height: 100%; width: auto; } .pad-0-5{ padding: 0px 5px ; } .aui label[for="dobDay"], .aui label[for="dobMonth"] { display: none !important; } div#incorrectRole { padding: 1em; border-radius: 5px; } div#incorrectRole .fa-exclamation { color: #FFFFFF; background-color: #f48291; width: 1.5em; border-radius: 1em; height: 1.5em; background-attachment: fixed; line-height: 1.5em; margin-right: 0.2em; } .creditCardPaymentArea { width: 380px; margin: 0 auto; text-align: initial; display: inline-block; } .cartOptionSection { border: 1px solid #DDD !important; border-radius: 8px !important; border-collapse: separate !important; margin-bottom: 3em !important; } #mailingAddressSection { margin-top: 3em; } .aui .control-group { margin: 0; padding: 0; } .select-control-group.error { border-color: #F16577; } .error.help-block { color: #F16577; } .aui .tab-content { overflow: initial !important; } .aui .pw-vis, .pw-vis { bottom: 7px !important; } .cardTypeImg { height: 50px; width: 50px; border: 1px solid black; display: inline-block; text-align:center; } .cardTypeImg .helper { display: inline-block; height: 100%; vertical-align: middle; margin-left: -0.3em; } .card-number-expiry { display: inline-block; /*height: auto;*/ position: relative; padding-left: 5px; transform: translateY(10%); } label.paymentTokens { line-height: 32px; } .aui .row-fluid [class*="span"] { margin-left: 0; } #userDetails .sod_select { width: 100%; text-transform: none; }
-        #userDetails input, #userDetails .sod_select { text-align: center; display:inline; } a.lnkFaq { color:#17A4E1 !important; text-decoration: underline !important; } .left-col~.right-col { margin-bottom: 1em; } .left-col { text-align: right; padding-right: 1em; line-height: 33px; /*line height of textbox is also specified as 33px*/ } .right-col { text-align: center; } .postallabel { line-height: 70px; } .postalcontainer { line-height: 49px; } .postalcontainer { margin-left:-180px; width: 100%; } .postalcontainer>div { margin-left:180px; line-height: 58px; } .postalcontainer~.btn{ width: 150px; margin: 0; } input[type=checkbox]~label { display: inline; } #user_sal, #parishCode { text-align-last: center; } @media (max-width: 768px) { .left-col { text-align: center; } #user_sal { width: 15em; } } span.check.expired { background-color: #eeeeee !important; } .expiredCampaign { font-size: .875em; font-style: italic; } #donation-details .default, #donation-details .age18, #donation-details .age13 { display:none; } #donation-details .default.active, #donation-details .age18.active, #donation-details .age13.active { display:block; } .radio-pay-type, .radio-pay-token { margin-left : 50px; } .radio-pay-type.active, .radio-pay-token.active { display: block !important; } .creditCardPaymentArea { background-color: #FFF; } .radio-pay-type .small { border-bottom: 0px !important; } .choice-buttons button.no.active { background-color: #F16577 !important; color: #FFF !important; } .choice-buttons button.yes.active { background: #43AD49 !important; color: #FFF !important; } .user-img { width: 40px; height: 40px; } .warning { background: transparent !important; } .active .warning { background-color: rgb(241, 242, 242) !important; } .cartItemSelection div.lbl-warning{ color: #f5866c !important; } #gf-bkt-table { margin-bottom: 20px; } .gf-bkt-table-footer { margin-bottom: 0; } @media (min-width: 56.25rem) { #gf-bkt-table { margin-bottom: 0; } .gf-bkt-table-footer { margin-bottom: 20px; } } #donation-details a { color: #ea2722 }  #donation-details li.active a { color: white!important; } .m-bot20{ margin-bottom:20px !important; } .aui input[type="radio"], .aui input[type="checkbox"] { margin: 0px!important; }
+        #userDetails input, #userDetails .sod_select { text-align: center; display:inline; } a.lnkFaq { color:#17A4E1 !important; text-decoration: underline !important; } .left-col~.right-col { margin-bottom: 1em; } .left-col { text-align: right; padding-right: 1em; line-height: 33px; /*line height of textbox is also specified as 33px*/ } .right-col { text-align: center; } .postallabel { line-height: 70px; } .postalcontainer { line-height: 49px; } .postalcontainer { margin-left:-180px; width: 100%; } .postalcontainer>div { margin-left:180px; line-height: 58px; } .postalcontainer~.btn{ width: 150px; margin: 0; } input[type=checkbox]~label { display: inline; } #user_sal, #parishCode { text-align-last: center; } @media (max-width: 768px) { .left-col { text-align: center; } #user_sal { width: 15em; } } span.check.expired { background-color: #eeeeee !important; } .expiredObituary { font-size: .875em; font-style: italic; } #donation-details .default, #donation-details .age18, #donation-details .age13 { display:none; } #donation-details .default.active, #donation-details .age18.active, #donation-details .age13.active { display:block; } .radio-pay-type, .radio-pay-token { margin-left : 50px; } .radio-pay-type.active, .radio-pay-token.active { display: block !important; } .creditCardPaymentArea { background-color: #FFF; } .radio-pay-type .small { border-bottom: 0px !important; } .choice-buttons button.no.active { background-color: #F16577 !important; color: #FFF !important; } .choice-buttons button.yes.active { background: #43AD49 !important; color: #FFF !important; } .user-img { width: 40px; height: 40px; } .warning { background: transparent !important; } .active .warning { background-color: rgb(241, 242, 242) !important; } .cartItemSelection div.lbl-warning{ color: #f5866c !important; } #gf-bkt-table { margin-bottom: 20px; } .gf-bkt-table-footer { margin-bottom: 0; } @media (min-width: 56.25rem) { #gf-bkt-table { margin-bottom: 0; } .gf-bkt-table-footer { margin-bottom: 20px; } } #donation-details a { color: #ea2722 }  #donation-details li.active a { color: white!important; } .m-bot20{ margin-bottom:20px !important; } .aui input[type="radio"], .aui input[type="checkbox"] { margin: 0px!important; }
     </style>
     <div class="section-page pad-navbar" id="donation-details">
         <div class=" auto-container gf" id="gf-bkt-wrapper">
@@ -61,7 +61,7 @@
                         <table class="table gf-bkt" id="gf-bkt-table">
                             <thead>
                             <tr>
-                                <td  width="40%">Campaign</td>
+                                <td  width="40%">Obituary</td>
                                 <td  >Eligibility for <br> Tax Deduction</td>
                                 <td width="30%" colspan="2">Donation <br class="hidden-phone"> Amount</td>
                             </tr>

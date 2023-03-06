@@ -3268,8 +3268,8 @@ html, body {
 .ico-donation-raised-db {
   background-image: url("../images/ic-donation-raised-db.svg"); }
 
-.ico-fundraise-db {
-  background-image: url("../images/ic-fundraise-db.svg"); }
+.ico-obituary-db {
+  background-image: url("../images/ic-obituary-db.svg"); }
 
 .ico-volunteer-db {
   background-image: url("../images/ic-volunteer-db.svg"); }
@@ -3937,7 +3937,7 @@ select::-ms-expand {
   margin-left: -70px;
   font-weight: 700; }
 
-/* scss/minitheory/molecules/_campaign-stats.scss */
+/* scss/minitheory/molecules/_obituary-stats.scss */
 .progress-ov--white {
   color: #FFFFFF; }
 
@@ -3951,7 +3951,7 @@ select::-ms-expand {
 .progress-ov .progress-ov__stats--right {
   float: right; }
 
-.campaign-stats button {
+.obituary-stats button {
   display: block; }
 
 .more-days {
@@ -10912,7 +10912,7 @@ form {
 .impact-message-section .error-msg ~ .error-msg, .impact-msg .error-msg ~ .error-msg {
   display: none !important; }
 
-/* To break URL and other details in campaign or NPO profile. word-break is not cross platform (does not work for IE 11) */
+/* To break URL and other details in obituary or NPO profile. word-break is not cross platform (does not work for IE 11) */
 .company-profile__causes-contact .accordion-card__body div.mb-16,
 .volunteer-event__causes-contact .accordion-card__body div.mb-16 {
   display: flex; }
@@ -10978,7 +10978,7 @@ div#_125_password {
 #searchText:after {
 	clear: both;
 }
-#_managecampaigns_WAR_givingsgportlet_searchTerm{
+#_manageobituaries_WAR_givingsgportlet_searchTerm{
 	float: left;
     width: 100%;
     margin-left: -36px;
@@ -11003,7 +11003,7 @@ div#_125_password {
 .volunteer-listing .flex-ctn--dir-col-tablet-portrait-up-row, .aui .flex-ctn--dir-col-tablet-portrait-up-row {
   position: relative; }
 
-#portlet_managecampaigns_WAR_givingsgportlet #searchText, #portlet_managecampaigns_WAR_givingsgportlet #searchText input[type="text"] {
+#portlet_manageobituaries_WAR_givingsgportlet #searchText, #portlet_manageobituaries_WAR_givingsgportlet #searchText input[type="text"] {
   margin-right: 0;
   width: 100%; }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCampaignPaymentsTable extends Migration
+class CreateObituaryPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCampaignPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('campaign_payments', function (Blueprint $table) {
+        Schema::create('obituary_payments', function (Blueprint $table) {
             $table->id();
             $table->integer('payment_id');
             $table->integer('user_id');
-            $table->string('campaign_id');
+            $table->string('obituary_id');
             $table->double('amount');
             $table->string('currency');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateCampaignPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campaign_payments');
+        Schema::dropIfExists('obituary_payments');
     }
 }

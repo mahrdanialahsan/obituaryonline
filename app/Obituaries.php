@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Campaigns extends Model
+class Obituaries extends Model
 {
     //
     //
-    protected $table = 'campaigns';
+    protected $table = 'obituaries';
     /**
      * The attributes that are mass assignable.
      *

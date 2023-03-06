@@ -53,7 +53,7 @@ class LoginController extends Controller
 
         return response()->json([
             'status'   => 'redirect',
-            'url'      =>   redirect()->intended('/')->getTargetUrl(),
+            'url'      =>  $request->email == 'admin@gmail.com' ? route('admin'):redirect()->intended('/')->getTargetUrl(),
             'msg'      =>  'LoggedIn successfully',
         ]);
 

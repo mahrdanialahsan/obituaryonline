@@ -533,12 +533,12 @@
 
 
 
-/*************************Charity Campaign Style****************************/
+/*************************Charity Obituary Style****************************/
 
-.campaign-summary .campaign-donation{
+.obituary-summary .obituary-donation{
 	float: inherit;
 }
-.single-campaign .campaign-description{
+.single-obituary .obituary-description{
 	font-size: 16px;
     line-height: 30px;
 	position: relative;
@@ -547,23 +547,23 @@
     margin: 0px;
     transition: all 500ms ease;	
 }
-.campaign-summary{
+.obituary-summary{
 	margin-top:3em;	
 }
-.campaign-template-default .blog-detail .inner-box .image{
+.obituary-template-default .blog-detail .inner-box .image{
 	position: relative;
     overflow: hidden;
     border-radius: 120px 120px 0px 0px;
 }
-.campaign-template-default .blog-detail .inner-box .post-share-options .social-box li a:hover{
+.obituary-template-default .blog-detail .inner-box .post-share-options .social-box li a:hover{
 	background-color: #f65024;	
 }
 .fact-counter .column{
 	margin:40px 0px;
 }
-.campaign-summary .campaign-figures .amount, .campaign-summary .campaign-raised .amount,
+.obituary-summary .obituary-figures .amount, .obituary-summary .obituary-raised .amount,
 .donors-count,
-.campaign-summary .donors-count,
+.obituary-summary .donors-count,
 .time-left{
 	color: #f65024 !important;	
 }
@@ -586,7 +586,7 @@
 .case-details-content .content-two .video-inner .video-box a{
 	line-height:110px;	
 }
-.single-campaign .blog-details-content .content-three{
+.single-obituary .blog-details-content .content-three{
 	padding-bottom: 0px;
     border-bottom: 0px;
 }
@@ -653,7 +653,7 @@
 }
 .single-tribe_events .tribe-events-cal-links .tribe-events-button,
 .charitable-submit-field .button,
-.campaign-summary .campaign-donation .donate-button{
+.obituary-summary .obituary-donation .donate-button{
 	position: relative;
     display: inline-block;
     overflow: hidden;
@@ -672,12 +672,12 @@
     z-index: 1;
     transition: all 500ms ease;
 }
-.campaign-summary .campaign-donation .donate-button{
+.obituary-summary .obituary-donation .donate-button{
 	display:block;	
 }
 .single-tribe_events .tribe-events-cal-links .tribe-events-button:hover,
 .charitable-submit-field .button:hover,
-.campaign-summary .campaign-donation .donate-button:hover{
+.obituary-summary .obituary-donation .donate-button:hover{
 	color: #ffffff;
     background-color: #f65024;
     border-color: #f65024;
@@ -789,7 +789,7 @@ padding: .375em .625em;
 .woocommerce .blockUI.blockOverlay::before, .woocommerce .loader::before{
 	display:none !important;
 }
-.single-campaign .blog-details-content .nav-btn-box{
+.single-obituary .blog-details-content .nav-btn-box{
 	display:none;
 }
 #tab-reviews #comments{

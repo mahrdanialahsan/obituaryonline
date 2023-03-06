@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaigns;
+use App\Obituaries;
 use Illuminate\Http\Request;
 use Session;
 
@@ -22,7 +22,7 @@ class AddToCartController extends Controller
         $donations          =   [];
         if(Session::has('cart_items')){
             $cart           =   Session::get('cart_items');
-            $donations      =   Campaigns::whereIn('uid',array_keys($cart))->get();
+            $donations      =   Obituaries::whereIn('uid',array_keys($cart))->get();
         }
         if(@Auth()->user()->is_admin == 1){
             return redirect(url('/'));
@@ -37,7 +37,7 @@ class AddToCartController extends Controller
         $donations          =   [];
         if(Session::has('cart_items')){
             $cart           =   Session::get('cart_items');
-            $donations      =   Campaigns::whereIn('uid',array_keys($cart))->get();
+            $donations      =   Obituaries::whereIn('uid',array_keys($cart))->get();
         }
         $data   =    [
                         'cart'       => $cart,

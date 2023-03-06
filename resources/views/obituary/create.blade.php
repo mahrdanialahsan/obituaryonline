@@ -14,14 +14,14 @@
         }
     </style>
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->fundraise_page_cover_image)) ?  url('storage/site_settings/'.$site->fundraise_page_cover_image): asset('images/12.png')}});">
+    <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->obituary_page_cover_image)) ?  url('storage/site_settings/'.$site->obituary_page_cover_image): asset('images/12.png')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>{{$site->fundraise_page_header_title ? $site->fundraise_page_header_title:"Campaign"}}</h1>
+                    <h1>{{$site->obituary_page_header_title ? $site->obituary_page_header_title:"Obituary"}}</h1>
                 </div>
 {{--                <ul class="bread-crumb clearfix">--}}
-{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">Campaign--}}
+{{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">Obituary--}}
 {{--                    </li> --}}
 {{--                </ul>--}}
             </div>
@@ -39,15 +39,15 @@
                     <div class="blog-list-content">
                         <div class="thm-unit-test">
                             <div class="hero-container hero-container--light-grey hero-container--auto-w create-volunteer-act__head pad-navbar">
-                                <h2 class="h2 create-volunteer-act__title">{{$site->fundraise_page_campaign_title ? $site->fundraise_page_campaign_title:"Start a fundraising campaign"}}</h2>
+                                <h2 class="h2 create-volunteer-act__title">{{$site->obituary_page_obituary_title ? $site->obituary_page_obituary_title:"Start a fundraising obituary"}}</h2>
 {{--                                <div class="mobile-title m-top20 centered visible-phone">--}}
-{{--                                    <span class="small breakword">Start a fundraising campaign</span>--}}
+{{--                                    <span class="small breakword">Start a fundraising obituary</span>--}}
 {{--                                </div>--}}
                                 <div class="ctn-1200">
                                     <div class="create-volunteer-act__hero-ctn hero-container__body hero-container__body--no-pad hero-container__body--auto relative js-bcrumb bcrumb bcrumb--grey-back bcrumb--center js-create-volunteer-act__bcrumb">
                                         <div tab="1" id="tab-nav-1" class="js-bcrumb__child bcrumb__child bcrumb__child--responsive bcrumb__child is-active">
                                             <span class="bcrumb__number">1</span>
-                                            <p class="roboto-font">Enter campaign details</p></div>
+                                            <p class="roboto-font">Enter obituary details</p></div>
                                         <div tab="2" id="tab-nav-2" class="js-bcrumb__child bcrumb__child bcrumb__child--responsive bcrumb__child">
                                             <span class="bcrumb__number">2</span>
                                             <p class="roboto-font">Submit for approval</p>
@@ -55,12 +55,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="post" name="campaign-form" id="campaign-form" action="{{ !empty($uid) ? route('campaign.update',['id'=>$uid]):route('campaign.store')}}" novalidate="novalidate">
+                            <form method="post" name="obituary-form" id="obituary-form" action="{{ !empty($uid) ? route('obituary.update',['id'=>$uid]):route('obituary.store')}}" novalidate="novalidate">
                                 @csrf
                                 <div class="ctn-1200" id="">
                                     <div data-role="page-holder" class="rounded-card rounded-card--no-pad rounded-card--light-shadow rounded-card--height-auto rounded-card--full create-volunteer-act__main js-create-volunteer-act__main" >
                                         <div id="tab-page-1" style ="display: none;" class="rounded-card__body rounded-card__body--responsive js-create-volunteer-act__page js-create-volunteer-act__page--1" data-role="page" >
-                                            <h3 class="h3 font-dark-grey">{{$site->fundraise_page_form_title ? $site->fundraise_page_form_title:"Deceased Information"}}</h3>
+                                            <h3 class="h3 font-dark-grey">{{$site->obituary_page_form_title ? $site->obituary_page_form_title:"Deceased Information"}}</h3>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_first_name">First Name </label>
                                                 <input type="text" name="deceased_first_name" id="deceased_first_name"  class="form-control field-required input txtOnly">
@@ -133,12 +133,12 @@
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_picture">Deceased Picture</label>
-                                                <input data-default-file="{{!empty($campaign) ?  url('storage/deceased_picture/'.$campaign->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
+                                                <input data-default-file="{{!empty($obituary) ?  url('storage/deceased_picture/'.$obituary->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
 
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="death_certificate">Death Certificate</label>
-                                                <input data-default-file="{{!empty($campaign) ?  url('storage/death_certificate/'.$campaign->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
+                                                <input data-default-file="{{!empty($obituary) ?  url('storage/death_certificate/'.$obituary->death_certificate): ''}}"  accept="application/pdf" type="file" name="death_certificate" id="death_certificate" class="form-control dropify field-required file">
 
                                             </div>
                                             <div class="row">
@@ -175,7 +175,7 @@
                                                 <textarea   name="poa_wills" id="poa_wills"    class="form-control field-required textarea"></textarea>
                                             </div>
                                             <div class="input-ctrl">
-                                                <label class="lbl" for="message">About Campaign </label>
+                                                <label class="lbl" for="message">About Obituary </label>
                                                 <textarea   name="message" id="message"    class="form-control field-required textarea"></textarea>
                                             </div>
                                         </div>
@@ -183,23 +183,23 @@
                                             <h3 class="h3 font-dark-grey">One last look and we're off!</h3>
                                             <h3 class="h3 font-dark-grey">Please confirm you'd like to submit for approval.</h3>
                                             <div class="input-ctrl" style="margin-top: 10px">
-                                                <label class="lbl" style="text-align: justify">Once submitted, you can edit this and any other campaigns, on the "My Campaigns" page.</label>
+                                                <label class="lbl" style="text-align: justify">Once submitted, you can edit this and any other obituaries, on the "My Obituaries" page.</label>
                                             </div>
                                             <br/>
                                             <hr>
                                             <br/>
                                             <div class="input-ctrl">
                                                 <p class="lbl" style="text-align: justify">
-                                                    By submitting, I declare that this campaign is to raise funds for local charitable purposes only, and that I am aware of, and abide by the requirements under the Charities Act of Singapore (Chapter 37), including the
+                                                    By submitting, I declare that this obituary is to raise funds for local charitable purposes only, and that I am aware of, and abide by the requirements under the Charities Act of Singapore (Chapter 37), including the
                                                     Charities (Fund-raising appeals for <a href="https://www.charities.gov.sg/Pages/Fund-Raising/Types-of-FR-Permits/Fund-Raising-for-Local-Charitable-Purposes.aspx#" target="_blank">Local</a> &amp; <a href="https://www.charities.gov.sg/Pages/Fund-Raising/Types-of-FR-Permits/Fund-Raising-for-Foreign-Charitable-Purposes.aspx#" target="_blank">Foreign</a> Charitable Purposes) Regulations.
                                                 </p>
                                             </div>
                                             <br/>
                                         </div>
                                         <div class="create-volunteer-act__footer" style="margin-top: 1px" id="">
-                                            <button tab="1" class="button button--135 button--large m-top10 js-create-campaign-act__next button-page-next" id="tab-next-btn" type="button">SUBMIT</button>
+                                            <button tab="1" class="button button--135 button--large m-top10 js-create-obituary-act__next button-page-next" id="tab-next-btn" type="button">SUBMIT</button>
                                             @if(!empty($uid))
-                                                <button class="button button--135 button--large save-for-approval m-top10 js-create-campaign-act__next button-page-next" id="submit-btn" style="display: none" type="button" onclick="submitForm('campaign-approval-form')">CONFIRM SUBMISSION</button>
+                                                <button class="button button--135 button--large save-for-approval m-top10 js-create-obituary-act__next button-page-next" id="submit-btn" style="display: none" type="button" onclick="submitForm('obituary-approval-form')">CONFIRM SUBMISSION</button>
 
                                             @endif
                                         </div>
@@ -215,7 +215,7 @@
         </div>
     </section>
     @if(!empty($uid))
-        <form method="post" id="campaign-approval-form" action="{{route('campaign.submit.approval',['id'=>$uid])}}" style="display: none">
+        <form method="post" id="obituary-approval-form" action="{{route('obituary.submit.approval',['id'=>$uid])}}" style="display: none">
             @csrf
         </form>
     @endif
@@ -254,7 +254,7 @@
         var base_url = '{{url('/')}}';
         function setValue(){
             @if(!empty($uid))
-                $.get("/campaign/get/{!! $uid !!}").done(function(response){
+                $.get("/obituary/get/{!! $uid !!}").done(function(response){
 
                     $('#deceased_first_name').val(response.deceased_first_name);
                     $('#deceased_last_name').val(response.deceased_last_name);
@@ -324,7 +324,7 @@
 
             if( tab == 1 ){
                 if(checkRequiredFileds(tab)){
-                    submitForm('campaign-form');
+                    submitForm('obituary-form');
                 }
 
             }else{

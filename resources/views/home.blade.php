@@ -98,7 +98,7 @@
                                 <div class="elementor-widget-container">
 
                                     <!-- case-style-two -->
-                                    <section class="case-style-two sec-pad">
+                                    <section class="case-style-two sec-pad1">
                                         <div class="pattern-layer"><br><br>
                                             <div class="pattern-1" style="background-image: url({{asset('images/shape-33.png')}});"></div>
                                             <div class="pattern-2" style="background-image: url({{asset('images/shape-34.png')}});"></div>
@@ -109,7 +109,7 @@
                                                 <div class="row align-items-center clearfix">
                                                     <div class="col-lg-6 col-md-12 col-sm-12 title-column">
                                                         <div class="sec-title style-two">
-                                                            <span class="top-text">{{$site->home_page_title_short_title ? $site->home_page_title_short_title:"Our Global Causes"}}</span>
+                                                            <span class="top-text">{{$site->home_page_title_short_title ? $site->home_page_title_short_title:"Today’s obituary"}}</span>
                                                             <h2>{{$site->home_page_title_long_title ? $site->home_page_title_long_title:"Spread Joy with a Donation"}}</h2>
                                                         </div>
                                                     </div>
@@ -121,40 +121,34 @@
                                                 </div>
                                             </div>
                                             <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">
-                                                @foreach($campaigns as $campaign)
+                                                @foreach($todayobituaries as $obituary)
                                                 <div class="case-block-two">
                                                     <div class="inner-box">
                                                         <div class="image-box">
-                                                            <figure class="image"><img width="570" height="420" src="{{url('storage/deceased_picture/'.$campaign->deceased_picture)}}"/></figure>
-                                                            @if($campaign->public_donation == 1 || $campaign->created_by == auth()->id())
+                                                            <figure class="image"><img width="570" height="420" src="{{url('storage/deceased_picture/'.$obituary->deceased_picture)}}"/></figure>
+                                                            @if($obituary->public_donation == 1 || $obituary->created_by == auth()->id())
                                                             <div class="percentage-box">
                                                                 <div class="bar">
                                                                     <div class="bar-inner count-bar counted" data-percent="50%"> <div class="count-box"><span class="count-text" data-speed="2500" data-stop="50">0</span>%</div></div>
                                                                 </div>
-                                                                <div class="count-text"><span class="amount">&#036;{{$campaign->total_donation}}</span> donated of <span class="goal-amount">&#036;50,000.00</span> goal</div>
+                                                                <div class="count-text"><span class="amount">&#036;{{$obituary->total_donation}}</span> donated of <span class="goal-amount">&#036;50,000.00</span> goal</div>
                                                             </div>
                                                             @endif
                                                         </div>
                                                         <div class="lower-content">
                                                             <div class="text">
-                                                                <div class="category">{{$site->home_page_campaign_slider_title ? $site->home_page_campaign_slider_title:"Our Causes"}} </div>
-                                                                <h3><a href="{{route('campaign.details',['id'=>$campaign->uid])}}">{{$campaign->deceased_first_name}} {{$campaign->deceased_last_name}}</a></h3>
-                                                                <p>{!! substr($campaign->message, 0, 131) !!}{{strlen($campaign->message)>130 ? '...':''}}</p>
+                                                                <div class="category">{{$site->home_page_obituary_slider_title ? $site->home_page_obituary_slider_title:"Our Causes"}} </div>
+                                                                <h3><a href="{{route('obituary.details',['id'=>$obituary->uid])}}">{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</a></h3>
+                                                                <p>{!! substr($obituary->message, 0, 131) !!}{{strlen($obituary->message)>130 ? '...':''}}</p>
                                                             </div>
                                                             <ul class="info-box clearfix">
                                                                 <li>
                                                                     <i class="fa fa-calendar"></i>
-                                                                    <h5>Date:<small> {{date('M d, Y',strtotime($campaign->created_at))}} </small></h5>
+                                                                    <h5>Date:<small> {{date('M d, Y',strtotime($obituary->created_at))}} </small></h5>
                                                                 </li>
                                                                 <li>
-                                                                    @php
-                                                                        $dateOfBirth = $campaign->date_of_birth;
-                                                                        $dob = new DateTime($dateOfBirth);
-                                                                        $now = new DateTime();
-                                                                        $diff = $now->diff($dob);
-                                                                    @endphp
                                                                     <i class="fa fa-users"></i>
-                                                                    <h5>Age: <small>{{ $diff->y > 0 ? $diff->y." Years ":($diff->m > 0 ? $diff->m." Months ":($diff->d > 0 ? $diff->d." Days":'1 Day'))}}</small></h5>
+                                                                    <h5>Age: <small>{{getAge($obituary->date_of_birth,$obituary->date_of_death)}}</small></h5>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -173,6 +167,16 @@
                 </div>
             </section>
 
+
+            <section class="elementor-section mt-15 mb-15">
+                <div class="elementor-container elementor-column-gap-default">
+                    <div class="elementor-column">
+                        <div class="row">
+                            <div class="col text-center mb-15"><a class="button" style="background-color: #EA2722;border:2px #EA2722 solid" href="{{route('obituaries')}}"> See all Archives </a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 {{--            <section class="elementor-section">--}}
 {{--                <div class="elementor-container elementor-column-gap-default">--}}
@@ -207,8 +211,6 @@
 {{--                                                        </div>--}}
 {{--                                                    </div>--}}
 {{--                                                </div>--}}
-
-
 {{--                                                <div class="col-lg-4 col-md-6 col-sm-12 welcome-block">--}}
 {{--                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
 {{--                                                        <div class="inner-box">--}}
@@ -227,8 +229,6 @@
 {{--                                                        </div>--}}
 {{--                                                    </div>--}}
 {{--                                                </div>--}}
-
-
 {{--                                                <div class="col-lg-4 col-md-6 col-sm-12 welcome-block">--}}
 {{--                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
 {{--                                                        <div class="inner-box">--}}
@@ -236,7 +236,7 @@
 {{--                                                            <div class="content-box">--}}
 {{--                                                                <div class="shape" style="background-image: url(images/shape-32.png);"></div><div class="text">--}}
 {{--                                                                    <span>Join With Us</span>--}}
-{{--                                                                    <h2>Fundraise</h2>--}}
+{{--                                                                    <h2>Obituary</h2>--}}
 {{--                                                                </div>--}}
 {{--                                                            </div>--}}
 {{--                                                            <div class="btn-box">--}}
@@ -259,6 +259,7 @@
 {{--            </section>--}}
 
 
+
             <section class="elementor-section elementor-top-section elementor-element elementor-element-1cb8d88 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="1cb8d88" data-element_type="section">
                 <div class="elementor-container elementor-column-gap-default">
                     <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0d8bb58" data-id="0d8bb58" data-element_type="column">
@@ -279,7 +280,7 @@
                                                         <div class="inner-box">
                                                             <div class="icon-box"><i class="icon-charity"></i></div>
                                                             <div class="count-outer count-box">
-                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->count()}}">{{collect($campaigns)->count()}}</span><span></span>
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($obituaries)->count()}}">{{collect($obituaries)->count()}}</span><span></span>
                                                             </div>
                                                             <h4>Obituary</h4>
                                                         </div>
@@ -289,7 +290,7 @@
                                                     <div class="funfact-block-one wow slideInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms"><div class="inner-box">
                                                             <div class="icon-box"><i class="icon-donation-1"></i></div>
                                                             <div class="count-outer count-box">
-                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->where('total_donation','>',0)->count()}}">{{collect($campaigns)->where('total_donation','>',0)->count()}}</span>
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($obituaries)->where('total_donation','>',0)->count()}}">{{collect($obituaries)->where('total_donation','>',0)->count()}}</span>
                                                             </div>
                                                             <h4>Family helped</h4>
                                                         </div>
@@ -300,7 +301,7 @@
                                                         <div class="inner-box">
                                                             <div class="icon-box"><i class="icon-donation"></i></div>
                                                             <div class="count-outer count-box">
-                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($campaigns)->sum('total_donation')}}">{{collect($campaigns)->sum('total_donation')}}</span><span>$</span>
+                                                                <span class="count-text" data-speed="1500" data-stop="{{collect($obituaries)->sum('total_donation')}}">{{collect($obituaries)->sum('total_donation')}}</span><span>$</span>
                                                             </div>
                                                             <h4>Fund Raised</h4>
                                                         </div>

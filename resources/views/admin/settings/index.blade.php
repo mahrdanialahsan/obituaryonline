@@ -20,8 +20,8 @@
                     </div>
                     <div class="col-md-6  mb-3">
                         <div class="form-floating mb-3 mb-md-0">
-                            <input  value="{{$site->my_campaigns_title}}"  class="form-control" id="my_campaigns_title" name="my_campaigns_title" type="text" placeholder="My Campaigns Title" required11 />
-                            <label for="my_campaigns_title">My Campaigns Title on Top Bar left Side</label>
+                            <input  value="{{$site->my_obituaries_title}}"  class="form-control" id="my_obituaries_title" name="my_obituaries_title" type="text" placeholder="My Obituaries Title" required11 />
+                            <label for="my_obituaries_title">My Obituaries Title on Top Bar left Side</label>
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <h3> Stripe Leys</h3>
+                    <h3> Stripe Keys</h3>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating  mb-3">
                             <input  value="{{$site->stripe_key}}"  class="form-control" id="stripe_key" name="stripe_key" type="text" placeholder="pk_test_AGasvfU4csIh1Cbhk2TFfLEJ00uLFx1vrg" required11 />
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->home_page_title_short_title}}"  class="form-control" id="home_page_title_short_title" name="home_page_title_short_title" type="text" placeholder="Our Global Causes" required11 />
+                            <input  value="{{$site->home_page_title_short_title}}"  class="form-control" id="home_page_title_short_title" name="home_page_title_short_title" type="text" placeholder="Today’s obituary" required11 />
                             <label for="home_page_title_short_title">Short Title</label>
                         </div>
                     </div>
@@ -104,14 +104,36 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->home_page_campaign_slider_title}}"  class="form-control" id="home_page_campaign_slider_title" name="home_page_campaign_slider_title" type="text" placeholder="Our Causes" required11 />
-                            <label for="home_page_campaign_slider_title">Campaign Slider Title</label>
+                            <input  value="{{$site->home_page_obituary_slider_title}}"  class="form-control" id="home_page_obituary_slider_title" name="home_page_obituary_slider_title" type="text" placeholder="Our Causes" required11 />
+                            <label for="home_page_obituary_slider_title">Obituary Slider Title</label>
                         </div>
                     </div>
                     <div class="col-md-12 mb-3">
                         <div class="form-floating">
                             <textarea class="form-control" id="home_page_title_short_description" name="home_page_title_short_description" type="text" required11 placeholder="Ever undertakes laborious physical exercise except obtain some advantage from it but who has any right to find." > {{$site->home_page_title_short_description}} </textarea>
                             <label for="home_page_title_short_description">Title Short Description</label>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input  value="{{$site->pure_heart_title}}"  class="form-control" id="pure_heart_title" name="pure_heart_title" type="text" placeholder="Our Causes" required11 />
+                            <label for="pure_heart_title">Pure Heart Title</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input  value="{{$site->pure_large_title}}"  class="form-control" id="pure_large_title" name="pure_large_title" type="text" placeholder="Our Causes" required11 />
+                            <label for="pure_large_title">Pure Heart Large Title</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input  value="{{$site->pure_small_description}}"  class="form-control" id="pure_small_description" name="pure_small_description" type="text" placeholder="Our Causes" required11 />
+                            <label for="pure_small_description">Pure Heart small Description</label>
                         </div>
                     </div>
                 </div>
@@ -182,36 +204,36 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <h3> Fundraise Now</h3>
+                    <h3> Post obituary</h3>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->fundraise_page_menu_title}}"  class="form-control"  id="fundraise_page_menu_title" name="fundraise_page_menu_title"  type="text" placeholder="Fundraise Now" required11 />
-                            <label for="fundraise_page_menu_title"> Menu Title</label>
+                            <input  value="{{$site->obituary_page_menu_title}}"  class="form-control"  id="obituary_page_menu_title" name="obituary_page_menu_title"  type="text" placeholder="Post obituary" required11 />
+                            <label for="obituary_page_menu_title"> Menu Title</label>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->fundraise_page_header_title}}"  class="form-control"  id="fundraise_page_header_title" name="fundraise_page_header_title" type="text" placeholder="Fundraising Campaign" required11 />
-                            <label for="fundraise_page_header_title"> Header Title</label>
+                            <input  value="{{$site->obituary_page_header_title}}"  class="form-control"  id="obituary_page_header_title" name="obituary_page_header_title" type="text" placeholder="Fundraising Obituary" required11 />
+                            <label for="obituary_page_header_title"> Header Title</label>
                         </div>
                     </div>
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
-                            <label for="fundraise_page_cover_image"> Header Cover Image</label>
-                            <input  value="{{$site->fundraise_page_cover_image}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->fundraise_page_cover_image)) ?  url('storage/site_settings/'.$site->fundraise_page_cover_image): asset('images/12.jpg')}}"  id="fundraise_page_cover_image" name="fundraise_page_cover_image" type="file"  />
+                            <label for="obituary_page_cover_image"> Header Cover Image</label>
+                            <input  value="{{$site->obituary_page_cover_image}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->obituary_page_cover_image)) ?  url('storage/site_settings/'.$site->obituary_page_cover_image): asset('images/12.jpg')}}"  id="obituary_page_cover_image" name="obituary_page_cover_image" type="file"  />
 
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->fundraise_page_campaign_title}}"  class="form-control"  id="fundraise_page_campaign_title" name="fundraise_page_campaign_title" type="text" placeholder="Start a fundraising campaign" required11 />
-                            <label for="fundraise_page_campaign_title"> Campaign Title</label>
+                            <input  value="{{$site->obituary_page_obituary_title}}"  class="form-control"  id="obituary_page_obituary_title" name="obituary_page_obituary_title" type="text" placeholder="Start a fundraising obituary" required11 />
+                            <label for="obituary_page_obituary_title"> Obituary Title</label>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating">
-                            <input  value="{{$site->fundraise_page_form_title}}"  class="form-control"  id="fundraise_page_form_title" name="fundraise_page_form_title" type="text" placeholder="Deceased Information" required11 />
-                            <label for="fundraise_page_form_title"> Campaign Form Title</label>
+                            <input  value="{{$site->obituary_page_form_title}}"  class="form-control"  id="obituary_page_form_title" name="obituary_page_form_title" type="text" placeholder="Deceased Information" required11 />
+                            <label for="obituary_page_form_title"> Obituary Form Title</label>
                         </div>
                     </div>
                 </div>

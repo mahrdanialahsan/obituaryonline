@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CampaignPayments;
-use App\Campaigns;
+use App\ObituaryPayments;
+use App\Obituaries;
 use App\Payments;
 use App\SiteSettings;
 use Illuminate\Http\Request;
@@ -65,17 +65,17 @@ class StripeCheckoutController extends Controller
 
                     $items   =   json_decode($data['metadata']['cart_items'],true);
                     foreach ($items as $uid=>$amount){
-                        $campaign   =   Campaigns::where('uid',$uid)->first();
-                        CampaignPayments::insertGetId([
+                        $obituary   =   Obituaries::where('uid',$uid)->first();
+                        ObituaryPayments::insertGetId([
                             'user_id'          =>  Auth::user()->id,
                             'payment_id'   =>  $payment_id,
-                            'campaign_id'  =>  $campaign->id,
+                            'obituary_id'  =>  $obituary->id,
                             'amount'       =>  $amount,
                             'currency'     =>  $data['currency'],
                             'created_at'   =>  date("Y-m-d H:i:s"),
                         ]);
-                        $campaign->total_donation   =   $campaign->total_donation+$amount;
-                        $campaign->save();
+                        $obituary->total_donation   =   $obituary->total_donation+$amount;
+                        $obituary->save();
                     }
                     Session::put('cart_items', []);
                     Session::flash('success', 'Payment successfully paid.!');

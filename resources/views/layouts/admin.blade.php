@@ -67,9 +67,9 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Slider
                     </a>
-                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.campaign') ? 'active':''}}" href="{{route('admin.campaigns')}}">
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.obituary') ? 'active':''}}" href="{{route('admin.obituaries')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Campaigns
+                        Obituaries
                     </a>
                     <a class="nav-link {{Route::currentRouteName() == 'admin.subscriptions' ? 'active':''}}" href="{{route('admin.subscriptions')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

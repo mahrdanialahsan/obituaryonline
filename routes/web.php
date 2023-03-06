@@ -23,7 +23,6 @@ Route::get('/cache-clear', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 //    \Illuminate\Support\Facades\Artisan::call('route:cache');
     \Illuminate\Support\Facades\Artisan::call('view:cache');
-    \Illuminate\Support\Facades\Artisan::call('storage:link');
     dd('done');
 });
 Route::get('/storage-link', function (){
@@ -36,22 +35,24 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/obituaries', 'HomeController@obituaries')->name('obituaries');
+Route::get('/load-obituaries/{limit}/{offset}', 'HomeController@loadObituaries')->name('obituaries.load');
 Route::group(['middleware' => ['auth']], function () {
 //    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
-    Route::get('/campaign/create', 'CampaignController@create')->name('campaign.create');
-    Route::post('/campaign', 'CampaignController@store')->name('campaign.store');
-    Route::get('/campaign/{id}', 'CampaignController@show')->name('campaign.show');
-    Route::get('/campaign/get/{id}', 'CampaignController@get')->name('campaign.get');
-    Route::post('/campaign/{id}/update', 'CampaignController@update')->name('campaign.update');
-    Route::post('/campaign/{id}/submit/approval', 'CampaignController@submitForApproval')->name('campaign.submit.approval');
+    Route::get('/myobituaries', 'ObituaryController@index')->name('myobituaries');
+    Route::get('/obituary/create', 'ObituaryController@create')->name('obituary.create');
+    Route::post('/obituary', 'ObituaryController@store')->name('obituary.store');
+    Route::get('/obituary/{id}', 'ObituaryController@show')->name('obituary.show');
+    Route::get('/obituary/get/{id}', 'ObituaryController@get')->name('obituary.get');
+    Route::post('/obituary/{id}/update', 'ObituaryController@update')->name('obituary.update');
+    Route::post('/obituary/{id}/submit/approval', 'ObituaryController@submitForApproval')->name('obituary.submit.approval');
     Route::get('/cart/checkout', 'AddToCartController@checkout')->name('cart.checkout');
 });
 
 
-Route::get('/campaign-details/{id}', 'CampaignController@details')->name('campaign.details');
+Route::get('/obituary-details/{id}', 'ObituaryController@details')->name('obituary.details');
 Route::get('/donate', 'DonateController@index')->name('donate');
-Route::post('/filter-campaigns', 'DonateController@filter')->name('filter');
+Route::post('/filter-obituaries', 'DonateController@filter')->name('filter');
 
 
 Route::get('/admin', function (){
@@ -81,10 +82,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/payments', 'Admin\PaymentController@index')->name('admin.payments');
     Route::get('/payments/{id}', 'Admin\PaymentController@show')->name('admin.payments.show');
 
-    Route::get('/campaigns', 'Admin\CampaignController@index')->name('admin.campaigns');
-    Route::get('/campaign/{id}', 'Admin\CampaignController@show')->name('admin.campaign.show');
-    Route::get('/campaign/{id}/approve', 'Admin\CampaignController@approve')->name('admin.campaign.approve');
-    Route::get('/campaign/{id}/reject', 'Admin\CampaignController@reject')->name('admin.campaign.reject');
+    Route::get('/obituaries', 'Admin\ObituaryController@index')->name('admin.obituaries');
+    Route::get('/obituary/{id}', 'Admin\ObituaryController@show')->name('admin.obituary.show');
+    Route::get('/obituary/{id}/approve', 'Admin\ObituaryController@approve')->name('admin.obituary.approve');
+    Route::get('/obituary/{id}/reject', 'Admin\ObituaryController@reject')->name('admin.obituary.reject');
 
 
 
