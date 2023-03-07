@@ -56,15 +56,17 @@ Route::post('/filter-obituaries', 'DonateController@filter')->name('filter');
 
 
 Route::get('/admin', function (){
-    return redirect(route('admin.settings.site'));
+    return redirect(route('admin.dashboard'));
 })->name('admin');
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
 
 
-
-
+    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
     Route::get('/users', 'Admin\AdminController@users')->name('admin.users');
+    Route::get('/contributors', 'Admin\AdminController@contributors')->name('admin.contributors');
+    Route::get('/contributor/{id}', 'Admin\AdminController@contributorDetails')->name('admin.contributor');
     Route::get('/subscriptions', 'Admin\AdminController@subscriptions')->name('admin.subscriptions');
+    Route::get('/analysis', 'Admin\AdminController@getAnalysis')->name('admin.analysis');
 
     Route::get('/settings/site', 'Admin\SiteController@index')->name('admin.settings.site');
     Route::post('/settings/store', 'Admin\SiteController@store')->name('admin.settings.save.site');

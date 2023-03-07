@@ -59,6 +59,10 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
+                    <a class="nav-link {{Route::currentRouteName() == 'admin.dashboard' ? 'active':''}} " href="{{route('admin.dashboard')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
                     <a class="nav-link {{Route::currentRouteName() == 'admin.settings.site' ? 'active':''}} " href="{{route('admin.settings.site')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Site Setting
@@ -78,6 +82,10 @@
                     <a class="nav-link {{Route::currentRouteName() == 'admin.users' ? 'active':''}}" href="{{route('admin.users')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Users
+                    </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.contributor') ? 'active':''}}" href="{{route('admin.contributors')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Contributors
                     </a>
                     <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.payments')  ? 'active':''}}" href="{{route('admin.payments')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

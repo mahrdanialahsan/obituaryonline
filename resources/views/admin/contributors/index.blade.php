@@ -14,8 +14,8 @@
                     <th>No#</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Is Admin</th>
+                    <th>Total Amount $</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,8 +24,8 @@
                         <td>{{$key+1}}</td>
                         <td>{{$row->name}}</td>
                         <td>{{$row->email}}</td>
-                        <td>{{$row->phone}}</td>
-                        <td>{{$row->is_admin == 1 ? 'Yes':'No'}}</td>
+                        <td>${{number_format($row->total_amount,2)}}</td>
+                        <td><a href="{{route('admin.contributor',['id'=>$row->id])}}">Details</a></td>
                     </tr>
                 @endforeach
                 </tbody>
