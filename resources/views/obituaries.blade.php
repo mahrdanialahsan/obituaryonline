@@ -1,16 +1,4 @@
 @extends('layouts.public')
-@push('css')
-    <style>
-        .title-ctn__child-input{
-            margin-bottom: 0px !important;
-
-        }
-        .input-small{
-            font-size: 12px !important;
-            width: 195px;
-        }
-    </style>
-@endpush
 @section('content')
     <!-- Page Title -->
     <section class="page-title" style="background-image: url({{file_exists(storage_path('app/public/site_settings/'.$site->archive_page_cover_image)) ?  url('storage/site_settings/'.$site->archive_page_cover_image): asset('images/12.png')}});">

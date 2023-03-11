@@ -168,95 +168,46 @@
             </section>
 
 
-            <section class="elementor-section mt-15 mb-15">
-                <div class="elementor-container elementor-column-gap-default">
-                    <div class="elementor-column">
-                        <div class="row">
-                            <div class="col text-center mb-15"><a class="button" style="background-color: #EA2722;border:2px #EA2722 solid" href="{{route('obituaries')}}"> See all Archives </a></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-{{--            <section class="elementor-section">--}}
+{{--            <section class="elementor-section mt-15 mb-15">--}}
 {{--                <div class="elementor-container elementor-column-gap-default">--}}
 {{--                    <div class="elementor-column">--}}
-{{--                        <div class="elementor-widget-wrap elementor-element-populated">--}}
-{{--                            <div class="elementor-element elementor-element-a43694e elementor-widget elementor-widget-purehearts_our_participate" data-id="a43694e" data-element_type="widget" data-widget_type="purehearts_our_participate.default">--}}
-{{--                                <div class="elementor-widget-container">--}}
-
-{{--                                    <!-- welcome-section -->--}}
-{{--                                    <section class="welcome-section sec-pad">--}}
-{{--                                        <div class="auto-container">--}}
-{{--                                            <div class="sec-title style-two centred">--}}
-{{--                                                <span class="top-text">Welcome to Pure Hearts</span>--}}
-{{--                                                <h2>Participate in Changing the World</h2>--}}
-{{--                                                <p>The master-builder of human happiness no one rejects, dislikes <br />or avoids  pleasure itself pleasure.</p>                </div>--}}
-{{--                                            <div class="row clearfix">--}}
-{{--                                                <div class="col-lg-4 col-md-6 col-sm-12 welcome-block">--}}
-{{--                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <figure class="image-box"><img decoding="async" src="images/welcome-1.jpg" alt="Awesome Image"></figure>--}}
-{{--                                                            <div class="content-box">--}}
-{{--                                                                <div class="shape" style="background-image: url(images/shape-32.png);"></div>--}}
-{{--                                                                <div class="text">--}}
-{{--                                                                    <span>Join With Us</span>--}}
-{{--                                                                    <h2>Donate</h2>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="btn-box">--}}
-{{--                                                                <a href="#" class="links"><i class="icon-right-arrow"></i></a>--}}
-{{--                                                                <a href="#" class="links-btn"><i class="icon-right-arrow"></i>Read More</a>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-lg-4 col-md-6 col-sm-12 welcome-block">--}}
-{{--                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <figure class="image-box"><img decoding="async" src="images/welcome-2.jpg" alt="Awesome Image"></figure>--}}
-{{--                                                            <div class="content-box">--}}
-{{--                                                                <div class="shape" style="background-image: url(images/shape-32.png);"></div>--}}
-{{--                                                                <div class="text">--}}
-{{--                                                                    <span>Join With Us</span>--}}
-{{--                                                                    <h2>Volunteer</h2>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="btn-box">--}}
-{{--                                                                <a href="#" class="links"><i class="icon-right-arrow"></i></a>--}}
-{{--                                                                <a href="#" class="links-btn"><i class="icon-right-arrow"></i>Read More</a>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-lg-4 col-md-6 col-sm-12 welcome-block">--}}
-{{--                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">--}}
-{{--                                                        <div class="inner-box">--}}
-{{--                                                            <figure class="image-box"><img decoding="async" src="images/welcome-4.jpg" alt="Awesome Image"></figure>--}}
-{{--                                                            <div class="content-box">--}}
-{{--                                                                <div class="shape" style="background-image: url(images/shape-32.png);"></div><div class="text">--}}
-{{--                                                                    <span>Join With Us</span>--}}
-{{--                                                                    <h2>Obituary</h2>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="btn-box">--}}
-{{--                                                                <a href="#" class="links"><i class="icon-right-arrow"></i></a>--}}
-{{--                                                                <a href="#" class="links-btn"><i class="icon-right-arrow"></i>Read More</a>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </section>--}}
-{{--                                    <!-- welcome-section end -->--}}
-
-{{--                                </div>--}}
-{{--                            </div>--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col text-center mb-15"><a class="button" style="background-color: #EA2722;border:2px #EA2722 solid" href="{{route('obituaries')}}"> See all Archives </a></div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </section>--}}
+
+            <section class="elementor-section">
+                <div class="elementor-container elementor-column-gap-default">
+                    <div class="elementor-column">
+                        <div class="elementor-widget-wrap elementor-element-populated">
+                            <div class="elementor-element elementor-element-a43694e elementor-widget elementor-widget-purehearts_our_participate" data-id="a43694e" data-element_type="widget" data-widget_type="purehearts_our_participate.default">
+                                <div class="elementor-widget-container">
+
+                                    <!-- welcome-section -->
+                                    <section class="welcome-section sec-pad">
+                                        <div class="auto-container">
+                                            <div class="sec-title style-two centred">
+                                                <span class="top-text">Welcome to Pure Hearts</span>
+                                                <h2>Participate in Changing the World</h2>
+                                                <div class="col text-center mb-15" id="archivesList-btn">
+                                                    <a class="button"  style="background-color: #EA2722;border:2px #EA2722 solid" href="javascript:;" onclick="filterObituary(1)"> See all Archives </a>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix" id="archivesList">
+
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- welcome-section end -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
 
@@ -337,5 +288,65 @@
 
 @endsection
 @push('js')
+    <script>
+        let total = 3;
+        function calAge(dob,dod) {
+            var diff = moment(dob).diff(dod, 'milliseconds');
+            var duration = moment.duration(diff);
+            return duration.format().replace("-","");
+        }
+        function filterObituary(flag){
+            if(flag==1){
+                $(`#archivesList-btn`).hide();
+            }
+            let offset  =   0;
+            let limit   =   total;
+            $('#archivesList').LoadingOverlay("show");
+            $('#archivesList').empty();
+            $.ajax({
+                type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
+                url         : `/load-obituaries/${limit}/${offset}`,
+                headers     : {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    total               =   response.data.total;
+                    let obituaries      =   response.data.obituaries;
+                    if(obituaries){
+                        obituaries.forEach(x=>{
+                            var age = calAge(moment(x.date_of_birth).format('YYYY-MM-DD'),moment( x.date_of_death).format('YYYY-MM-DD'));
+                            $('#archivesList').append(`<div class="col-lg-4 col-md-6 col-sm-12 welcome-block">
+                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div class="inner-box">
+                                                            <figure class="image-box"><img decoding="async" src="storage/deceased_picture/${x.deceased_picture}" alt="${x.deceased_first_name} ${x.deceased_last_name}"></figure>
+                                                            <div class="content-box">
+                                                                <div class="shape" style="background-image: url({{asset('images/shape-32.png')}});"></div>
+                                                                <div class="text">
+                                                                    <span>${x.deceased_first_name} ${x.deceased_last_name}</span>
+                                                                    <h2>Donate</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="btn-box">
+                                                                <a href="/obituary-details/${x.uid}" class="links"><i class="icon-right-arrow"></i></a>
+                                                                <a href="/obituary-details/${x.uid}" class="links-btn"><i class="icon-right-arrow"></i>Read More</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`).show('slow');
+                        });
+                        $('#archivesList').LoadingOverlay("hide");
+                    }
 
+                },
+                error: function (data) {
+                    toaster('Error',data.responseJSON.message,'error');
+                    $('#archivesList').LoadingOverlay("hide");
+                }
+            })
+        }
+        $(document).ready(function () {
+            filterObituary(0);
+        });
+
+    </script>
 @endpush

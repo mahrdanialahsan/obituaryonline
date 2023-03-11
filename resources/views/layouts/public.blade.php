@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Route;
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"  class="no-js no-svg">
 @php
@@ -12,15 +15,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="shortcut icon" href="{{file_exists(storage_path('app/public/site_settings/'.$site->fav_icon)) ?  url('storage/site_settings/'.$site->fav_icon): asset('images/favicon.ico')}}" type="image/x-icon">
-    <!-- responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- For IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @stack('meta')
     <title>{{$site->site_title ? $site->site_title:"Obitury Online."}}</title>
     <meta name='robots' content='max-image-preview:large' />
+    @if(in_array(Route::currentRouteName(),['obituary.details','about-us','contact-us','blogs','blog']))
+    @stack('meta')
+    @else
+    <meta property="og:url"           content="{{url('/')}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
+    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
+    <meta property="og:image"         content="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" />
+    @endif
     <link rel='dns-prefetch'    href="{{asset('http://fonts.googleapis.com/')}}" />
     <link rel='stylesheet'      id='wp-block-library-css'       href="{{asset('css/style.min6a4d.css')}}" type='text/css' media='all' />
     <link rel='stylesheet'      id='font-awesome-css'           href="{{asset('css/font-awesome.min1849.css')}}" type='text/css' media='all' />
@@ -118,7 +126,7 @@
             <div class="logo-box">
                 <div class="shape" style="background-image: url({{asset('images/shape-30.png')}});"></div>
                 <figure class="logo"><a href="{{ url('/') }}" title="Arbituaryonline">
-                        <img src="{{ asset('images/logo.png')}}" alt="logo" style="height: 86px;" />
+                        <img src="{{ file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" alt="logo" style="height: 86px;" />
                     </a>
                 </figure>
             </div>
@@ -129,7 +137,7 @@
                         <div class="logo-box responsive">
                             <div class="shape" style="background-image: url({{asset('images/shape-30.png')}});"></div>
                             <figure class="logo"><a href="{{ url('/') }}" title="Arbituaryonline">
-                                    <img src="{{ asset('images/logo.png')}}" alt="logo" style="height: 86px;" />
+                                    <img src="{{ file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" alt="logo" style="height: 86px;" />
                                 </a>
                             </figure>
                         </div>
@@ -145,16 +153,23 @@
                                     <ul class="navigation clearfix">
 
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">{{$site->home_page_menu_title ? $site->home_page_menu_title:"Home"}}</a></li>
-
+                                            <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">{{$site->home_page_menu_title ? $site->home_page_menu_title:"Home"}}</a>
+                                        </li>
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">{{$site->donate_page_menu_title ? $site->donate_page_menu_title:"Donate Today"}}</a></li>
-
-    {{--                                    <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">--}}
-    {{--                                        <a title="Be a Volunteer" href="{{ route('home') }}" class="hvr-underline-from-left1">Be a Volunteer</a></li>--}}
-
+                                            <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">{{$site->donate_page_menu_title ? $site->donate_page_menu_title:"Donate Today"}}</a>
+                                        </li>
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a></li>
+                                            <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('about-us') }}" class="hvr-underline-from-left1">About Us</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('blogs') }}" class="hvr-underline-from-left1">Blog</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('contact-us') }}" class="hvr-underline-from-left1">Contact Us</a>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -231,7 +246,7 @@
             <div class="close-btn"><i class="fa fa-times"></i></div>
 
             <nav class="menu-box">
-                <div class="nav-logo"><a href="#" title="Purehearts"><img src="{{asset('images/logo.png')}}" alt="logo"/></a></div>
+                <div class="nav-logo"><a href="#" title="Purehearts"><img src="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" alt="logo"/></a></div>
                 <div class="menu-outer"></div>
                 <div class="social-links">
                     @if( @Auth()->user()->is_admin != 1)
@@ -275,7 +290,7 @@
                                             <div class="left-column pull-left">
                                                 <div class="logo-box">
                                                     <div class="shape" style="background-image: url({{asset('images/shape-1.png')}});"></div>
-                                                    <figure class="logo"><a href="{{ url('/') }}"><img decoding="async" src="{{ asset('images/logo.png')}}" alt="Awesome Image"></a></figure>
+                                                    <figure class="logo"><a href="{{ url('/') }}"><img decoding="async" src="{{ file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" alt="Awesome Image"></a></figure>
                                                 </div>
                                                 <div class="text">
                                                     <h3><i class="icon-email-open-sketched-envelope"></i>Subscribe <br> Our Newsletter</h3>

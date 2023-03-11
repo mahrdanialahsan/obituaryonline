@@ -67,17 +67,9 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Site Setting
                     </a>
-                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.settings.slider') ? 'active':''}}" href="{{route('admin.settings.slider')}}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Slider
-                    </a>
                     <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.obituary') ? 'active':''}}" href="{{route('admin.obituaries')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Obituaries
-                    </a>
-                    <a class="nav-link {{Route::currentRouteName() == 'admin.subscriptions' ? 'active':''}}" href="{{route('admin.subscriptions')}}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Subscriptions
                     </a>
                     <a class="nav-link {{Route::currentRouteName() == 'admin.users' ? 'active':''}}" href="{{route('admin.users')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -87,9 +79,22 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Contributors
                     </a>
+
                     <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.payments')  ? 'active':''}}" href="{{route('admin.payments')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Payments
+                    </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.page')  ? 'active':''}}" href="{{route('admin.pages')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Pages
+                    </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.settings.slider') ? 'active':''}}" href="{{route('admin.settings.slider')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Slider
+                    </a>
+                    <a class="nav-link {{Route::currentRouteName() == 'admin.subscriptions' ? 'active':''}}" href="{{route('admin.subscriptions')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Subscriptions
                     </a>
                 </div>
             </div>

@@ -90,9 +90,21 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/obituary/{id}/reject', 'Admin\ObituaryController@reject')->name('admin.obituary.reject');
 
 
+    Route::get('/pages', 'Admin\PagesController@index')->name('admin.pages');
+    Route::get('/page/create', 'Admin\PagesController@create')->name('admin.page.create');
+    Route::post('/page/store', 'Admin\PagesController@store')->name('admin.page.store');
+    Route::get('/page/{id}/edit', 'Admin\PagesController@show')->name('admin.page.show');
+    Route::post('/page/{id}/update', 'Admin\PagesController@update')->name('admin.page.update');
+    Route::get('/page/{id}/delete', 'Admin\PagesController@show')->name('admin.page.delete');
+
+
 
 });
 
+Route::get('/about-us', 'HomeController@aboutUs')->name('about-us');
+Route::get('/contact-us', 'HomeController@contactUs')->name('contact-us');
+Route::get('/blogs', 'HomeController@blogs')->name('blogs');
+Route::get('/blog/{slug}', 'HomeController@blog')->name('blog');
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
 
 

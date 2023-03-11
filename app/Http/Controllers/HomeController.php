@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Obituaries;
+use App\Pages;
 use App\Slider;
 use App\Subscriptions;
 use Illuminate\Http\Request;
@@ -79,5 +80,43 @@ class HomeController extends Controller
             'status'   => 'success',
             'msg'      =>  'You are successfully subscribed.'
         ],200);
+    }
+
+    public function aboutUs(){
+        $data   = Pages::whereType('about')->first();
+        if($data){
+            $obituaries      =    Obituaries::where('status',1)->limit(3)->orderBy('created_at','DESC')->get();
+            return view('about-us',compact('data','obituaries'));
+        }else{
+            return abort(404);
+        }
+
+    }
+    public function contactUs(){
+        $data   = Pages::whereType('contact')->first();
+        if($data){
+
+            $obituaries      =    Obituaries::where('status',1)->limit(3)->orderBy('created_at','DESC')->get();
+            return view('contact-us',compact('data','obituaries'));
+        }else{
+            return abort(404);
+        }
+    }
+    public function blogs(){
+        $data   = Pages::whereType('blog')->get();
+        if($data){
+            return view('blogs',compact('data'));
+        }else{
+            return abort(404);
+        }
+    }
+    public function blog($slug){
+        $data    = Pages::whereType('blog')->whereSlug($slug)->first();
+        if($data){
+            $blogs   = Pages::whereType('blog')->where('id','!=',$data->id)->limit(3)->orderBy('created_at','DESC')->get();
+            return view('blog',compact('data','blogs'));
+        }else{
+            return abort(404);
+        }
     }
 }
