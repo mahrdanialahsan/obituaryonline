@@ -6,9 +6,11 @@ use App\Pages;
 use Illuminate\Http\Request;
 use stdClass;
 use Illuminate\Support\Str;
+use App\Http\Traits\CommonTrait;
 
 class PagesController extends Controller
 {
+    use CommonTrait;
     /**
      * Display a listing of the resource.
      *
@@ -51,11 +53,15 @@ class PagesController extends Controller
         $cover_image                    =   null;
         if($request->hasFile('thumbnail_image')){
             $thumbnail_image          =   'thumbnail_image_' . time() . '.'. $request->thumbnail_image->extension();
-            $request->thumbnail_image->move(storage_path('app/public/pages'), $thumbnail_image);
+            if(!$this->uploadImage($request,'thumbnail_image',570,420,'pages/'.$thumbnail_image)){
+                $request->thumbnail_image->move(storage_path('app/public/pages'), $thumbnail_image);
+            }
         }
         if($request->hasFile('cover_image')){
             $cover_image          =   'cover_image_' . time() . '.'. $request->cover_image->extension();
-            $request->cover_image->move(storage_path('app/public/pages'), $cover_image);
+            if(!$this->uploadImage($request,'cover_image',1900,300,'pages/'.$cover_image)){
+                $request->cover_image->move(storage_path('app/public/pages'), $cover_image);
+            }
         }
         Pages::create([
             "title"             =>  $request->title,
@@ -111,12 +117,16 @@ class PagesController extends Controller
         $page->title                =   $request->title;
         if($request->hasFile('thumbnail_image')){
             $fileName          =   'thumbnail_image_' . time() . '.'. $request->thumbnail_image->extension();
-            $request->thumbnail_image->move(storage_path('app/public/pages'), $fileName);
+            if(!$this->uploadImage($request,'thumbnail_image',570,420,'pages/'.$fileName)){
+                $request->thumbnail_image->move(storage_path('app/public/pages'), $fileName);
+            }
             $page->thumbnail_image      =   $fileName;
         }
         if($request->hasFile('cover_image')){
             $fileName          =   'cover_image_' . time() . '.'. $request->cover_image->extension();
-            $request->cover_image->move(storage_path('app/public/pages'), $fileName);
+            if(!$this->uploadImage($request,'cover_image',1900,300,'pages/'.$fileName)){
+                $request->cover_image->move(storage_path('app/public/pages'), $fileName);
+            }
             $page->cover_image      =   $fileName;
         }
         $page->short_description    =   $request->short_description ? $request->short_description:null;

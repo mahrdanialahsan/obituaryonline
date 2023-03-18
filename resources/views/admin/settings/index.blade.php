@@ -28,14 +28,14 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-floating1">
                             <label for="site_logo"> Site Logo</label>
-                            <input  value="{{$site->site_logo}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}"  id="site_logo" name="site_logo" type="file"  />
+                            <input  value="{{$site->site_logo}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}"  id="site_logo" name="site_logo" type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' />
 
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-floating1">
                             <label for="fav_icon"> Fav Icon</label>
-                            <input  value="{{$site->fav_icon}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->fav_icon)) ?  url('storage/site_settings/'.$site->fav_icon): asset('images/favicon.ico')}}"  id="fav_icon" name="fav_icon" type="file"  />
+                            <input  value="{{$site->fav_icon}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->fav_icon)) ?  url('storage/site_settings/'.$site->fav_icon): asset('images/favicon.ico')}}"  id="fav_icon" name="fav_icon" type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'  />
 
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
                             <label for="signup_page_cover_image"> Cover Image</label>
-                            <input  value="{{$site->signup_page_cover_image}}"  class="form-control dropify"   id="signup_page_cover_image" name="signup_page_cover_image"  type="file"  data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->signup_page_cover_image)) ?  url('storage/site_settings/'.$site->signup_page_cover_image): asset('images/12.jpg')}}"  />
+                            <input  value="{{$site->signup_page_cover_image}}"  class="form-control cover_image dropify"   id="signup_page_cover_image" name="signup_page_cover_image"  type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->signup_page_cover_image)) ?  url('storage/site_settings/'.$site->signup_page_cover_image): asset('images/12.jpg')}}"  />
 
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
                             <label for="login_page_cover_image"> Cover Image</label>
-                            <input  value="{{$site->login_page_cover_image}}"  class="form-control dropify"   id="login_page_cover_image" name="login_page_cover_image"  type="file"  data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->login_page_cover_image)) ?  url('storage/site_settings/'.$site->login_page_cover_image): asset('images/12.jpg')}}"  />
+                            <input  value="{{$site->login_page_cover_image}}"  class="form-control cover_image dropify"   id="login_page_cover_image" name="login_page_cover_image"  type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->login_page_cover_image)) ?  url('storage/site_settings/'.$site->login_page_cover_image): asset('images/12.jpg')}}"  />
 
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
                             <label for="donate_page_cover_image"> Header Cover Image</label>
-                            <input  value="{{$site->donate_page_cover_image}}"  class="form-control dropify"   id="donate_page_cover_image" name="donate_page_cover_image"  type="file"  data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->donate_page_cover_image)) ?  url('storage/site_settings/'.$site->donate_page_cover_image): asset('images/12.jpg')}}"  />
+                            <input  value="{{$site->donate_page_cover_image}}"  class="form-control cover_image dropify"   id="donate_page_cover_image" name="donate_page_cover_image"  type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->donate_page_cover_image)) ?  url('storage/site_settings/'.$site->donate_page_cover_image): asset('images/12.jpg')}}"  />
 
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
                             <label for="obituary_page_cover_image"> Header Cover Image</label>
-                            <input  value="{{$site->obituary_page_cover_image}}"  class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->obituary_page_cover_image)) ?  url('storage/site_settings/'.$site->obituary_page_cover_image): asset('images/12.jpg')}}"  id="obituary_page_cover_image" name="obituary_page_cover_image" type="file"  />
+                            <input  value="{{$site->obituary_page_cover_image}}"  class="form-control cover_image dropify" data-default-file="{{file_exists(storage_path('app/public/site_settings/'.$site->obituary_page_cover_image)) ?  url('storage/site_settings/'.$site->obituary_page_cover_image): asset('images/12.jpg')}}"  id="obituary_page_cover_image" name="obituary_page_cover_image" type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' />
 
                         </div>
                     </div>
@@ -247,7 +247,22 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            $('.dropify').dropify();
+            // $('.dropify').dropify();
+            $('#site_logo').dropify({
+                minWidth: 120,
+                minHeight: 130
+            });
+
+            $('#fav_icon').dropify({
+                minWidth: 32,
+                minHeight: 32
+            });
+
+            $('.cover_image').dropify({
+                minWidth: 1900,
+                minHeight: 300
+            });
+
         });
     </script>
 @endpush

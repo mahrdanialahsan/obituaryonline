@@ -192,7 +192,7 @@
                                                 <span class="top-text">Welcome to Pure Hearts</span>
                                                 <h2>Participate in Changing the World</h2>
                                                 <div class="col text-center mb-15" id="archivesList-btn">
-                                                    <a class="button"  style="background-color: #EA2722;border:2px #EA2722 solid" href="javascript:;" onclick="filterObituary(1)"> See all Archives </a>
+                                                    <button type="button" class="button"  style="background-color: #EA2722;border:2px #EA2722 solid" href="javascript:;" onclick="filterObituary(1)"> See all Archives </button>
                                                 </div>
                                             </div>
                                             <div class="row clearfix" id="archivesList">
@@ -316,7 +316,7 @@
                         obituaries.forEach(x=>{
                             var age = calAge(moment(x.date_of_birth).format('YYYY-MM-DD'),moment( x.date_of_death).format('YYYY-MM-DD'));
                             $('#archivesList').append(`<div class="col-lg-4 col-md-6 col-sm-12 welcome-block">
-                                                    <div class="welcome-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                    <div class="welcome-block-one wow wow-slider fadeInUp animated"  data-wow-delay="00ms" data-wow-duration="1500ms">
                                                         <div class="inner-box">
                                                             <figure class="image-box"><img decoding="async" src="storage/deceased_picture/${x.deceased_picture}" alt="${x.deceased_first_name} ${x.deceased_last_name}"></figure>
                                                             <div class="content-box">
@@ -332,9 +332,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>`).show('slow');
+                                                </div>`)
+                                .show('slow');
                         });
                         $('#archivesList').LoadingOverlay("hide");
+                        setTimeout(function () {
+                            $(`.wow-slider`).css('visibility','visible');
+                        },1000)
                     }
 
                 },

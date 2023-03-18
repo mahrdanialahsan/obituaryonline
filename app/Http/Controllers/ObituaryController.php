@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CondolenceDesign;
 use App\ObituaryPayments;
 use App\Obituaries;
 use Illuminate\Http\Request;
@@ -47,6 +48,10 @@ class ObituaryController extends Controller
      */
     public function store(Request $request)
     {
+//        minWidth: 530,
+//        minHeight: 252
+
+
         $uid = Str::random(40);
         $todayDate = date('Y-m-d');
         $request->validate([
@@ -151,7 +156,9 @@ class ObituaryController extends Controller
                                          ORDER BY SUM(obituary_payments.amount) DESC 
                                          LIMIT 25
                                         ");
-            return view('obituary.details',compact('uid','obituary','payments'));
+
+            $designs    =   json_encode(CondolenceDesign::all(),true);
+            return view('obituary.details',compact('uid','obituary','payments','designs'));
         }
         else{
             abort(404);

@@ -44,35 +44,47 @@ class SiteController extends Controller
 
         if($request->hasFile('site_logo')){
             $fileName          =   'site_logo_' . time() . '.'. $request->site_logo->extension();
-            $request->site_logo->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'site_logo',120,130,'site_settings/'.$fileName)){
+                $request->site_logo->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->site_logo     =  $fileName;
         }
         if($request->hasFile('fav_icon')){
             $fileName          =   'fav_icon_' . time() . '.'. $request->fav_icon->extension();
-            $request->fav_icon->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'site_logo',32,32,'site_settings/'.$fileName)){
+                $request->site_logo->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->fav_icon    =  $fileName;
         }
         if($request->hasFile('donate_page_cover_image')){
             $fileName          =   'donate_page_cover_image_' . time() . '.'. $request->donate_page_cover_image->extension();
-            $request->donate_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'donate_page_cover_image',1900,200,'site_settings/'.$fileName)){
+                $request->donate_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->donate_page_cover_image     =  $fileName;
         }
         if($request->hasFile('obituary_page_cover_image')){
             $fileName          =   'obituary_page_cover_image_' . time() . '.'. $request->obituary_page_cover_image->extension();
-            $request->obituary_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'obituary_page_cover_image',1900,200,'site_settings/'.$fileName)){
+                $request->obituary_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->obituary_page_cover_image     =  $fileName;
         }
 
 
         if($request->hasFile('signup_page_cover_image')){
             $fileName          =   'signup_page_cover_image' . time() . '.'. $request->signup_page_cover_image->extension();
-            $request->signup_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'signup_page_cover_image',1900,200,'site_settings/'.$fileName)){
+                $request->signup_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->signup_page_cover_image     =  $fileName;
         }
 
         if($request->hasFile('login_page_cover_image')){
             $fileName          =   'login_page_cover_image' . time() . '.'. $request->login_page_cover_image->extension();
-            $request->login_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            if(!$this->uploadImage($request,'login_page_cover_image',1900,200,'site_settings/'.$fileName)){
+                $request->login_page_cover_image->move(storage_path('app/public/site_settings'), $fileName);
+            }
             $site->login_page_cover_image     =  $fileName;
         }
 
@@ -106,7 +118,9 @@ class SiteController extends Controller
         $slider->status             =   (int)$request->status;
         if($request->hasFile('image')){
             $fileName               =   'slider-' . time() . '.'. $request->image->extension();
-            $request->image->move(storage_path('app/public/slider'), $fileName);
+            if(!$this->uploadImage($request,'image',1900,900,'slider/'.$fileName)){
+                $request->image->move(storage_path('app/public/slider'), $fileName);
+            }
             $slider->image     =  $fileName;
         }
         $slider->save();
@@ -126,7 +140,9 @@ class SiteController extends Controller
         $slider->status             =   $request->status;
         if($request->hasFile('image')){
             $fileName               =   'slider-' . time() . '.'. $request->image->extension();
-            $request->image->move(storage_path('app/public/slider'), $fileName);
+            if(!$this->uploadImage($request,'image',1900,900,'slider/'.$fileName)){
+                $request->image->move(storage_path('app/public/slider'), $fileName);
+            }
             $slider->image     =  $fileName;
         }
         $slider->save();

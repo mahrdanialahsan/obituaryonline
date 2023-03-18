@@ -14,13 +14,16 @@ class DonateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $q = '';
+        if($request->has('q')){
+            $q = $request->input('q');
+        }
         if(@Auth()->user()->is_admin == 1){
             return redirect(url('/'));
         }
-        return view('donate.index');
+        return view('donate.index',compact('q'));
     }
 
     /**
@@ -93,7 +96,15 @@ class DonateController extends Controller
         $check      = '';
         $orderBy    = '';
         $orderByArr = [];
+        $q = '';
+        if($request->has('q')){
+            $q = trim($request->input('q'));
+        }
         $flag       = false;
+        if($q!=''){
+            $check .=  " AND (deceased_first_name LIKE '%$q%' || deceased_last_name LIKE '%$q%' ) ";
+            $flag   = true;
+        }
         if($request->has('filter_post_date') && !is_null($request->filter_post_date)  && !empty($request->filter_post_date)){
             $filter_post_date   =   date('Y-m-d',strtotime($request->filter_post_date));
             $check .=  " AND DATE(created_at) = '$filter_post_date' ";

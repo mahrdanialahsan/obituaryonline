@@ -30,7 +30,7 @@
                         <div class="col-md-6 mb-3">
                             <div class="form-floating1">
                                 <label for="thumbnail_image">Thumbnail</label>
-                                <input  value="{{@$page->thumbnail_image}}"  accept="image/*" class="form-control dropify" data-allowed-file-extensions='["png", "jpg","jpeg"]'  data-default-file="{{file_exists(storage_path('app/public/pages/'.@$page->thumbnail_image)) ?  url('storage/pages/'.@$page->thumbnail_image): asset('images/logo.png')}}"  id="thumbnail_image" name="thumbnail_image" type="file"  />
+                                <input  value="{{@$page->thumbnail_image}}"   class="form-control "  accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'  data-default-file="{{file_exists(storage_path('app/public/pages/'.@$page->thumbnail_image)) ?  url('storage/pages/'.@$page->thumbnail_image): asset('images/logo.png')}}"  id="thumbnail_image" name="thumbnail_image" type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' />
 
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-floating1">
                             <label for="cover_image"> Cover Image</label>
-                            <input  value="{{@$page->cover_image}}"  accept="image/*" class="form-control dropify" data-default-file="{{file_exists(storage_path('app/public/pages/'.@$page->cover_image)) ?  url('storage/pages/'.@$page->cover_image): asset('images/12.jpg')}}"  id="cover_image" name="cover_image" type="file"  />
+                            <input  value="{{@$page->cover_image}}"  accept="image/*" class="form-control " data-default-file="{{file_exists(storage_path('app/public/pages/'.@$page->cover_image)) ?  url('storage/pages/'.@$page->cover_image): asset('images/12.jpg')}}"  id="cover_image" name="cover_image" type="file"  accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'/>
                         </div>
                     </div>
                     @if(!in_array(@$page->type,['contact','about']))
@@ -66,7 +66,14 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            $('.dropify').dropify();
+            $('#thumbnail_image').dropify({
+                minWidth: 570,
+                minHeight: 420
+            });
+            $('#cover_image').dropify({
+                minWidth: 1900,
+                minHeight: 300
+            });
             CKEDITOR.replace('description', {
                 // toolbar: toolbar,
             });

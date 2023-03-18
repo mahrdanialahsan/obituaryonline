@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="deceased_picture">Deceased Picture</label>
-                                                <input data-default-file="{{!empty($obituary) ?  url('storage/deceased_picture/'.$obituary->deceased_picture): ''}}"  accept="image/gif, image/png,, image/jpg,, image/jpeg"  type="file" name="deceased_picture" id="deceased_picture" class="form-control dropify field-required file">
+                                                <input data-default-file="{{!empty($obituary) ?  url('storage/deceased_picture/'.$obituary->deceased_picture): ''}}"  accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'  type="file" name="deceased_picture" id="deceased_picture" class="form-control field-required file">
 
                                             </div>
                                             <div class="input-ctrl">
@@ -364,7 +364,11 @@
             $('#funeral_date').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
             });
-            $('.dropify').dropify();
+            $('.dropify').dropify(); //
+            $('#deceased_picture').dropify({
+                minWidth: 570,
+                minHeight: 420
+            });
 
             toolbar = [
                 { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },

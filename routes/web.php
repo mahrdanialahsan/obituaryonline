@@ -29,6 +29,10 @@ Route::get('/storage-link', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     dd('done');
 });
+Route::get('/dump-autoload', function (){
+    system('php /opt/cpanel/composer/bin/composer dump-autoload');
+    dd('done');
+});
 
 
 Auth::routes();
@@ -52,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/obituary-details/{id}', 'ObituaryController@details')->name('obituary.details');
 Route::get('/donate', 'DonateController@index')->name('donate');
+Route::get('/search', 'DonateController@index')->name('search');
 Route::post('/filter-obituaries', 'DonateController@filter')->name('filter');
 
 
@@ -98,6 +103,14 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/page/{id}/delete', 'Admin\PagesController@show')->name('admin.page.delete');
 
 
+    Route::get('/designs', 'Admin\CondolenceDesignController@index')->name('admin.designs');
+    Route::get('/design/create', 'Admin\CondolenceDesignController@create')->name('admin.design.create');
+    Route::post('/design/store', 'Admin\CondolenceDesignController@store')->name('admin.design.store');
+    Route::get('/design/{id}/edit', 'Admin\CondolenceDesignController@show')->name('admin.design.show');
+    Route::post('/design/{id}/update', 'Admin\CondolenceDesignController@update')->name('admin.design.update');
+    Route::get('/design/{id}/delete', 'Admin\CondolenceDesignController@show')->name('admin.design.delete');
+
+
 
 });
 
@@ -106,6 +119,7 @@ Route::get('/contact-us', 'HomeController@contactUs')->name('contact-us');
 Route::get('/blogs', 'HomeController@blogs')->name('blogs');
 Route::get('/blog/{slug}', 'HomeController@blog')->name('blog');
 Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
+Route::post('/memory/store', 'MemoriesController@store')->name('memory.store');
 
 
 Route::get('/cart/donation', 'AddToCartController@index')->name('cart');

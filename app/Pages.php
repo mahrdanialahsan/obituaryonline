@@ -31,4 +31,5 @@ class Pages extends Model
         }
         return $slug;
     }
+
 }

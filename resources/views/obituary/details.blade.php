@@ -15,7 +15,7 @@
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>Memory</h1>
+                    <h1>Obituary </h1>
                 </div>
 {{--                <ul class="bread-crumb clearfix">--}}
 {{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">My account</li>                --}}
@@ -38,13 +38,36 @@
                                     <span class="post-date">{{date('F d, Y',strtotime($obituary->created_at))}}</span>
                                 </figure>
                             </div>
-                            <div class="" id="donate-trig" style="margin-left: 0px;">
+                            @if(is_mobile_device())
+                                @include('obituary.details-sidebar')
+                            @endif
+                            <br>
+                            <div class="text">
+                                <h3 class="h3">About Obituary</h3><br>
+                                <div class="obituary-description">{!! $obituary->message !!}</div>
+                            </div>
+                            @if(is_mobile_device() && collect($payments)->count()>0)
+                                <div class="volunteer-event__venue">
+                                    <div class="obituary-stats mt-16">
+                                        <div class="font-black">
+                                            <div class="h2">Contributor:</div>
+                                            <ul class="list-group list-group-flush">
+                                                @foreach($payments as $key=>$payment)
+                                                    <li class="list-group-item"> {{$key+1}}. ${{$payment->ttl_amount}} {{$payment->user_name}}</li>
+                                                @endforeach
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="m" id="donate-trig" style="margin-left: 0px;">
                                 <h3 class="h3 mt-40">How Your Donation Makes a Difference</h3>
                                 <div class="company-profile__donation-cards">
                                     <div class="border-all dtn-amt-item m-bot30 border-round clearfix ">
                                         <div class="horizontal-card">
                                             <div class="horizontal-card__head">
-                                                <h2 class="vertical-horizontal-center"> ${{$obituary->default_amount}} </h2>
+                                                <h2 class="vertical-horizontal-center" style="text-align: center"> ${{$obituary->default_amount}} </h2>
                                             </div>
                                             <div class="clearfix m-left0 horizontal-card__main horizontal-card__main--light-blue" id="other-amt" style="margin-left: 00px;"> <div class="text-left dtn-desc m-left0 text-left"> <span class="small">
 <p class="body-txt break-word" id="otherAmtMessage"> Your donation could help provide a meal for 3 children in our Canossaville Student Care programme for a month. </p> </span> </div> </div>
@@ -149,10 +172,85 @@
                                     </div>
                                 </div>
                             </div>
-                            <br>
                             <div class="text">
-                                <h3 class="h3">About Obituary</h3><br>
-                                <div class="obituary-description">{!! $obituary->message !!}</div>
+                                <div class="default-form comments-form-area">
+
+                                    <div class="group-title"><h3>Can share a memory</h3></div>
+                                    <div class="form-inner">
+                                        <form action="{{route('memory.store')}}" method="post" id="memory-form" class="comment-form add-comment-form" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" readonly name="uid"  value="{{$obituary->uid}}">
+                                            <input type="hidden" readonly name="obituary_id" id="obituary_id" value="{{$obituary->id}}">
+                                            <input type="hidden" name="design_id" id="design_id" value="">
+                                            <div class="row">
+                                                <div class="btn-send col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-15">
+                                                            <div class="box__input" align="center">
+                                                                <style>
+                                                                    .card {
+                                                                        position: relative;
+                                                                        display: inline-block;
+                                                                    }
+
+                                                                    .card-img {
+                                                                        width: 100%;
+                                                                        height: auto;
+                                                                        display: block;
+                                                                    }
+
+                                                                    .card-img-overlay {
+                                                                        position: absolute;
+                                                                        top: 0;
+                                                                        bottom: 0;
+                                                                        left: 0;
+                                                                        right: 0;
+                                                                        background-color: rgba(0, 0, 0, 0.5);
+                                                                        display: flex;
+                                                                        justify-content: center;
+                                                                        align-items: center;
+                                                                    }
+
+                                                                    .btn {
+                                                                        font-size: 1rem;
+                                                                    }
+                                                                </style>
+                                                                <div class="card">
+                                                                    <img id="design-image" src="" width="320" height="400" class="card-img" alt="Your Image">
+                                                                    <div class="card-img-overlay h-100">
+                                                                        <div class="row h-100">
+                                                                            <div class="col-12 h-100">
+                                                                                <div class="card-body d-flex flex-column justify-content-between h-100">
+                                                                                    <div class="flex-fill">
+                                                                                        <p id="design-title" class="card-text" style="color: #fff">My dearest condolence.</p>
+                                                                                    </div>
+                                                                                    <button type="button" class="btn btn-dark mt-auto" onclick="getNextKey()">Change Design</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-15">
+                                                            <div class="box__input" align="center">
+                                                                <input type="file" name="image"  accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'  id="files" class="box__file" style="margin-left:50px; border:hidden;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <textarea placeholder="Type Wishes here" id="wishes" name="wishes" class="form-control" rows="7" required="required"></textarea>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12  mb-15 form-group message-btn">
+                                                            <button  type="button" onclick="submitForm('memory-form','{{route('memory.store')}}')" id="submit" class="submit theme-btn btn-one" value="Leave a Wishes">Share Memory</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <div class="clearfix"><br></div>
                         </div>
@@ -162,95 +260,8 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                     <aside class="blog-sidebar">
-                        <h5>In laving memory of</h5>
-                        <h2 class="h2 volunteer-event__title break-word">{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</h2>
-                        <p class="mt-10">Passed away on {{date('d F Y',strtotime($obituary->date_of_death))}}</p>
-                        <br>
-                        <div class="social-list social-list--just-left mt-16">
-                            <div class="dropdown" style="margin-right: 5px">
-                                <a class=" dropdown-toggle button button--icon button--ghost centered shareit addthis_button_compact" data-toggle="dropdown">
-                                    <i class="ico ico-share button--icon__icon" style="margin-top:2px;"></i>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a target="_blank" class="dropdown-item" href="https://api.whatsapp.com/send?text={{urlencode($obituary->message." ".route('obituary.details',['id'=>$obituary->uid]))}}"> <i class="fa-brands fa-whatsapp" style="color: #25D366"></i> &nbsp;&nbsp; WhatsApp</a>
-                                    <a  class="dropdown-item shareBtn" url="{{route('obituary.details',['id'=>$obituary->uid])}}" href="javascript:;"><i class="fa-brands fa-facebook-f" style="color: #4267B2" ></i> &nbsp;&nbsp; Facebook</a>
-{{--                                    <a class="dropdown-item" href="#">Twitter</a>--}}
-                                </div>
-                            </div>
-                            <a id="copy-url" text="{{route('obituary.details',['id'=>$obituary->uid])}}" class="button button--icon button--ghost copyText" data-clipboard-text="" msg="Link is copied to clipboard">
-                                <i class="ico ico-link button--icon__icon" style="margin-top:2px;"></i>
-                                <span class="button--icon__name">LINK</span>
-                            </a>
-                        </div>
-{{-- <a  target="_blank" href="https://api.whatsapp.com/send?text={{urlencode("Charities Week 2023 by Caritas Singapore Community Council - The Caritas Singapore Agape Fund https://www.giving.sg/caritas-singapore-community-council-the-cscc-agape-fund/charities_week_2023#.ZARS9R1KVIs.whatsapp")}}" data-action="share/whatsapp/share">Share via Whatsapp</a>--}}
-
-
-
-                        <div class="volunteer-event__venue">
-                            @if($obituary->public_donation == 1 || $obituary->created_by == auth()->id())
-                            <div class="obituary-stats mt-16">
-                                <div class="font-black">
-                                    <div class="h2">${{number_format($obituary->total_donation)}}</div>
-                                    @if(collect($payments)->count())
-                                        <div class="body-txt body-txt--small body-txt--no-letter-space bold">raised from {{collect($payments)->count()}} donors</div>
-                                    @endif
-                                    <div class="progress-bar mt-8 mb-8">
-                                        <div class="progress-bar__fill" style="width: 20%;"></div>
-                                    </div>
-                                    <span class="body-txt body-txt--small body-txt--no-letter-space bold">20% of $220,000</span>
-                                    <span style="position: absolute;right: 1px;" class="body-txt body-txt--small body-txt--no-letter-space float-right bold">20 more days</span>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-
-
-
-                        <div class="post-widget" style="text-align:center; margin-top:5rem;">
-                            @php
-                                $dateOfBirth =    $obituary->date_of_birth;
-                                $dob         =    new DateTime($dateOfBirth);
-                                $now         =    new DateTime();
-                                $diff        =    $now->diff($dob);
-                            @endphp
-                            <div class="widget-title"><h3>Age:  <small>{{getAge($obituary->date_of_birth,$obituary->date_of_death)}} </small></h3></div>
-                            <div class="post-inner">
-                                <p>Passed away peacefully on {{date('d F Y',strtotime($obituary->date_of_death))}}. </p>
-                                <p>Dearly missed and fondly remembered by loved ones.</p>
-                            </div>
-                            <div class="widget-title"><h3></h3></div>
-                            @php
-                              $surviving_family =    json_decode($obituary->surviving_family);
-                            @endphp
-                            @if(is_array($surviving_family) || is_object($surviving_family))
-                                @foreach($surviving_family as $row)
-                                    <div class="post-inner">
-                                        <span class="post-date" style="color:#000000; font-size:1.5rem;">{{$row->surviving_family_relation_title}}</span>
-                                        <p>{{$row->surviving_family_relation_name}}</p>
-                                        @if(trim($row->surviving_family_relation_description) != '')
-                                         <p><small>{{$row->surviving_family_relation_description}}</small></p>
-                                        @endif
-                                    </div>
-                                    <br>
-                                @endforeach
-                            @endif
-                        </div>
-
-                        @if(collect($payments)->count()>0)
-
-                        <div class="volunteer-event__venue">
-                            <div class="obituary-stats mt-16">
-                                <div class="font-black">
-                                    <div class="h2">Contributor:</div>
-                                    <ul class="list-group list-group-flush">
-                                        @foreach($payments as $key=>$payment)
-                                            <li class="list-group-item"> {{$key+1}}. ${{$payment->ttl_amount}} {{$payment->user_name}}</li>
-                                        @endforeach
-                                    </ul>
-
-                                </div>
-                    </div>
-                        </div>
+                        @if(!is_mobile_device())
+                        @include('obituary.details-sidebar')
                         @endif
                     </aside>
                 </div>
@@ -262,6 +273,28 @@
 
 @push('js')
     <script>
+        var designs = JSON.parse('{!! $designs !!}');
+
+        let currentIndex = 0;
+        const keys = Object.keys(designs);
+
+        function getNextKey() {
+            const nextIndex = currentIndex + 1;
+            if (nextIndex < keys.length) {
+                currentIndex = nextIndex;
+            } else {
+                currentIndex = 0;
+            }
+            let design = designs[keys[currentIndex]];
+            $(`#design_id`).val(design.id);
+            $(`#design-title`).text(design.title);
+            $(`#design-image`).attr('src',`/storage/designs/${design.image}`);
+        }
+        $(document).ready(function () {
+
+            getNextKey();
+          $("#files").dropify();
+        });
         $(document).on('input','.other-amount',function () {
             $('.CustomAmountButtons').attr('amount',$(this).val());
         });
@@ -322,6 +355,8 @@
             facebookShareUrl = 'https://www.facebook.com/sharer.php?p[url]=' + url
             // how to open a window - https://www.w3schools.com/jsref/met_win_open.asp
             window.open(facebookShareUrl);
+
+
         });
 
     </script>

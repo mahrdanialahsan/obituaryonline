@@ -30,7 +30,7 @@
                             </div>
                             <div class="row">
                                 <div class="col text-center mb-15 mt-15">
-                                    <a href="javascript:;" onclick="filterObituary()" class="button button--no-bg button--full load-more">LOAD MORE</a>
+                                    <button type="button" onclick="filterObituary()" class="button button--no-bg button--full load-more">LOAD MORE</button>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                            </div>
                        </div>
                        <div class="card__cta">
-                           <a href="javascript:;" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</a>
+                           <button type="button" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</button>
                                                 </div>
                                                 <div class="card__cta">
                                                     <a href="/obituary-details/${x.uid}" class="button button--no-bg button--full" >LEARN MORE</a>

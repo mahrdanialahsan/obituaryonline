@@ -9,7 +9,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-12 text-right" style="text-align: right">
-                <a class="btn btn-sm btn-dark" href="{{route('admin.page.create')}}">New Blog</a>
+                <a class="btn btn-sm btn-dark" href="{{route('admin.page.create')}}">New Page</a>
             </div>
         </div>
     </div>

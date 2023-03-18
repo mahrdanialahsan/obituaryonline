@@ -87,7 +87,7 @@
                         </div>
                         <div class="gf-bkt-table-footer delete-all-area pull-left">
                             <span class="check main main-mobile active"></span>
-                            <a href="javascript:;" uid="all" class="delete cartItemRemove"><span class="fa fa-trash"></span> Delete </a>
+                            <button type="button"  uid="all" class="delete cartItemRemove"><span class="fa fa-trash"></span> Delete </button>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                 let c_amount = $(this).attr('amount');
                 $(this).attr('action','save');
                 $(`#delete-id-${uid}`).hide();
-                $(`#editableAmount-${uid}`).html(`<input id="input-uid-${uid}" typ="number" value="${c_amount}">`);
+                $(`#editableAmount-${uid}`).html(`<input id="input-uid-${uid}" class="nbrOnly" type="number" value="${c_amount}">`);
                 $(this).html(`<i class="edit-table fa fa-check"></i>`);
             }
         })

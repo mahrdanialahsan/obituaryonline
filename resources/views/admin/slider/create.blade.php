@@ -70,7 +70,7 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-floating1">
                             <label for="image"> Image</label>
-                            <input  value="{{@$slider->image}}"  class="form-control dropify" data-default-file="{{{file_exists(storage_path('app/public/slider/'.@$slider->image)) ?  asset('storage/slider/'.@$slider->image) : asset('images/banner-6.jpg')}}}"  id="image" name="image" type="file"  />
+                            <input  value="{{@$slider->image}}"  class="form-control dropify" data-default-file="{{{file_exists(storage_path('app/public/slider/'.@$slider->image)) ?  asset('storage/slider/'.@$slider->image) : asset('images/banner-6.jpg')}}}"  id="image" name="image" type="file" accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]' />
 
                         </div>
                     </div>
@@ -85,7 +85,10 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            $('.dropify').dropify();
+            $('.dropify').dropify({
+                minWidth: 1900,
+                minHeight: 900
+            });
         });
     </script>
 @endpush

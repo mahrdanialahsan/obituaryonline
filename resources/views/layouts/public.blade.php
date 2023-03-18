@@ -10,6 +10,7 @@
     }else{
         $shopping_cart = "<i class='fa fa-shopping-cart'></i>";
     }
+
 @endphp
 <head>
     <meta charset="UTF-8">
@@ -112,6 +113,11 @@
         .bg-danger small{
             color: #fff;
         }
+        @media screen and (min-width: 769px) {
+            .header-style-two .header-lower .outer-container {
+                padding: 0px 10px 0px 120px !important;
+            }
+        }
     </style>
     @stack('css')
 </head>
@@ -177,6 +183,21 @@
                         </div>
                         <div class="nav-right-content clearfix">
                             @if( @Auth()->user()->is_admin != 1)
+                            <div class="search-box-outer">
+                                    <div class="dropdown">
+                                        <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-search"></i></button>
+                                        <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                                            <div class="form-container">
+                                                <form id="g_search-form" method="get" action="{{route('search')}}">
+                                                    <div class="form-group">
+                                                        <input type="search" id="g_search" name="q" value="" placeholder="Search...." required="">
+                                                        <button type="button" class="search-btn g-search-btn"><span class="fa fa-search"></span></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <div class="cart-box">
                                 <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!}</a>
                             </div>
@@ -375,10 +396,10 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <span class="dropdown-nchor-list">
-                                        <a class="dropdown-item " href="javasscript:;">10</a>
-                                        <a class="dropdown-item " href="javasscript:;">20</a>
-                                        <a class="dropdown-item " href="javasscript:;">30</a>
-                                        <a class="dropdown-item " href="javasscript:;">40</a>
+                                        <button type="button" class="dropdown-item ">10</button>
+                                        <button type="button" class="dropdown-item ">20</button>
+                                        <button type="button" class="dropdown-item ">30</button>
+                                        <button type="button" class="dropdown-item ">40</button>
                                     </span>
                                     <hr style="margin: 1px !important;">
                                     <div class="row" style="width: 185px;text-align: center;padding: 8px;">
@@ -401,10 +422,10 @@
                     </div>
                     <div class="row mb-20">
                         <div class="col-12 text-center mt-10">
-                            <a href="javascript:;" data-cart-btn="cart" class="btn-ghost clearfix  impact-message button donate-popup-button " id="user-input-holder"> Add To Cart <i class="fa fa-shopping-cart"></i> </a>
+                            <button type="button" data-cart-btn="cart" class="btn-ghost clearfix  impact-message button donate-popup-button " id="user-input-holder"> Add To Cart <i class="fa fa-shopping-cart"></i> </button>
                         </div>
                         <div class="col-12 text-center mt-10">
-                            <a href="javascript:;" data-cart-btn="donate" class="btn-ghost clearfix  impact-message button donate-popup-button" id="user-input-holder"> DONATE TODAY </a>
+                            <button type="button" data-cart-btn="donate" class="btn-ghost clearfix  impact-message button donate-popup-button" id="user-input-holder"> DONATE TODAY </button>
                         </div>
                     </div>
                 </div>
@@ -474,7 +495,12 @@
                  toaster('Error','Please select amount.','error');
              }
 
-        })
+        });
+        $(document).on('click','.g-search-btn',function () {
+             if($.trim($(`#g_search`).val()) != ''){
+                $(`#g_search-form`).submit();
+             }
+        });
         $(document).on('click','.dropdown-menu .dropdown-item',function(){
             let selText = $(this).text();
             $('#dropdownMenuButton').attr('amount',selText)
@@ -482,7 +508,7 @@
         });
         $(document).on('click','.dropdown_custom_btn',function(){
             let selText = $('#dropdown_custom_amount').val();
-            $('.dropdown-nchor-list').append(`<a class="dropdown-item " href="javasscript:;">${selText}</a>`);
+            $('.dropdown-nchor-list').append(`<button type="button"  class="dropdown-item">${selText}</button>`);
             $('#dropdownMenuButton').html(`<span style="margin-right: 20px;font-size: 20px">${selText} </span>  dollars <i class="fa fa-caret-down"></i>`);
             $('#dropdownMenuButton').attr('amount',selText)
             $('#dropdown_custom_amount').val('');
@@ -571,8 +597,8 @@
                                                                 </td>
                                                                 <td  style="text-align: center" class="editableAmount" id="editableAmount-${donation.uid}">${cart_items[donation.uid]} $</td>
                                                                 <td class=" edit-holder" style="min-width: 100px;">
-                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" action="edit" id="edit-id-${donation.uid}" href="javascript:;"  class="cartItemEdit"> <i class="edit-table fa fa-pencil"></i> </a>&nbsp;
-                                                                    <a uid="${donation.uid}" amount="${cart_items[donation.uid]}" id="delete-id-${donation.uid}" href="javascript:;" class="cartItemRemove"> <i class="edit-table fa fa-trash"></i> </a>&nbsp;
+                                                                    <button type="button" uid="${donation.uid}" amount="${cart_items[donation.uid]}" action="edit" id="edit-id-${donation.uid}" href="javascript:;"  class="cartItemEdit"> <i class="edit-table fa fa-pencil"></i> </button>&nbsp;
+                                                                    <button type="button" uid="${donation.uid}" amount="${cart_items[donation.uid]}" id="delete-id-${donation.uid}" href="javascript:;" class="cartItemRemove"> <i class="edit-table fa fa-trash"></i> </button>&nbsp;
 
                                                                 </td>
                                                             </tr>`)
@@ -606,20 +632,16 @@
         }
 
         $(document).ready(function () {
-            $('.nbrOnly').keypress(function (e) {
-                var charCode = (e.which) ? e.which : event.keyCode
-                if (String.fromCharCode(charCode).match(/[^0-9]/g))
-                    return false;
+            $(document).on('keydown','.nbrOnly',function (e) {
+                var key = e.keyCode;
+                if (!( (key >= 48 && key <= 57) || (key >= 37 && key <= 40) || (key == 8) )) {
+                    e.preventDefault();
+                }
             });
-            $('.txtOnly').keydown(function (e) {
-                // if (e.shiftKey || e.ctrlKey || e.altKey) {
-                //     e.preventDefault();
-                // } else
-                    {
-                    var key = e.keyCode;
-                    if (!((key == 8) || (key == 32) || (key >= 16 && key <= 18)|| (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
-                        e.preventDefault();
-                    }
+            $(document).on('keydown','.txtOnly',function (e) {
+                var key = e.keyCode;
+                if (!((key == 8) || (key == 32) || (key >= 16 && key <= 18)|| (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                    e.preventDefault();
                 }
             });
             $.LoadingOverlay("hide");

@@ -17,7 +17,7 @@
         <div class="auto-container">
             <div class="content-box">
                 <div class="title">
-                    <h1>{{$site->donate_page_header_title ? $site->donate_page_header_title:"Obituary"}}</h1>
+                    <h1>{{$site->donate_page_header_title ? $site->donate_page_header_title:"Obituaries"}}</h1>
                 </div>
 {{--                <ul class="bread-crumb clearfix">--}}
 {{--                    <li class="breadcrumb-item"><a href="{{route('home')}}">Home &nbsp;</a></li><li class="breadcrumb-item">{{$site->donate_page_header_title ? $site->donate_page_header_title:"Obituary"}}</li>--}}
@@ -111,11 +111,24 @@
                                 </form>
                             </div>
 
-
+<style>
+    .input-group-append button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>
                             <div class="search-result__main">
                                 <div class="search-result__main-head" id="search-result-holder">
                                     <p class="font-black bold caps search-result__result">
                                         <strong class="big "><span  id="resultcount"></span> </strong><span id="result_text">RESULTS FOUND</span>
+                                        @if(Route::currentRouteName() == 'search')
+                                            <div class="input-group mb-3" style="width: 40%;float: right;">
+                                                <input type="text" class="form-control" id="search_id" value="{{$q}}" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary btn-dark search-btn" type="button" id="button-addon2"><span class="fa fa-search"></span></button>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </p>
                                 </div>
 
@@ -140,11 +153,15 @@
             return duration.format().replace("-","");
         }
         function filterObituary(){
+            let q = '';
+            if($(`#search_id`) && $.trim($(`#search_id`).val()) != ''){
+                q = $(`#search_id`).val();
+            }
             $('#searchlisting').LoadingOverlay("show");
             $('#resultcount').text(0);
             $.ajax({
                 type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                url         : '/filter-obituaries', // the url where we want to POST
+                url         : `/filter-obituaries?q=${q}`, // the url where we want to POST
                 data        : $('#filter-form').serialize(),
                 headers     : {
                     'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -184,7 +201,7 @@
                            </div>
                        </div>
                        <div class="card__cta">
-                           <a href="javascript:;" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</a>
+                           <button type="button" title="${x.deceased_first_name} ${x.deceased_last_name}" uid="${x.uid}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> DONATE</button>
                                                 </div>
                                                 <div class="card__cta">
                                                     <a href="/obituary-details/${x.uid}" class="button button--no-bg button--full" >LEARN MORE</a>
@@ -193,6 +210,10 @@
                                         </div>`).show('slow');
                         });
                         $('#searchlisting').LoadingOverlay("hide");
+                    }
+                    else{
+                        $('#searchlisting').LoadingOverlay("hide");
+                        toaster('Alert','No record found','warning');
                     }
 
                 },
@@ -235,7 +256,12 @@
             $('.filter-obituaries').prop("checked",false);
             setTimeout(filterObituary(),5);
 
-        })
+        });
+        $(document).on('click','.search-btn',function () {
+            if($.trim($(`#search_id`).val()) != ''){
+                window.location = `search?q=${$(`#search_id`).val()}`
+            }
+        });
 
     </script>
 @endpush

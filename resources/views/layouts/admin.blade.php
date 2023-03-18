@@ -88,6 +88,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Pages
                     </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.design')  ? 'active':''}}" href="{{route('admin.designs')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Condolence Design
+                    </a>
                     <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.settings.slider') ? 'active':''}}" href="{{route('admin.settings.slider')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Slider
