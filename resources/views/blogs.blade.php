@@ -3,7 +3,7 @@
     <meta property="og:url"           content="{{route('blogs')}}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Blogs" />
-    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
+    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obituary Online."}}" />
     <meta property="og:image"         content="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" />
 @endpush
 @section('content')

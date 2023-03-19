@@ -44,9 +44,9 @@
                                                                     <span>Give a Littele &amp; Help a Lot</span>
                                                                     <h2>Adopt a Child</h2>
                                                                     <p>Charity is a continuous process toward success and happiness <br />Let’s help them now.</p>
-                                                                    <div class="btn-box">
-                                                                        <a href="{{route('donate')}}" class="banner-btn">Donate Now</a>
-                                                                    </div>
+{{--                                                                    <div class="btn-box">--}}
+{{--                                                                        <a href="{{route('donate')}}" class="banner-btn">Donate Now</a>--}}
+{{--                                                                    </div>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -167,36 +167,47 @@
                 </div>
             </section>
 
-
-{{--            <section class="elementor-section mt-15 mb-15">--}}
-{{--                <div class="elementor-container elementor-column-gap-default">--}}
-{{--                    <div class="elementor-column">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col text-center mb-15"><a class="button" style="background-color: #EA2722;border:2px #EA2722 solid" href="{{route('obituaries')}}"> See all Archives </a></div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </section>--}}
-
             <section class="elementor-section">
                 <div class="elementor-container elementor-column-gap-default">
                     <div class="elementor-column">
                         <div class="elementor-widget-wrap elementor-element-populated">
                             <div class="elementor-element elementor-element-a43694e elementor-widget elementor-widget-purehearts_our_participate" data-id="a43694e" data-element_type="widget" data-widget_type="purehearts_our_participate.default">
                                 <div class="elementor-widget-container">
-
                                     <!-- welcome-section -->
                                     <section class="welcome-section sec-pad">
-                                        <div class="auto-container">
-                                            <div class="sec-title style-two centred">
-                                                <span class="top-text">Welcome to Pure Hearts</span>
-                                                <h2>Participate in Changing the World</h2>
-                                                <div class="col text-center mb-15" id="archivesList-btn">
-                                                    <button type="button" class="button"  style="background-color: #EA2722;border:2px #EA2722 solid" href="javascript:;" onclick="filterObituary(1)"> See all Archives </button>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="auto-container">
+                                                    <div class="sec-title style-two centred">
+                                                        <span class="top-text">Welcome to Pure Hearts</span>
+                                                        <h2>Participate in Changing the World</h2>
+                                                        <div class="row">
+                                                            <div class="col-md-4 col-sm-12"></div>
+                                                            <div class="col-md-4 col-sm-12">
+                                                                <div class="col-auto text-center mb-15" id="archivesList-btn">
+                                                                    <button type="button" class="button"  style="background-color: #EA2722;border:2px #EA2722 solid" href="javascript:;" onclick="filterObituary(1)"> See all Archives </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12">
+                                                                <div class="col-auto text-center mb-15" id="archivesList-search-input" style="display: none">
+                                                                    <div class="input-group mb-3" style="width: 350px; ">
+                                                                    <input type="text" class="form-control" id="filter-search-input" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+{{--                                                                    <div class="input-group-append">--}}
+{{--                                                                        <button class="btn btn-outline-secondary btn-dark filter-search-btn" type="button" id="button-addon2"><span class="fa fa-search"></span></button>--}}
+{{--                                                                    </div>--}}
+                                                                </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row clearfix" id="archivesList">
-
+                                            <div class="col-12">
+                                                <div class="auto-container">
+                                                    <div class="row clearfix" id="archivesList"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -289,15 +300,54 @@
 @endsection
 @push('js')
     <script>
-        let total = 3;
+        let obituaries  =   [];
+        let total       =   3;
         function calAge(dob,dod) {
             var diff = moment(dob).diff(dod, 'milliseconds');
             var duration = moment.duration(diff);
             return duration.format().replace("-","");
         }
+        function loadObituaryes() {
+            $('#archivesList').empty();
+            let searchval = $.trim($('#filter-search-input').val());
+            if(obituaries?.length) {
+                let filteredobituaries =  obituaries;
+                if(searchval != ''){
+                    filteredobituaries = obituaries.filter((x) => ( x.deceased_first_name.toLowerCase().includes(searchval) || x.deceased_last_name.toLowerCase().includes(searchval) ) );
+                }
+                filteredobituaries.forEach(x=>{
+                    var age = calAge(moment(x.date_of_birth).format('YYYY-MM-DD'),moment( x.date_of_death).format('YYYY-MM-DD'));
+                    $('#archivesList').append(`<div class="col-lg-4 col-md-6 col-sm-12 welcome-block">
+                                                    <div class="welcome-block-one wow wow-slider fadeInUp animated"  data-wow-delay="00ms" data-wow-duration="1500ms">
+                                                        <div class="inner-box">
+                                                            <figure class="image-box"><img decoding="async" src="storage/deceased_picture/${x.deceased_picture}" alt="${x.deceased_first_name} ${x.deceased_last_name}"></figure>
+                                                            <div class="content-box">
+{{--                                                                <div class="shape" style="background-image: url({{asset('images/shape-32.png')}});"></div>--}}
+                                                                <div class="text">
+                                                                    <span>${x.deceased_first_name} ${x.deceased_last_name}</span>
+                                                                    <h2>Memorial</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="btn-box">
+                                                                <a href="/obituary-details/${x.uid}" class="links"><i class="icon-right-arrow"></i></a>
+                                                                <a href="/obituary-details/${x.uid}" class="links-btn"><i class="icon-right-arrow"></i>View</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+                        .show('slow');
+                });
+            }
+            setTimeout(function () {
+                $(`.wow-slider`).css('visibility','visible');
+            },1000)
+        }
         function filterObituary(flag){
+            $(`#archivesList-btn`).show();
+            $(`#archivesList-search-input`).hide();
             if(flag==1){
                 $(`#archivesList-btn`).hide();
+                $(`#archivesList-search-input`).show();
             }
             let offset  =   0;
             let limit   =   total;
@@ -311,36 +361,9 @@
                 },
                 success: function (response) {
                     total               =   response.data.total;
-                    let obituaries      =   response.data.obituaries;
-                    if(obituaries){
-                        obituaries.forEach(x=>{
-                            var age = calAge(moment(x.date_of_birth).format('YYYY-MM-DD'),moment( x.date_of_death).format('YYYY-MM-DD'));
-                            $('#archivesList').append(`<div class="col-lg-4 col-md-6 col-sm-12 welcome-block">
-                                                    <div class="welcome-block-one wow wow-slider fadeInUp animated"  data-wow-delay="00ms" data-wow-duration="1500ms">
-                                                        <div class="inner-box">
-                                                            <figure class="image-box"><img decoding="async" src="storage/deceased_picture/${x.deceased_picture}" alt="${x.deceased_first_name} ${x.deceased_last_name}"></figure>
-                                                            <div class="content-box">
-                                                                <div class="shape" style="background-image: url({{asset('images/shape-32.png')}});"></div>
-                                                                <div class="text">
-                                                                    <span>${x.deceased_first_name} ${x.deceased_last_name}</span>
-                                                                    <h2>Donate</h2>
-                                                                </div>
-                                                            </div>
-                                                            <div class="btn-box">
-                                                                <a href="/obituary-details/${x.uid}" class="links"><i class="icon-right-arrow"></i></a>
-                                                                <a href="/obituary-details/${x.uid}" class="links-btn"><i class="icon-right-arrow"></i>Read More</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>`)
-                                .show('slow');
-                        });
-                        $('#archivesList').LoadingOverlay("hide");
-                        setTimeout(function () {
-                            $(`.wow-slider`).css('visibility','visible');
-                        },1000)
-                    }
-
+                    obituaries          =   response.data.obituaries;
+                    loadObituaryes();
+                    $('#archivesList').LoadingOverlay("hide");
                 },
                 error: function (data) {
                     toaster('Error',data.responseJSON.message,'error');
@@ -348,6 +371,9 @@
                 }
             })
         }
+        $(document).on('input','#filter-search-input',function () {
+            loadObituaryes();
+        })
         $(document).ready(function () {
             filterObituary(0);
         });

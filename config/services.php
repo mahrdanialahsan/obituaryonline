@@ -25,9 +25,14 @@ return [
     ],
 
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+        'key'       => env('AWS_ACCESS_KEY_ID'),
+        'secret'    => env('AWS_SECRET_ACCESS_KEY'),
+        'region'    => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_CLIENT_ID','167741742790924'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET','fba4f15d27c5314724a405c04fea4ae0'),
+        'redirect'      => env('APP_URL','https://obituaryonline.sg').'/auth/facebook/callback',
     ],
 
 ];

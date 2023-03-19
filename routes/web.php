@@ -25,6 +25,11 @@ Route::get('/cache-clear', function (){
     \Illuminate\Support\Facades\Artisan::call('view:cache');
     dd('done');
 });
+Route::get('/optimize', function (){
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    //\Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    dd('done');
+});
 Route::get('/storage-link', function (){
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     dd('done');
@@ -41,6 +46,12 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/obituaries', 'HomeController@obituaries')->name('obituaries');
 Route::get('/load-obituaries/{limit}/{offset}', 'HomeController@loadObituaries')->name('obituaries.load');
+
+
+Route::get('auth/facebook', 'FacebookController@redirectToFacebook')->name('facebook-login');
+Route::get('auth/facebook/callback','FacebookController@handleFacebookCallback')->name('facebook-callback');
+
+
 Route::group(['middleware' => ['auth']], function () {
 //    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/myobituaries', 'ObituaryController@index')->name('myobituaries');
@@ -114,6 +125,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
 
 });
 
+Route::get('/learn', 'HomeController@learn')->name('learn');
 Route::get('/about-us', 'HomeController@aboutUs')->name('about-us');
 Route::get('/contact-us', 'HomeController@contactUs')->name('contact-us');
 Route::get('/blogs', 'HomeController@blogs')->name('blogs');

@@ -19,15 +19,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{$site->site_title ? $site->site_title:"Obitury Online."}}</title>
+    <title>{{$site->site_title ? $site->site_title:"Obituary Online."}}</title>
     <meta name='robots' content='max-image-preview:large' />
     @if(in_array(Route::currentRouteName(),['obituary.details','about-us','contact-us','blogs','blog']))
     @stack('meta')
     @else
     <meta property="og:url"           content="{{url('/')}}" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
-    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
+    <meta property="og:title"         content="{{$site->site_title ? $site->site_title:"Obituary Online."}}" />
+    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obituary Online."}}" />
     <meta property="og:image"         content="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" />
     @endif
     <link rel='dns-prefetch'    href="{{asset('http://fonts.googleapis.com/')}}" />
@@ -115,7 +115,7 @@
         }
         @media screen and (min-width: 769px) {
             .header-style-two .header-lower .outer-container {
-                padding: 0px 10px 0px 120px !important;
+                padding: 0px 10px 0px 95px !important;
             }
         }
     </style>
@@ -159,22 +159,28 @@
                                     <ul class="navigation clearfix">
 
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">{{$site->home_page_menu_title ? $site->home_page_menu_title:"Home"}}</a>
+                                            <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">{{$site->home_page_menu_title ? $site->home_page_menu_title:"Today's Obituary"}}</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">{{$site->donate_page_menu_title ? $site->donate_page_menu_title:"Donate Today"}}</a>
-                                        </li>
+{{--                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">--}}
+{{--                                            <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">{{$site->donate_page_menu_title ? $site->donate_page_menu_title:"Donate Today"}}</a>--}}
+{{--                                        </li>--}}
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('obituaries') }}" class="hvr-underline-from-left1">Archives</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('learn') }}" class="hvr-underline-from-left1">Learn</a>
+                                        </li>
+                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                            <a title="Post obituary" href="{{ route('contact-us') }}" class="hvr-underline-from-left1">Contact Us</a>
                                         </li>
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('about-us') }}" class="hvr-underline-from-left1">About Us</a>
                                         </li>
                                         <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('blogs') }}" class="hvr-underline-from-left1">Blog</a>
-                                        </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
-                                            <a title="Post obituary" href="{{ route('contact-us') }}" class="hvr-underline-from-left1">Contact Us</a>
                                         </li>
 
                                     </ul>
@@ -184,23 +190,23 @@
                         <div class="nav-right-content clearfix">
                             @if( @Auth()->user()->is_admin != 1)
                             <div class="search-box-outer">
-                                    <div class="dropdown">
-                                        <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-search"></i></button>
-                                        <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
-                                            <div class="form-container">
-                                                <form id="g_search-form" method="get" action="{{route('search')}}">
-                                                    <div class="form-group">
-                                                        <input type="search" id="g_search" name="q" value="" placeholder="Search...." required="">
-                                                        <button type="button" class="search-btn g-search-btn"><span class="fa fa-search"></span></button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                <div class="dropdown">
+                                    <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-search"></i></button>
+                                    <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                                        <div class="form-container">
+                                            <form id="g_search-form-1" method="get" action="{{route('search')}}">
+                                                <div class="form-group">
+                                                    <input type="search" id="g_search-1" name="q" value="" placeholder="Search...." required="">
+                                                    <button type="button" btn-id="1" class="search-btn g-search-btn"><span class="fa fa-search"></span></button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            <div class="cart-box">
-                                <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!}</a>
                             </div>
+{{--                            <div class="cart-box">--}}
+{{--                                <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!}</a>--}}
+{{--                            </div>--}}
                             <div class="admin clearfix">
                                 @guest
                                     <a href="{{ route('login') }}"><i class="admin-bar"></i>{{$site->login_page_menu_title ? $site->login_page_menu_title:'Log In'}}</a> |
@@ -231,9 +237,24 @@
                         </div>
                         <div class="nav-right-content clearfix">
                             @if( @Auth()->user()->is_admin != 1)
-                            <div class="cart-box">
-                                <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>
+                            <div class="search-box-outer">
+                                <div class="dropdown">
+                                    <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon-search"></i></button>
+                                    <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                                        <div class="form-container">
+                                            <form id="g_search-form-2" method="get" action="{{route('search')}}">
+                                                <div class="form-group">
+                                                    <input type="search" id="g_search-2" name="q" value="" placeholder="Search...." required="">
+                                                    <button type="button" btn-id="2" class="search-btn g-search-btn"><span class="fa fa-search"></span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+{{--                            <div class="cart-box">--}}
+{{--                                <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>--}}
+{{--                            </div>--}}
                             <div class="admin clearfix">
                                 @guest
                                     <a href="{{ route('login') }}"><i class="admin-bar"></i>{{$site->login_page_menu_title ? $site->login_page_menu_title:'Log In'}}</a> |
@@ -269,12 +290,26 @@
             <nav class="menu-box">
                 <div class="nav-logo"><a href="#" title="Purehearts"><img src="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" alt="logo"/></a></div>
                 <div class="menu-outer"></div>
+
+
                 <div class="social-links">
                     @if( @Auth()->user()->is_admin != 1)
                     <ul class="clearfix">
                         <li>
-                            <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>
+                            <form id="g_search-form-3" method="get" action="{{route('search')}}">
+                                <div class="form-group">
+                                    <div class="input-group mb-3" style="width: 250px; float: right">
+                                        <input type="search" id="g_search-3" name="q" value="" placeholder="Search...." class="form-control"  aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary btn-dark g-search-btn" btn-id="3" type="button" id="button-addon2"><span class="fa fa-search"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </li>
+{{--                        <li>--}}
+{{--                            <a href="{{route('cart')}}"  class="cart-items">{!! $shopping_cart !!} </a>--}}
+{{--                        </li>--}}
                         @guest
                             <li><a href="{{ route('login') }}"><i class="admin-bar"></i>{{$site->login_page_menu_title ? $site->login_page_menu_title:'Log In'}}</a> </li>
                             <li><a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a></li>
@@ -497,8 +532,9 @@
 
         });
         $(document).on('click','.g-search-btn',function () {
-             if($.trim($(`#g_search`).val()) != ''){
-                $(`#g_search-form`).submit();
+            var btn_id = $(this).attr('btn-id');
+             if($.trim($(`#g_search-${btn_id}`).val()) != ''){
+                $(`#g_search-form-${btn_id}`).submit();
              }
         });
         $(document).on('click','.dropdown-menu .dropdown-item',function(){

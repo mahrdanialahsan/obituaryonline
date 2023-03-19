@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     @endif
-                    @if(!in_array(@$page->type,['contact','about']))
+                    @if(!in_array(@$page->type,['contact','about','learn']))
                         <div class="col-md-6 mb-3">
                             <div class="form-floating1">
                                 <label for="thumbnail_image">Thumbnail</label>
@@ -41,7 +41,7 @@
                             <input  value="{{@$page->cover_image}}"  accept="image/*" class="form-control " data-default-file="{{file_exists(storage_path('app/public/pages/'.@$page->cover_image)) ?  url('storage/pages/'.@$page->cover_image): asset('images/12.jpg')}}"  id="cover_image" name="cover_image" type="file"  accept="image/*" data-allowed-file-extensions='["png", "jpg","jpeg"]'/>
                         </div>
                     </div>
-                    @if(!in_array(@$page->type,['contact','about']))
+                    @if(!in_array(@$page->type,['contact','about','learn']))
                     <div class="col-md-12 mb-3">
                         <div class="form-floating">
                             <textarea class="form-control" id="short_description" name="short_description"  required  placeholder="Type Here." > {{@$page->short_description}} </textarea>

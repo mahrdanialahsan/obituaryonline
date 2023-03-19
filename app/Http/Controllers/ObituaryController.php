@@ -72,17 +72,26 @@ class ObituaryController extends Controller
             //'deceased_picture'    => 'required|image','mimes:jpeg,png,jpg,gif',
             'deceased_picture'      => 'required',
             'death_certificate'     => 'required|mimes:pdf',
+            'poa_wills'             => 'required|mimes:pdf',
             //'poa_wills'             => 'required|string',
             'message'               => 'required|string',
         ]);
         //dd($request->all());
         $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
         $request->deceased_picture->move(storage_path('app/public/deceased_picture'), $dpfileName);
+
         $dcfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->death_certificate->extension();
         $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
-        $data                       =   $request->except(['deceased_picture','death_certificate']);
+
+
+        $willfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->poa_wills->extension();
+        $request->poa_wills->move(storage_path('app/public/poa_wills'), $willfileName);
+
+
+        $data                       =   $request->except(['deceased_picture','death_certificate','poa_wills']);
         $data['deceased_picture']   =   $dpfileName;
         $data['death_certificate']  =   $dcfileName;
+        $data['poa_wills']          =   $willfileName;
         $data['uid']                =   $uid;
         $data['created_by']         =   auth()->id();
         $surviving_family           =   [];
@@ -220,7 +229,7 @@ class ObituaryController extends Controller
             $compaign->default_amount       =  (float)$request->default_amount;
             $compaign->funeral_location_json=  $request->funeral_location_json;
             $compaign->surviving_family     =  $request->surviving_family;
-            $compaign->poa_wills            =  $request->poa_wills;
+//            $compaign->poa_wills            =  $request->poa_wills;
             $compaign->message              =  $request->message;
             if($request->hasFile('deceased_picture')){
                 $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
@@ -231,6 +240,11 @@ class ObituaryController extends Controller
                 $dcfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->death_certificate->extension();
                 $request->death_certificate->move(storage_path('app/public/death_certificate'), $dcfileName);
                 $compaign->death_certificate    =  $dcfileName;
+            }
+            if($request->hasFile('poa_wills')){
+                $willfileName         =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->poa_wills->extension();
+                $request->poa_wills->move(storage_path('app/public/poa_wills'), $willfileName);
+                $compaign->poa_wills    =  $willfileName;
             }
             $surviving_family         =   [];
             //dd($request->surviving_family_relation_title);

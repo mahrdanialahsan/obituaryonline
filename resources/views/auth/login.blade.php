@@ -35,9 +35,10 @@
                             </div>
                             <div class="rounded-card--header-solid__body" id="yui_patched_v3_11_0_1_1676319507111_277">
 
-                                <button id="clickFBLogin" class="button button--full button--large button--facebook button--with-icon" style="background-color: #3B5998"> <div class="button--with-icon__wrapper">
-                                        <i class="ico ico-facebook-box button--with-icon__icon"></i>LOG IN WITH FACEBOOK </div> </button>
-
+                                <a href="{{ route('facebook-login') }}" id="clickFBLogin" class="button button--full button--large button--facebook button--with-icon" style="background-color: #3B5998">
+                                    <div class="button--with-icon__wrapper">
+                                        <i class="ico ico-facebook-box button--with-icon__icon"></i>LOG IN WITH FACEBOOK </div>
+                                </a>
                                 <div class="body-txt body-txt--smaller body-txt--no-letter-space pt-8 text-center">Don't worry, we will never share on your page without your permission</div>
 
                                 <hr class="hr-text" data-content="Or sign in with email">

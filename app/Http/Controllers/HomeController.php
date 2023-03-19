@@ -82,6 +82,17 @@ class HomeController extends Controller
         ],200);
     }
 
+    public function learn(){
+        $data   = Pages::whereType('learn')->first();
+        if($data){
+            $obituaries      =    Obituaries::where('status',1)->limit(3)->orderBy('created_at','DESC')->get();
+            return view('learn',compact('data','obituaries'));
+        }else{
+            return abort(404);
+        }
+
+    }
+
     public function aboutUs(){
         $data   = Pages::whereType('about')->first();
         if($data){

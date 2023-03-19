@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('content')
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+{{--    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>--}}
     <style>
         .error{
             color: #f98768;
@@ -172,7 +172,9 @@
                                             </span>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="poa_wills"> Power of attorney / Power of probate</label>
-                                                <textarea   name="poa_wills" id="poa_wills"    class="form-control field-required textarea"></textarea>
+                                                <input data-default-file="{{!empty($obituary) ?  url('storage/poa_wills/'.$obituary->poa_wills): ''}}"  accept="application/pdf" type="file" name="poa_wills" id="poa_wills" class="form-control dropify field-required file">
+
+                                                {{--                                                <textarea   name="poa_wills" id="poa_wills"    class="form-control field-required textarea"></textarea>--}}
                                             </div>
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="message">About Obituary </label>
@@ -270,8 +272,8 @@
                     $('#funeral_location_json').val(response.funeral_location_json);
                     $('#public_donation').prop("checked",response.public_donation == 1 ? true:false );
                     // CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
-                   if(CKEDITOR.instances["poa_wills"])
-                    CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
+                   // if(CKEDITOR.instances["poa_wills"])
+                   //  CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
                     //CKEDITOR.instances["message"].setData(response.message);
 
                     if($.trim(response.surviving_family) != ''){
@@ -300,11 +302,11 @@
                     }
                     $('#message').val(response.message);
                     debugger
-                    setTimeout(function () {
-                        for ( instance in CKEDITOR.instances )
-                            CKEDITOR.instances[instance].updateElement();
-                    },10)
-                    tab     =   response.status == null ? 2:1;
+                    // setTimeout(function () {
+                    //     for ( instance in CKEDITOR.instances )
+                    //         CKEDITOR.instances[instance].updateElement();
+                    // },10)
+                    tab     =   response.status == null ? 2:2;
                     $(`.rounded-card__body`).hide();
                     $(`#tab-page-${tab}`).show();
                     $('.bcrumb__child').removeClass('is-active');
@@ -394,17 +396,17 @@
             // CKEDITOR.replace('message', {
             //     // toolbar: toolbar,
             // });
-            CKEDITOR.replace('poa_wills', {
-                // toolbar: toolbar,
-            });
-            CKEDITOR.on('instanceReady', function(){
-                $.each( CKEDITOR.instances, function(instance) {
-                    CKEDITOR.instances[instance].on("change", function(e) {
-                        for ( instance in CKEDITOR.instances )
-                            CKEDITOR.instances[instance].updateElement();
-                    });
-                });
-            });
+            // CKEDITOR.replace('poa_wills', {
+            //     // toolbar: toolbar,
+            // });
+            // CKEDITOR.on('instanceReady', function(){
+            //     $.each( CKEDITOR.instances, function(instance) {
+            //         CKEDITOR.instances[instance].on("change", function(e) {
+            //             for ( instance in CKEDITOR.instances )
+            //                 CKEDITOR.instances[instance].updateElement();
+            //         });
+            //     });
+            // });
         })
 
     </script>

@@ -1,6 +1,6 @@
 @extends('layouts.public')
 @push('meta')
-    <meta property="og:url"           content="{{route('about-us')}}" />
+    <meta property="og:url"           content="{{route('learn')}}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{$data->title}}" />
     <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obituary Online."}}" />

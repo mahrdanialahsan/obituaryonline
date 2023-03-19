@@ -17,7 +17,7 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->enum('type',['contact','about','blog']);
+            $table->enum('type',['learn','contact','about','blog']);
             $table->string('thumbnail_image')->nullable();
             $table->string('cover_image')->nullable();
             $table->text('short_description')->nullable();

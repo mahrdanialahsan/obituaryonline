@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->default(0)->comment("0:In-Active, 1:Active ")->index();
             $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

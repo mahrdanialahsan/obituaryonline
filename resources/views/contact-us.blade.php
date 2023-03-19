@@ -3,7 +3,7 @@
     <meta property="og:url"           content="{{route('contact-us')}}" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{$data->title}}" />
-    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obitury Online."}}" />
+    <meta property="og:description"   content="{{$site->site_title ? $site->site_title:"Obituary Online."}}" />
     <meta property="og:image"         content="{{file_exists(storage_path('app/public/site_settings/'.$site->site_logo)) ?  url('storage/site_settings/'.$site->site_logo): asset('images/logo.png')}}" />
 @endpush
 @section('content')
@@ -48,7 +48,7 @@
                         <div id="purehearts_popular_post-3" class="widget sidebar-widget widget_purehearts_popular_post">
                             <!-- Categories Widget -->
                             <div class="post-widget">
-                                <div class="widget-title"><h3>Today Obituary</h3></div>
+                                <div class="widget-title"><h3>Today's Obituary</h3></div>
                                 <div class="post-inner mb-20">
                                     <!-- Title -->
                                     @foreach(@$obituaries as $row)

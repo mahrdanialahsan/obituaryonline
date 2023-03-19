@@ -316,9 +316,9 @@
                     success: function (response) {
                         if(response.status == 'success'){
                             if(response.amount > 0){
-                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.amount}$</small></sup>`)
+                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"  style='display:none'></i> <sup class="badge bg-danger"><small>${response.amount}$</small></sup>`)
                             }else{
-                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"></i></span>`)
+                                $('.cart-items').html(`<i class="fa-brands fa-shopping-cart"  style='display:none'></i></span>`)
                             }
                             if(btn_type == 'donate'){
                                 window.location = '/cart/donation';
