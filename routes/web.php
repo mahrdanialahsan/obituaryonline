@@ -44,7 +44,10 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/obituaries', 'HomeController@obituaries')->name('obituaries');
+//Route::get('/obituaries', 'HomeController@obituaries')->name('obituaries');
+Route::get('/obituaries', function (){
+    return redirect(route('donate'));
+})->name('obituaries');
 Route::get('/load-obituaries/{limit}/{offset}', 'HomeController@loadObituaries')->name('obituaries.load');
 
 
@@ -67,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::get('/obituary-details/{id}', 'ObituaryController@details')->name('obituary.details');
-Route::get('/donate', 'DonateController@index')->name('donate');
+Route::get('/archives', 'DonateController@index')->name('donate');
 Route::get('/search', 'DonateController@index')->name('search');
 Route::post('/filter-obituaries', 'DonateController@filter')->name('filter');
 
