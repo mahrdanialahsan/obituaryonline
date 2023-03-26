@@ -15,7 +15,8 @@ class AdminController extends Controller
 {
     //
     public  function index(){
-        return view('admin.dashboard');
+        $payments = Obituaries::whereRaw(" status = 1 AND total_donation > total_paid")->get();
+        return view('admin.dashboard',compact('payments'));
     }
     public  function getAnalysis(){
         $today = date('Y-m-d');
@@ -41,6 +42,16 @@ class AdminController extends Controller
         //Today obituaries
         $data['today_obituaries'] =   Obituaries::whereRaw("DATE(created_at) = '$today'")->count();
         $data['total_obituaries'] =   Obituaries::count();
+
+
+
+        $data['total_service_charges']      =   ObituaryPayments::where('status','in')->sum('service_charges_amount');
+        $data['total_released_payments']    =   ObituaryPayments::where('status','out')->sum('amount');
+        $data['pending_released_payments']  =   ObituaryPayments::where('status','in')->sum('amount')-$data['total_released_payments'];
+        $data['pending_released_obituaries']=   Obituaries::whereRaw(" status = 1 AND total_donation > total_paid")->count();
+
+
+
         $last30day = Carbon::now()->subDay(30)->format('Y-m-d');
         $last_30_days =   DB::select("SELECT 
                                                     sum(amount) as total_amount,

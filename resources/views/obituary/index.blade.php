@@ -232,13 +232,21 @@
                                                     <tbody>
                                                     @foreach($obituaries['all'] as $obituary)
                                                         <tr>
-                                                            <td>{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</td>
+                                                            <td><a href="{{route('obituary.details',['id'=>$obituary->uid])}}">{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</a></td>
                                                             <td style="text-align: right">{{$obituary->total_donation}}$</td>
                                                             <td style="text-align: right">{{$obituary->total_paid}}$</td>
                                                             <td><a href="{{route('obituary.payments',['id'=>$obituary->uid])}}"> View</a> </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Total</th>
+                                                            <th style="text-align: right">{{collect($obituaries['all'])->sum('total_donation')}}$</th>
+                                                            <th style="text-align: right">{{collect($obituaries['all'])->sum('total_paid')}}$</th>
+                                                            <th>-</th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                         @endif
                                     </div>

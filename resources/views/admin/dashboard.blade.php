@@ -6,7 +6,7 @@
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
     <div class="row">
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Today Payments <span style="float: right" class="today_payments" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Total Payments <span style="float: right" class="total_payments" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Today Contributors <span style="float: right" class="today_contributors" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Total Contributors <span style="float: right" class="total_contributors" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Total Users <span style="float: right" class="total_users" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">New Users <span style="float: right" class="today_users" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Today Obituaries <span style="float: right" class="today_obituaries" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
@@ -69,13 +69,33 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Total Obituaries <span style="float: right" class="total_obituaries" ></span></div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <a class="small text-white stretched-link" href="{{route('admin.obituaries')}}">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Total Service Charges <span style="float: right" class="total_service_charges" ></span></div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Total Released Payment <span style="float: right" class="total_released_payments" ></span></div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Pending Released Payment <span style="float: right" class="pending_released_payments" ></span></div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Pending Released  Obituaries<span style="float: right" class="pending_released_obituaries" ></span></div>
             </div>
         </div>
     </div>
@@ -96,6 +116,50 @@
                     Last Few Months Analysis
                 </div>
                 <div class="card-body"><canvas id="last12Months" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    Pending Release Payments
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>DOB</th>
+                            <th>DOD</th>
+                            <th>Wake Period</th>
+                            <th>Funeral date</th>
+                            <th>Donation</th>
+                            <th>Paid</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($payments as $row)
+                            <tr>
+                                <td>{{$row->deceased_first_name}} {{$row->deceased_last_name}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->date_of_birth)->format('Y-m-d')}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->date_of_death)->format('Y-m-d H:i')}}</td>
+                                <td>{{$row->wake_period}}</td>
+                                <td>{{\Carbon\Carbon::parse($row->funeral_date)->format('Y-m-d H:i')}}</td>
+                                <td>{{number_format($row->total_donation,2)}}$</td>
+                                <td>{{number_format($row->total_paid,2)}}$</td>
+                                <td>{{$row->status == 0 ? 'Pending':(    $row->status == 1 ? 'Approved': 'Deactivated'  )}}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-dark" href="{{route('admin.obituary.show',['id' => $row->id ])}}">View</a>
+                                    @if($row->total_donation > $row->total_paid)
+                                        <a class="btn btn-sm btn-dark" href="{{route('admin.obituary.pay',['id' => $row->id ])}}">Release ({{round($row->total_donation-$row->total_paid,2)}}$)</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -121,8 +185,8 @@
                     if(response.status == 'success'){
                         let data = response.data;
                         if(data){
-                            $(`.today_payments`).text("$"+data.today_payments);
-                            $(`.total_payments`).text("$"+data.total_payments);
+                            $(`.today_payments`).text(data.today_payments+"$");
+                            $(`.total_payments`).text(data.total_payments+"$");
 
                             $(`.today_contributors`).text(data.today_contributors);
                             $(`.total_contributors`).text(data.total_contributors);
@@ -132,6 +196,12 @@
 
                             $(`.today_obituaries`).text(data.today_obituaries);
                             $(`.total_obituaries`).text(data.total_obituaries);
+
+
+                            $(`.total_service_charges`).text(data.total_service_charges+"$");
+                            $(`.total_released_payments`).text(data.total_released_payments+"$");
+                            $(`.pending_released_payments`).text(data.pending_released_payments+"$");
+                            $(`.pending_released_obituaries`).text(data.pending_released_obituaries);
 
                             let lineLable = [];
                             let lineData = [];
