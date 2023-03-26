@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMemoriesTable extends Migration
+class CreateRelationTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateMemoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('memories', function (Blueprint $table) {
+        Schema::create('relation_type', function (Blueprint $table) {
             $table->id();
-            $table->integer('obituary_id');
-            $table->integer('design_id');
-            $table->string('image');
-            $table->string('youtube_link');
-            $table->text('wishes');
+            $table->string('title');
+            $table->tinyInteger('status')->default(1)->comment('1:Active');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateMemoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('memories');
+        Schema::dropIfExists('relation_type');
     }
 }

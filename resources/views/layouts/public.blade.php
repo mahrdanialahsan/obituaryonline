@@ -113,6 +113,13 @@
         .bg-danger small{
             color: #fff;
         }
+        .footer-card li a:hover{
+            color: #fff !important;
+
+        }
+        .main-menu .navigation > li {
+            margin: 0px 10px;
+        }
         @media screen and (min-width: 769px) {
             .header-style-two .header-lower .outer-container {
                 padding: 0px 10px 0px 95px !important;
@@ -158,28 +165,28 @@
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
 
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Home" href="{{ route('home') }}" class="hvr-underline-from-left1">{{$site->home_page_menu_title ? $site->home_page_menu_title:"Today's Obituary"}}</a>
                                         </li>
-{{--                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">--}}
+{{--                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">--}}
 {{--                                            <a title="Donate Today" href="{{ route('donate') }}" class="hvr-underline-from-left1">{{$site->donate_page_menu_title ? $site->donate_page_menu_title:"Donate Today"}}</a>--}}
 {{--                                        </li>--}}
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('obituary.create') }}" class="hvr-underline-from-left1">{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('obituaries') }}" class="hvr-underline-from-left1">Archives</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('learn') }}" class="hvr-underline-from-left1">Learn</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('contact-us') }}" class="hvr-underline-from-left1">Contact Us</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('about-us') }}" class="hvr-underline-from-left1">About Us</a>
                                         </li>
-                                        <li id="menu-item-837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-837">
                                             <a title="Post obituary" href="{{ route('blogs') }}" class="hvr-underline-from-left1">Blog</a>
                                         </li>
 
@@ -213,7 +220,7 @@
                                     <a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a>
                                 @else
                                     {{ Auth::user()->name }} |
-                                    <a href="{{ route('myobituaries') }}"> {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> |
+                                    <a href="{{ route('mine') }}"> {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> |
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -261,7 +268,7 @@
                                     <a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a>
                                 @else
                                     {{ Auth::user()->name }} |
-                                    <a href="{{ route('myobituaries') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}}  </a> |
+                                    <a href="{{ route('mine') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}}  </a> |
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -315,7 +322,7 @@
                             <li><a href="{{ route('register') }}"><i class="admin-bar"></i>{{$site->signup_page_menu_title ? $site->signup_page_menu_title:'Sign Up'}}</a></li>
                         @else
                             <li> {{ Auth::user()->name }} </li>
-                            <li><a href="{{ route('myobituaries') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> </li>
+                            <li><a href="{{ route('mine') }}">  {{$site->my_obituaries_title ? $site->my_obituaries_title:"My Obituaries"}} </a> </li>
                             <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="admin-bar"></i> {{ __('Logout') }}
@@ -393,9 +400,16 @@
                         <p>© 2023 <a href="{{ route('home') }}">{{$site->site_title ? $site->site_title:"Obituary Online."}},</a> {{$site->footer_rights ? $site->footer_rights:"All Rights Reserved."}}</p>
                     </div>
                     <ul class="footer-card pull-right clearfix">
-                        <li><span>Ways to Donate:</span></li>
-                        <li><a href="#"><img src="{{ asset('images/card-1.png')}}" alt="Awesome Image"></a></li>
-                        <li><a href="#"><img src="{{ asset('images/card-2.png')}}" alt="Awesome Image"></a></li>
+                        <li> <a title="Home" href="{{ route('home') }}" >{{$site->home_page_menu_title ? $site->home_page_menu_title:"Today's Obituary"}}</a></li>
+                        <li><a title="Post obituary" href="{{ route('obituary.create') }}" >{{$site->obituary_page_menu_title ? $site->obituary_page_menu_title:"Post obituary"}}</a></li>
+                        <li><a title="Post obituary" href="{{ route('obituaries') }}" >Archives</a></li>
+                        <li><a title="Post obituary" href="{{ route('learn') }}" >Learn</a></li>
+                        <li><a title="Post obituary" href="{{ route('contact-us') }}" >Contact Us</a></li>
+                        <li><a title="Post obituary" href="{{ route('about-us') }}" >About Us</a></li>
+                        <li> <a title="Post obituary" href="{{ route('blogs') }}" >Blog</a></li>
+{{--                        <li><span>Ways to Donate:</span></li>--}}
+{{--                        <li><a href="#"><img src="{{ asset('images/card-1.png')}}" alt="Awesome Image"></a></li>--}}
+{{--                        <li><a href="#"><img src="{{ asset('images/card-2.png')}}" alt="Awesome Image"></a></li>--}}
 {{--                        <li><a href="#"><img src="{{ asset('images/card-3.png')}}" alt="Awesome Image"></a></li>--}}
 {{--                        <li><a href="#"><img src="{{ asset('images/card-4.png')}}" alt="Awesome Image"></a></li>--}}
 {{--                        <li><a href="#"><img src="{{ asset('images/card-5.png')}}" alt="Awesome Image"></a></li>--}}
@@ -487,6 +501,40 @@
 
 
     <script>
+        let relationtypes = [];
+        function getRelationType(id){
+            return relationtypes.find(x=>(x.id==id))?.title || '';
+        }
+
+        function loadRelationType(id=0){
+            let options =   `<option value="">Select Relation</option>`;
+            if(relationtypes.length){
+                relationtypes.forEach(x=>{
+                    options +=   `<option ${x.id==id ? 'selected':''} value="${x.id}">${x.title}</option>`;
+                })
+            }
+            return options;
+        }
+        $.ajax({
+            type        : 'GET', // define the type of HTTP verb we want to use (POST for our form)
+            url         : `/get-relation-types`,
+            processData : false,
+            contentType : false,
+            cache       : false,
+            headers     : {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                if(response.status == 'success'){
+                    relationtypes   =   response.data;
+                }else{
+                    toaster('Error',response.msg,'error');
+                }
+            },
+            error: function (data) {
+                toaster('Error',data.responseJSON.message,'error');
+            }
+        })
         $.LoadingOverlay("show");
         $(document).on('click','.donate-popup-button',function () {
              let btn_type   =  $(this).attr('data-cart-btn');
@@ -614,9 +662,9 @@
         }
         var cart_items = [];
         function LoadcartItems(response) {
-            $('.ttl_amount').text(response.data.ttl_amount+'$');
+            $('.ttl_amount').text(response.data.ttl_amount+' $');
             if(response.data.ttl_amount > 0){
-                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.data.ttl_amount}$</small></sup>`)
+                $('.cart-items').html(`<i class="fa fa-shopping-cart"></i> <sup class="badge bg-danger"><small>${response.data.ttl_amount} $</small></sup>`)
             }else{
                 $('.cart-items').html(`<i class="fa fa-shopping-cart"></i></span>`)
             }
@@ -628,10 +676,7 @@
                                                                 <td  class="cartItemSelection">
                                                                     <div class="truncate">${donation.deceased_first_name} ${donation.deceased_last_name}</div>
                                                                 </td>
-                                                                <td style="text-align: center"  class="success ">
-                                                                    Donation is eligible for tax deduction
-                                                                </td>
-                                                                <td  style="text-align: center" class="editableAmount" id="editableAmount-${donation.uid}">${cart_items[donation.uid]} $</td>
+                                                                <td  style="text-align: right" class="editableAmount" id="editableAmount-${donation.uid}">${cart_items[donation.uid]} $</td>
                                                                 <td class=" edit-holder" style="min-width: 100px;">
                                                                     <button type="button" uid="${donation.uid}" amount="${cart_items[donation.uid]}" action="edit" id="edit-id-${donation.uid}" href="javascript:;"  class="cartItemEdit"> <i class="edit-table fa fa-pencil"></i> </button>&nbsp;
                                                                     <button type="button" uid="${donation.uid}" amount="${cart_items[donation.uid]}" id="delete-id-${donation.uid}" href="javascript:;" class="cartItemRemove"> <i class="edit-table fa fa-trash"></i> </button>&nbsp;

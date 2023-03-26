@@ -13,7 +13,7 @@ class MemoriesController extends Controller
         $request->validate([
             'obituary_id'       => 'required',
             'design_id'         => 'required',
-            'image'             => 'required',
+            //'image'             => 'required',
             'wishes'            => 'required|string',
         ]);
         $memory                 =   new Memories();
@@ -24,11 +24,12 @@ class MemoriesController extends Controller
             $request->image->move(storage_path('app/public/memories'), $fileName);
             $memory->image      =   $fileName;
         }
-        $memory->wishes          =   $request->wishes;
+        $memory->youtube_link   =   $request->youtube_link;
+        $memory->wishes         =   $request->wishes;
         $memory->save();
         return response()->json([
             'status'   => 'redirect',
-            'url'      => route('obituary.details',['id'=>$request->uid]),
+            'url'      =>  route('obituary.details',['id'=>$request->uid]),
             'msg'      => 'Memory created successfully.',
         ],200);
 

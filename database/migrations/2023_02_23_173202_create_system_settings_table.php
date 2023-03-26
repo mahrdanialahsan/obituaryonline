@@ -20,6 +20,7 @@ class CreateSystemSettingsTable extends Migration
             $table->string('my_obituaries_title')->nullable();
             $table->string('stripe_key')->default('pk_test_AGasvfU4csIh1Cbhk2TFfLEJ00uLFx1vrg');
             $table->string('stripe_secret')->default('sk_test_VgQx6sXcjkb19a2xCjI3Bz2J00Jy8xVuGN');
+            $table->double('service_charges')->default(20)->comment('percent');
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('linkedin_url')->nullable();

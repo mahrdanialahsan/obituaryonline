@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CondolenceDesign;
 use App\ObituaryPayments;
 use App\Obituaries;
+use App\RelationType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Str;
@@ -37,7 +38,8 @@ class ObituaryController extends Controller
     public function create()
     {
         //
-        return view('obituary.create');
+        $relationtypes  =   RelationType::all();
+        return view('obituary.create',compact('relationtypes'));
     }
 
     /**
@@ -48,10 +50,6 @@ class ObituaryController extends Controller
      */
     public function store(Request $request)
     {
-//        minWidth: 530,
-//        minHeight: 252
-
-
         $uid = Str::random(40);
         $todayDate = date('Y-m-d');
         $request->validate([
@@ -73,8 +71,11 @@ class ObituaryController extends Controller
             'deceased_picture'      => 'required',
             'death_certificate'     => 'required|mimes:pdf',
             'poa_wills'             => 'required|mimes:pdf',
-            //'poa_wills'             => 'required|string',
+            //'poa_wills'           => 'required|string',
             'message'               => 'required|string',
+            'bank_name'             => 'required|string',
+            'account_title'         => 'required|string',
+            'account_number'        => 'required|string',
         ]);
         //dd($request->all());
         $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
@@ -127,8 +128,14 @@ class ObituaryController extends Controller
      */
     public function show($uid)
     {
-        $obituary =   Obituaries::where('uid',$uid)->where('created_by',auth()->id())->first();
-        return view('obituary.create',compact('uid','obituary'));
+        $relationtypes  =   RelationType::all();
+        $obituary       =   Obituaries::where('uid',$uid)->where('created_by',auth()->id())->first();
+        if($obituary){
+            return view('obituary.create',compact('uid','obituary','relationtypes'));
+        }else{
+            return  abort(404);
+        }
+
     }
     /**
      * Display the specified resource.
@@ -212,6 +219,9 @@ class ObituaryController extends Controller
             'surviving_family_relation_name.*'          => 'required|string',
             'surviving_family_relation_description.*'   => 'required|string',
             'message'           => 'required|string',
+            'bank_name'             => 'required|string',
+            'account_title'         => 'required|string',
+            'account_number'        => 'required|string',
         ]);
         $compaign                   =  Obituaries::where('uid',$uid)->where('created_by',auth()->id())->whereRaw(" ( status IS NULL OR status = 0) ")->first();
         if($compaign){
@@ -229,8 +239,10 @@ class ObituaryController extends Controller
             $compaign->default_amount       =  (float)$request->default_amount;
             $compaign->funeral_location_json=  $request->funeral_location_json;
             $compaign->surviving_family     =  $request->surviving_family;
-//            $compaign->poa_wills            =  $request->poa_wills;
             $compaign->message              =  $request->message;
+            $compaign->bank_name            =  $request->bank_name;
+            $compaign->account_title        =  $request->account_title;
+            $compaign->account_number       =  $request->account_number;
             if($request->hasFile('deceased_picture')){
                 $dpfileName          =   auth()->id() . '_' . str_replace(' ','-', $request->deceased_name) . '_' . time() . '.'. $request->deceased_picture->extension();
                 $request->deceased_picture->move(storage_path('app/public/deceased_picture'), $dpfileName);
@@ -306,6 +318,26 @@ class ObituaryController extends Controller
                 'status'   =>  'error',
                 'msg'      =>  'Invalid request.',
             ],400);
+        }
+    }
+
+
+
+    public function payments($uid)
+    {
+        $obituary       =   Obituaries::where('uid',$uid)->where('created_by',auth()->id())->first();
+        if($obituary){
+            $payments           =   ObituaryPayments::join('users','users.id','=','user_id')
+                                    ->selectRaw("obituary_payments.*,name as user_name")
+                                    ->where('obituary_id',$obituary->id)
+                                    ->where('obituary_payments.status','in')
+                                    ->get();
+            $releasedpayments  =   ObituaryPayments::where('obituary_payments.status','out')
+                                        ->where('obituary_id',$obituary->id)
+                                        ->get();
+            return view('obituary.payments',compact('obituary','payments','releasedpayments'));
+        }else{
+            return  abort(404);
         }
     }
 }

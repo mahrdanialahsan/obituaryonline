@@ -96,6 +96,10 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Slider
                     </a>
+                    <a class="nav-link {{str_contains(Route::currentRouteName(),'admin.relationtype')  ? 'active':''}}" href="{{route('admin.relationtypes')}}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Relation Types
+                    </a>
                     <a class="nav-link {{Route::currentRouteName() == 'admin.subscriptions' ? 'active':''}}" href="{{route('admin.subscriptions')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Subscriptions

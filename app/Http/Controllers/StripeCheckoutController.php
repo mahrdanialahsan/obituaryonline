@@ -9,6 +9,11 @@ use App\SiteSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Stripe\Exception\CardException;
+use Stripe\Exception\InvalidRequestException;
+use Stripe\Exception\AuthenticationException;
+use Stripe\Exception\ApiConnectionException;
+use Stripe\Exception\ApiErrorException;
 use Stripe;
 //https://medium.com/@laraveltuts/laravel-9-stripe-payment-gateway-integration-example-79b17969b6eb
 class StripeCheckoutController extends Controller
@@ -64,15 +69,21 @@ class StripeCheckoutController extends Controller
 
 
                     $items   =   json_decode($data['metadata']['cart_items'],true);
-                    foreach ($items as $uid=>$amount){
-                        $obituary   =   Obituaries::where('uid',$uid)->first();
+                    foreach ($items as $uid=>$donar_amount){
+                        $service_charges_amount =   ($site->service_charges/100)*$donar_amount;
+                        $amount                 =   $donar_amount-$service_charges_amount;
+                        $obituary               =   Obituaries::where('uid',$uid)->first();
                         ObituaryPayments::insertGetId([
-                            'user_id'          =>  Auth::user()->id,
-                            'payment_id'   =>  $payment_id,
-                            'obituary_id'  =>  $obituary->id,
-                            'amount'       =>  $amount,
-                            'currency'     =>  $data['currency'],
-                            'created_at'   =>  date("Y-m-d H:i:s"),
+                            'user_id'               =>  Auth::user()->id,
+                            'payment_id'            =>  $payment_id,
+                            'obituary_id'           =>  $obituary->id,
+                            'donar_amount'          =>  $donar_amount,
+                            'service_charges'       =>  $site->service_charges,
+                            'service_charges_amount'=>  $service_charges_amount,
+                            'amount'                =>  $amount,
+                            'status'                =>  'in',
+                            'currency'              =>  $data['currency'],
+                            'created_at'            =>  date("Y-m-d H:i:s"),
                         ]);
                         $obituary->total_donation   =   $obituary->total_donation+$amount;
                         $obituary->save();
@@ -89,6 +100,41 @@ class StripeCheckoutController extends Controller
                 Session::flash('error', 'Invalid payment amount!');
                 return back();
             }
+        }
+        catch (CardException $e) {
+            // Handle card errors
+            $error_message = $e->getError()->message;
+
+            Session::flash('error', $error_message);
+            return back();
+
+        } catch (InvalidRequestException $e) {
+            // Handle invalid request errors
+            $error_message = $e->getError()->message;
+
+            Session::flash('error', $error_message);
+            return back();
+
+        } catch (AuthenticationException $e) {
+            // Handle authentication errors
+            $error_message = $e->getError()->message;
+
+            Session::flash('error', $error_message);
+            return back();
+
+        } catch (ApiConnectionException $e) {
+            // Handle API connection errors
+            $error_message = $e->getError()->message;
+
+            Session::flash('error', $error_message);
+            return back();
+
+        } catch (ApiErrorException $e) {
+            // Handle API errors
+            $error_message = $e->getError()->message;
+            Session::flash('error', $error_message);
+            return back();
+
         }
         catch(Exception $e) {
             Session::flash('error', $e->getMessage());

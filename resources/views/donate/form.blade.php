@@ -61,8 +61,7 @@
                         <table class="table gf-bkt" id="gf-bkt-table">
                             <thead>
                             <tr>
-                                <td  width="40%">Obituary</td>
-                                <td  >Eligibility for <br> Tax Deduction</td>
+                                <td  width="70%">Obituary</td>
                                 <td width="30%" colspan="2">Donation <br class="hidden-phone"> Amount</td>
                             </tr>
                             </thead>
@@ -76,13 +75,13 @@
                                             <span class="fa fa-plus-circle text-danger"></span>  Add another donation
                                         </a>
                                     </td>
-                                    <td><h4>TOTAL</h4></td>
-                                    <td colspan="2" > <h4 class="td-large-sm ttl_amount">0$</h4> </td>
+                                    <td style="text-align: right"> <h4 class="td-large-sm">TOTAL : <span class="ttl_amount">0 $</span></h4> </td>
+                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class="gf-bkt-table-footer text-right pull-right">
-                            <span class="text-error message only1"><i> * You have selected <b class="ttl_amount">0$</b> donation.</i> </span> <br>
+                            <span class="text-error message only1"><i> * You have selected <b class="ttl_amount">0 $</b> donation.</i> </span> <br>
                             <span style="color: black; font-style: italic;">* You can select multiple donations with a total amount up to $999,999.</span>
                         </div>
                         <div class="gf-bkt-table-footer delete-all-area pull-left">

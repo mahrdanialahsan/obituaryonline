@@ -54,10 +54,10 @@
     @if(is_array($surviving_family) || is_object($surviving_family))
         @foreach($surviving_family as $row)
             <div class="post-inner">
-                <span class="post-date" style="color:#000000; font-size:1.5rem;">{{$row->surviving_family_relation_title}}</span>
+                <span class="post-date" style="color:#000000; font-size:1.5rem;">{{getRelationType($row->surviving_family_relation_title)}}</span>
                 <p>{{$row->surviving_family_relation_name}}</p>
                 @if(trim($row->surviving_family_relation_description) != '')
-                    <p><small>{{$row->surviving_family_relation_description}}</small></p>
+                    <p style="text-align: justify"><small>{{$row->surviving_family_relation_description}}</small></p>
                 @endif
             </div>
             <br>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/ 
 
 
 Route::get('/cache-clear', function (){
@@ -54,7 +54,8 @@ Route::get('auth/facebook/callback','FacebookController@handleFacebookCallback')
 
 Route::group(['middleware' => ['auth']], function () {
 //    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/myobituaries', 'ObituaryController@index')->name('myobituaries');
+    Route::get('/mine', 'ObituaryController@index')->name('mine');
+    Route::get('/obituary/{id}/payments', 'ObituaryController@payments')->name('obituary.payments');
     Route::get('/obituary/create', 'ObituaryController@create')->name('obituary.create');
     Route::post('/obituary', 'ObituaryController@store')->name('obituary.store');
     Route::get('/obituary/{id}', 'ObituaryController@show')->name('obituary.show');
@@ -106,6 +107,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::get('/obituary/{id}/reject', 'Admin\ObituaryController@reject')->name('admin.obituary.reject');
 
 
+    Route::get('/obituary/{id}/pay', 'Admin\ObituaryController@pay')->name('admin.obituary.pay');
+    Route::post('/obituary/{id}/paid', 'Admin\ObituaryController@paid')->name('admin.obituary.paid');
+
+
     Route::get('/pages', 'Admin\PagesController@index')->name('admin.pages');
     Route::get('/page/create', 'Admin\PagesController@create')->name('admin.page.create');
     Route::post('/page/store', 'Admin\PagesController@store')->name('admin.page.store');
@@ -123,8 +128,18 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
 
 
 
+    Route::get('/relationtypes', 'Admin\RelationTypeController@index')->name('admin.relationtypes');
+    Route::get('/relationtype/create', 'Admin\RelationTypeController@create')->name('admin.relationtype.create');
+    Route::post('/relationtype/store', 'Admin\RelationTypeController@store')->name('admin.relationtype.store');
+    Route::get('/relationtype/{id}/edit', 'Admin\RelationTypeController@show')->name('admin.relationtype.show');
+    Route::post('/relationtype/{id}/update', 'Admin\RelationTypeController@update')->name('admin.relationtype.update');
+    Route::get('/relationtype/{id}/delete', 'Admin\RelationTypeController@show')->name('admin.relationtype.delete');
+
+
+
 });
 
+Route::get('/get-relation-types', 'HomeController@getRelationTypes')->name('get-relation-types');
 Route::get('/learn', 'HomeController@learn')->name('learn');
 Route::get('/about-us', 'HomeController@aboutUs')->name('about-us');
 Route::get('/contact-us', 'HomeController@contactUs')->name('contact-us');

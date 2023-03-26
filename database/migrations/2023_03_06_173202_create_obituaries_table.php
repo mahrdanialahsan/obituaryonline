@@ -35,10 +35,14 @@ class CreateObituariesTable extends Migration
             $table->longText('poa_wills')->nullable();
             $table->tinyInteger('public_donation')->default(1)->comment("0: No, 1:Yes");
             $table->double('total_donation')->default(0);
+            $table->double('total_paid')->default(0);
             $table->tinyInteger('status')->nullable()->comment("null:draft, 0: Pending, 1:Approved,2:Deactivated");
             $table->integer('created_by');
             $table->integer('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
+            $table->string("bank_name")->nullable();
+            $table->string("account_title")->nullable();
+            $table->string("account_number")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

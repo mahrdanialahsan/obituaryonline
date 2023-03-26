@@ -45,6 +45,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="pill" href="#Rejected" role="tab" aria-controls="pills-Rejected" aria-selected="false">Rejected <span class="badge bg-secondary">{{collect($obituaries['rejected'])->count()}}</span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" href="#Payment" role="tab" aria-controls="pills-Payment" aria-selected="false">Payments <span class="badge bg-secondary">{{collect($obituaries['all'])->count()}}</span></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="card-body">
@@ -81,7 +84,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card__cta">
-                                                    <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> Edit</a>
+                                                    <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow11 impact-message button button--small button--full " id="user-input-holder"> Edit</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +124,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card__cta">
-                                                    <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> Edit</a>
+                                                    <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow1 impact-message button button--small button--full " id="user-input-holder"> Edit</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,7 +164,7 @@
                                                     </div>
                                                 </div>
     {{--                                            <div class="card__cta">--}}
-    {{--                                                <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> Edit</a>--}}
+    {{--                                                <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow1 impact-message button button--small button--full " id="user-input-holder"> Edit</a>--}}
     {{--                                            </div>--}}
                                             </div>
                                         </div>
@@ -201,7 +204,7 @@
                                                     </div>
                                                 </div>
     {{--                                            <div class="card__cta">--}}
-    {{--                                                <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow impact-message button button--small button--full " id="user-input-holder"> Edit</a>--}}
+    {{--                                                <a href="{{route('obituary.show',['id'=>$obituary->uid])}}" class=" btn-ghost clearfix triggerDonateNow1 impact-message button button--small button--full " id="user-input-holder"> Edit</a>--}}
     {{--                                            </div>--}}
                                             </div>
                                         </div>
@@ -209,6 +212,37 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="tab-pane fade" id="Payment" role="tabpanel" aria-labelledby="Payment-tab">
+                                    <div class="search-result__gallery-flex gallery--flex gallery--flex-fill-empty" id="searchlisting">
+                                        @if(collect($obituaries['all'])->count()==0)
+                                            <div class="alert alert-warning" style="width: 100%;">
+                                                No  obituary found.
+                                            </div>
+                                        @else
+
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Total Received</th>
+                                                        <th>Details</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($obituaries['all'] as $obituary)
+                                                        <tr>
+                                                            <td>{{$obituary->deceased_first_name}} {{$obituary->deceased_last_name}}</td>
+                                                            <td style="text-align: right">{{$obituary->total_donation}}$</td>
+                                                            <td style="text-align: right">{{$obituary->total_paid}}$</td>
+                                                            <td><a href="{{route('obituary.payments',['id'=>$obituary->uid])}}"> View</a> </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                        @endif
+                                    </div>
+                                </div>
                         </div>
                         </div>
                     </div>

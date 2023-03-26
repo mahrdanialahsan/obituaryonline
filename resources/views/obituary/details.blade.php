@@ -240,6 +240,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <input placeholder="Youtube link (optional)" id="youtube_link" name="youtube_link" class="form-control" />
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                                             <textarea placeholder="Type Wishes here" id="wishes" name="wishes" class="form-control" rows="7" required="required"></textarea>
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12  mb-15 form-group message-btn">

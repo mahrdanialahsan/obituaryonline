@@ -11,6 +11,9 @@ class SiteSettings extends Model
     protected $fillable     =   [
                                     "site_title",
                                     "my_obituaries_title",
+                                    "stripe_key",
+                                    "stripe_secret",
+                                    "service_charges",
                                     "facebook_url",
                                     "twitter_url",
                                     "linkedin_url",

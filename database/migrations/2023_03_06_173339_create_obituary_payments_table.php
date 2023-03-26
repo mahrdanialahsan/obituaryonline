@@ -18,8 +18,13 @@ class CreateObituaryPaymentsTable extends Migration
             $table->integer('payment_id');
             $table->integer('user_id');
             $table->string('obituary_id');
-            $table->double('amount');
+            $table->enum('status',['in','out'])->default('in');
+            $table->double('donar_amount')->default(0);
+            $table->double('service_charges')->default(0);
+            $table->double('service_charges_amount')->default(0);
+            $table->double('amount')->default(0);
             $table->string('currency');
+            $table->string('payment_recipt')->nullable();
             $table->timestamps();
         });
     }

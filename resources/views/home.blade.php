@@ -377,6 +377,33 @@
         $(document).ready(function () {
             filterObituary(0);
         });
+        if ($('.three-item-carousel').length) {
+            $('.three-item-carousel').owlCarousel({
+                loop:true,
+                margin:30,
+                nav:true,
+                smartSpeed: 1000,
+                autoplay: true,
+                navText: [ '<span class="fa fa-arrow-left"></span>', '<span class="fa fa-arrow-right"></span>' ],
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },
+                    800:{
+                        items:2
+                    },
+                    1024:{
+                        items:3
+                    }
+                }
+            });
+        }
 
     </script>
 @endpush

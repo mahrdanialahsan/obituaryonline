@@ -302,8 +302,8 @@
 
 
     //three-item-carousel
-	if ($('.three-item-carousel').length) {
-		$('.three-item-carousel').owlCarousel({
+	if ($('.three-item-carousel1').length) {
+		$('.three-item-carousel1').owlCarousel({
 			loop:true,
 			margin:30,
 			nav:true,
@@ -327,7 +327,7 @@
 					items:3
 				}
 			}
-		});    		
+		});
 	}
 
 	// Four Item Carousel

@@ -8,5 +8,5 @@ class Memories extends Model
 {
     //
     protected $table    = 'memories';
-    protected $fillable = ['obituary_id','design_id','image','wishes'];
+    protected $fillable = ['obituary_id','design_id','image','wishes','youtube_link'];
 }

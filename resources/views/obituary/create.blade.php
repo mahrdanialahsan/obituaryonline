@@ -158,7 +158,12 @@
                                                             <div class="col-6"><label class="lbl" >Relation Title </label></div>
                                                             <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
                                                         </div>
-                                                        <input type="text" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+                                                        <select name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" >
+                                                            <option value="">Select Relation</option>
+                                                            @foreach($relationtypes as $row)
+                                                                <option value="{{$row->id}}">{{$row->title}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="input-ctrl">
                                                         <label class="lbl">Name </label>
@@ -179,6 +184,26 @@
                                             <div class="input-ctrl">
                                                 <label class="lbl" for="message">About Obituary </label>
                                                 <textarea   name="message" id="message"    class="form-control field-required textarea"></textarea>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h3 class="h3 font-dark-grey" style="margin-top: 15px">Bank Account Information</h3>
+                                                </div>
+                                            </div>
+                                            <hr class="hr">
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="bank_name">Bank Name</label>
+                                                <input   name="bank_name" id="bank_name"    class="form-control field-required"/>
+                                            </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="account_title">Account Title</label>
+                                                <input   name="account_title" id="account_title"    class="form-control field-required"/>
+                                            </div>
+                                            <div class="input-ctrl">
+                                                <label class="lbl" for="account_number">Account Number</label>
+                                                <input   name="account_number" id="account_number"    class="form-control field-required"/>
                                             </div>
                                         </div>
                                         <div id="tab-page-2" style ="text-align: center;display: none;" class="rounded-card__body rounded-card__body--responsive js-create-volunteer-act__page js-create-volunteer-act__page--1" data-role="page" >
@@ -239,7 +264,9 @@
                                                             <div class="col-6"><label class="lbl" >Relation Title </label></div>
                                                             <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
                                                         </div>
-                                                        <input type="text" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+                                                        <select name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" >
+                                                        ${loadRelationType()}
+                                                        </select>
                                                     </div>
                                                     <div class="input-ctrl">
                                                         <label class="lbl">Name </label>
@@ -274,7 +301,6 @@
                     // CKEDITOR.instances["surviving_family"].setData(response.surviving_family);
                    // if(CKEDITOR.instances["poa_wills"])
                    //  CKEDITOR.instances["poa_wills"].setData(response.poa_wills);
-                    //CKEDITOR.instances["message"].setData(response.message);
 
                     if($.trim(response.surviving_family) != ''){
                         var surviving_family = JSON.parse(response.surviving_family);
@@ -287,7 +313,10 @@
                                                             <div class="col-6"><label class="lbl" >Relation Title </label></div>
                                                             <div class="col-6" align="right"><button type="button" class="removeSurvivingFamily btn-danger btn-sm">Remove</button></div>
                                                         </div>
-                                                        <input type="text" value="${x.surviving_family_relation_title}" name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" />
+
+                                                        <select name="surviving_family_relation_title[]" class="form-control field-required input" placeholder="Wife,son,daughter etc" >
+                                                            ${loadRelationType(x.surviving_family_relation_title)}
+                                                        </select>
                                                     </div>
                                                     <div class="input-ctrl">
                                                         <label class="lbl">Name </label>
@@ -301,7 +330,9 @@
                         });
                     }
                     $('#message').val(response.message);
-                    debugger
+                    $('#bank_name').val(response.bank_name);
+                    $('#account_title').val(response.account_title);
+                    $('#account_number').val(response.account_number);
                     // setTimeout(function () {
                     //     for ( instance in CKEDITOR.instances )
                     //         CKEDITOR.instances[instance].updateElement();
@@ -421,29 +452,33 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ4QlHcp9J08dEpSwRhTY_gFTI5qsx_Ho&libraries=places&callback=initAutocomplete"
             async defer></script>
     <script type="text/javascript">
+        var options = {
+            types: ['geocode'],
+            componentRestrictions: {country: "sg"}
+        };
+
         function initAutocomplete1() {
-            var input = document.getElementById('wake_location');
-            var autocomplete = new google.maps.places.Autocomplete(input);
+            var input           =   document.getElementById('wake_location');
+            var autocomplete    =   new google.maps.places.Autocomplete(input,options);
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 var place = autocomplete.getPlace();
                 // document.getElementById('city2').value = place.name;
                 // document.getElementById('cityLat').value = place.geometry.location.lat();
                 // document.getElementById('cityLng').value = place.geometry.location.lng();
-                    document.getElementById('wake_location_json').value = JSON.stringify({
-                                                                    "address" :  document.getElementById('wake_location').value,
-                                                                    "city" :  place.name,
-                                                                    "lat" :  place.geometry.location.lat(),
-                                                                    "long" :  place.geometry.location.lng()
-                                                                });
+                document.getElementById('wake_location_json').value = JSON.stringify({
+                                                                "address" :  document.getElementById('wake_location').value,
+                                                                "city" :  place.name,
+                                                                "lat" :  place.geometry.location.lat(),
+                                                                "long" :  place.geometry.location.lng()
+                                                            });
                 //alert("This function is working!");
                 //alert(place.name);
                 // alert(place.address_components[0].long_name);
-
             });
         }
         function initAutocomplete2() {
             var input1 = document.getElementById('funeral_location');
-            var autocomplete1 = new google.maps.places.Autocomplete(input1);
+            var autocomplete1 = new google.maps.places.Autocomplete(input1,options);
             google.maps.event.addListener(autocomplete1, 'place_changed', function () {
                 var place = autocomplete1.getPlace();
                 document.getElementById('funeral_location_json').value = JSON.stringify({

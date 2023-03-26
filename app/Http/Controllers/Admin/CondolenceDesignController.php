@@ -7,6 +7,7 @@ use App\CondolenceDesign;
 use App\Http\Traits\CommonTrait;
 use Illuminate\Http\Request;
 use stdClass;
+use Session;
 
 class CondolenceDesignController extends Controller
 {
@@ -50,6 +51,10 @@ class CondolenceDesignController extends Controller
     {
         //
         $image                =   null;
+        if(CondolenceDesign::whereRaw(" title LIKE '{$request->title}' ")->first()){
+            Session::flash('title', $request->title);
+            return back()->with('error',"Title($request->title) Already Exist");
+        }
         if($request->hasFile('image')){
             $image          =   'image_' . time() . '.'. $request->image->extension();
             if(!$this->uploadImage($request,'image',320,400,'designs/'.$image)){
@@ -102,6 +107,10 @@ class CondolenceDesignController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(CondolenceDesign::whereRaw(" title LIKE '{$request->title}' ")->where('id','!=',$id)->first()){
+            Session::flash('title', $request->title);
+            return back()->with('error',"Title($request->title) Already Exist");
+        }
         $design                       =   CondolenceDesign::find($id);
         $design->title                =   $request->title;
         if($request->hasFile('image')){

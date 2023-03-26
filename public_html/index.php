@@ -9,13 +9,6 @@
 
 define('LARAVEL_START', microtime(true));
 
-function getAge($date_of_birth,$date_of_death){
-    $dob         =    new DateTime($date_of_birth);
-    $dod         =    new DateTime($date_of_death);
-    $diff        =    $dod->diff($dob);
-    return ($diff->y > 0 ? $diff->y." years ":'') . ($diff->m > 0 ? $diff->m." months ":'') . ($diff->d > 0 ? $diff->d." days":($diff->y== 0 && $diff->m== 0 ? '1 Day':''));
-}
-
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

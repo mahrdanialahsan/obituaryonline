@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Obituaries;
 use App\Pages;
+use App\RelationType;
 use App\Slider;
 use App\Subscriptions;
 use Illuminate\Http\Request;
@@ -79,6 +80,14 @@ class HomeController extends Controller
         return response()->json([
             'status'   => 'success',
             'msg'      =>  'You are successfully subscribed.'
+        ],200);
+    }
+
+    public function getRelationTypes(){
+        return response()->json([
+            'status'   => 'success',
+            'msg'      =>  'RelationType successfully loaded.',
+            'data'     =>   RelationType::all()
         ],200);
     }
 
